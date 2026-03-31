@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Touchstorm DATAlabs | YouTube Intelligence for Top Google Advertisers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --pink: #EF5C8D;
+            --pink-dark: #d94a7a;
+            --navy: #121440;
+            --navy-deep: #0a0b2e;
+            --cream: #FCEEE2;
+            --cream-dark: #f5e0d0;
+            --white: #ffffff;
+            --black: #0a0a0a;
+            --text-dark: #2a2a3e;
+            --text-muted: #6b6b80;
+            --text-light: rgba(255,255,255,0.65);
+            --border-light: rgba(18,20,64,0.08);
+            --border-dark: rgba(255,255,255,0.08);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 200;
+            padding: 0 clamp(24px, 4vw, 60px);
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.4s, box-shadow 0.4s;
+        }
+        nav.scrolled {
+            background: rgba(252, 238, 226, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 1px 0 var(--border-light);
+        }
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .logo-mark {
+            width: 20px;
+            height: 24px;
+            background: var(--pink);
+            clip-path: polygon(0 0, 0 100%, 100% 100%);
+        }
+        .logo-text {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--navy);
+            letter-spacing: -0.3px;
+        }
+        .logo-text span {
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-left: 2px;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--navy); }
+        .nav-cta {
+            background: var(--navy) !important;
+            color: var(--white) !important;
+            padding: 10px 24px !important;
+            border-radius: 6px;
+            font-weight: 600 !important;
+            font-size: 13px !important;
+            transition: background 0.2s, transform 0.15s !important;
+        }
+        .nav-cta:hover { background: var(--pink) !important; transform: translateY(-1px); }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px clamp(24px, 4vw, 60px) 80px;
+            background: var(--cream);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 60vw;
+            height: 60vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(239,92,141,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .hero-content { position: relative; z-index: 1; }
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--pink);
+            margin-bottom: 28px;
+        }
+        .hero-eyebrow::before {
+            content: '';
+            width: 24px;
+            height: 2px;
+            background: var(--pink);
+        }
+        .hero h1 {
+            font-size: clamp(42px, 5vw, 72px);
+            color: var(--navy);
+            margin-bottom: 24px;
+            max-width: 640px;
+        }
+        .hero h1 em {
+            font-style: normal;
+            color: var(--pink);
+            position: relative;
+        }
+        .hero-desc {
+            font-size: 17px;
+            line-height: 1.75;
+            color: var(--text-muted);
+            max-width: 500px;
+            margin-bottom: 40px;
+        }
+        .hero-ctas {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            background: var(--pink);
+            color: var(--white);
+            padding: 14px 32px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary:hover {
+            background: var(--pink-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(239,92,141,0.25);
+        }
+        .btn-ghost {
+            background: transparent;
+            color: var(--navy);
+            padding: 14px 32px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            border: 2px solid var(--border-light);
+            transition: border-color 0.2s, background 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-ghost:hover { border-color: var(--navy); background: rgba(18,20,64,0.03); }
+
+        /* Hero visual */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero-card-stack {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+        }
+        .hero-stat-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 40px rgba(18,20,64,0.06), 0 1px 3px rgba(18,20,64,0.04);
+            position: relative;
+        }
+        .hero-stat-card + .hero-stat-card {
+            margin-top: 16px;
+        }
+        .hero-stat-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+        .hero-stat-value {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 900;
+            font-size: 36px;
+            color: var(--navy);
+            line-height: 1.1;
+        }
+        .hero-stat-value em { color: var(--pink); font-style: normal; }
+        .hero-stat-sub {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        .hero-floating-badge {
+            position: absolute;
+            top: -16px;
+            right: -16px;
+            background: var(--navy);
+            color: var(--white);
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 8px 24px rgba(18,20,64,0.18);
+            z-index: 2;
+        }
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #34d399;
+            animation: pulse-dot 2s infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* ── TRUST STRIP ── */
+        .trust-strip {
+            padding: 40px clamp(24px, 4vw, 60px);
+            background: var(--cream);
+            border-top: 1px solid var(--border-light);
+        }
+        .trust-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+        .trust-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: rgba(18,20,64,0.3);
+            white-space: nowrap;
+        }
+        .trust-logos {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .trust-logo {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 800;
+            font-size: 15px;
+            color: rgba(18,20,64,0.18);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            white-space: nowrap;
+            transition: color 0.3s;
+        }
+        .trust-logo:hover { color: rgba(18,20,64,0.4); }
+
+        /* ── AUDIENCE SECTION ── */
+        .audience {
+            padding: 120px clamp(24px, 4vw, 60px);
+            background: var(--white);
+        }
+        .audience-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+        .audience-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        .section-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--pink);
+            margin-bottom: 20px;
+        }
+        .section-eyebrow::before,
+        .section-eyebrow::after {
+            content: '';
+            width: 20px;
+            height: 2px;
+            background: var(--pink);
+            opacity: 0.4;
+        }
+        .audience-header h2 {
+            font-size: clamp(32px, 4vw, 52px);
+            color: var(--navy);
+            margin-bottom: 16px;
+        }
+        .audience-header p {
+            font-size: 17px;
+            color: var(--text-muted);
+            max-width: 580px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        .audience-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        .audience-card {
+            border-radius: 20px;
+            padding: 56px 48px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .audience-card:hover { transform: translateY(-4px); }
+        .audience-card--rep {
+            background: var(--navy);
+            color: var(--white);
+        }
+        .audience-card--brand {
+            background: linear-gradient(135deg, #f8f0ea 0%, var(--cream) 100%);
+            color: var(--navy);
+            border: 1px solid var(--border-light);
+        }
+        .audience-card--rep .audience-card-eyebrow { color: var(--pink); }
+        .audience-card--brand .audience-card-eyebrow { color: var(--pink); }
+        .audience-card-eyebrow {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .audience-card h3 {
+            font-size: clamp(24px, 2.5vw, 32px);
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        .audience-card--rep h3 { color: var(--white); }
+        .audience-card p {
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+        .audience-card--rep p { color: var(--text-light); }
+        .audience-card--brand p { color: var(--text-muted); }
+        .audience-card-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .audience-card-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .audience-card--rep .audience-card-list li { color: rgba(255,255,255,0.75); }
+        .audience-card--brand .audience-card-list li { color: var(--text-muted); }
+        .check-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .audience-card--rep .check-icon {
+            background: rgba(239,92,141,0.2);
+            color: var(--pink);
+        }
+        .audience-card--brand .check-icon {
+            background: rgba(18,20,64,0.08);
+            color: var(--navy);
+        }
+        .check-icon svg { width: 11px; height: 11px; }
+
+        /* ── SERVICES ── */
+        .services {
+            padding: 120px clamp(24px, 4vw, 60px) 80px;
+            background: var(--navy);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 0%, rgba(239,92,141,0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(139,92,246,0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .services-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .services-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: end;
+            margin-bottom: 80px;
+        }
+        .services-header h2 {
+            font-size: clamp(36px, 4.5vw, 56px);
+            color: var(--white);
+        }
+        .services-header h2 em { color: var(--pink); font-style: normal; }
+        .services-header p {
+            font-size: 16px;
+            color: var(--text-light);
+            line-height: 1.8;
+            max-width: 480px;
+        }
+        .service-item {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 48px;
+            align-items: start;
+            padding: 48px 0;
+            border-top: 1px solid var(--border-dark);
+            transition: padding 0.3s;
+        }
+        .service-item:last-child { border-bottom: 1px solid var(--border-dark); }
+        .service-num {
+            font-family: 'Raleway', sans-serif;
+            font-size: clamp(48px, 5vw, 72px);
+            font-weight: 900;
+            color: rgba(255,255,255,0.06);
+            line-height: 1;
+            width: 90px;
+            transition: color 0.4s;
+        }
+        .service-item:hover .service-num { color: rgba(239,92,141,0.2); }
+        .service-body h3 {
+            font-size: clamp(22px, 2vw, 28px);
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+        .service-body p {
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.8;
+            max-width: 560px;
+        }
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: flex-end;
+            max-width: 280px;
+        }
+        .service-tag {
+            padding: 5px 14px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.5);
+            border: 1px solid rgba(255,255,255,0.08);
+            white-space: nowrap;
+            transition: border-color 0.3s, color 0.3s;
+        }
+        .service-item:hover .service-tag {
+            border-color: rgba(239,92,141,0.25);
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* ── RESULTS ── */
+        .results {
+            padding: 120px clamp(24px, 4vw, 60px);
+            background: var(--cream);
+        }
+        .results-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+        .results-header {
+            margin-bottom: 72px;
+        }
+        .results-header h2 {
+            font-size: clamp(36px, 4.5vw, 56px);
+            color: var(--navy);
+            margin-bottom: 16px;
+        }
+        .results-header h2 em { color: var(--pink); font-style: normal; }
+        .results-header p {
+            font-size: 17px;
+            color: var(--text-muted);
+            max-width: 500px;
+            line-height: 1.7;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            margin-bottom: 64px;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .stat-card {
+            background: var(--white);
+            padding: 40px 28px;
+            text-align: center;
+            transition: background 0.3s;
+        }
+        .stat-card:hover { background: #fdf6f0; }
+        .stat-number {
+            font-family: 'Raleway', sans-serif;
+            font-size: clamp(32px, 3.5vw, 48px);
+            font-weight: 900;
+            color: var(--navy);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .stat-number em { color: var(--pink); font-style: normal; }
+        .stat-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        .stat-brand {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--pink);
+        }
+
+        /* Case studies */
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .case-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 40px 32px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .case-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(18,20,64,0.08);
+        }
+        .case-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--pink);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .case-card:hover::before { transform: scaleX(1); }
+        .case-brand {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 800;
+            font-size: 20px;
+            color: var(--navy);
+            margin-bottom: 14px;
+        }
+        .case-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        /* ── PROCESS (for Google Reps) ── */
+        .process {
+            padding: 120px clamp(24px, 4vw, 60px);
+            background: var(--white);
+        }
+        .process-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+        .process-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        .process-header h2 {
+            font-size: clamp(32px, 4vw, 52px);
+            color: var(--navy);
+            margin-bottom: 16px;
+        }
+        .process-header h2 em { color: var(--pink); font-style: normal; }
+        .process-header p {
+            font-size: 17px;
+            color: var(--text-muted);
+            max-width: 520px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            position: relative;
+        }
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: calc(16.66% + 20px);
+            right: calc(16.66% + 20px);
+            height: 1px;
+            background: linear-gradient(90deg, var(--pink), rgba(239,92,141,0.15));
+        }
+        .process-step {
+            text-align: center;
+            padding: 0 32px;
+        }
+        .step-number {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 28px;
+            font-family: 'Raleway', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--navy);
+            position: relative;
+            z-index: 1;
+            transition: background 0.3s, color 0.3s;
+        }
+        .process-step:hover .step-number {
+            background: var(--pink);
+            color: var(--white);
+        }
+        .process-step h3 {
+            font-size: 20px;
+            color: var(--navy);
+            margin-bottom: 12px;
+        }
+        .process-step p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.75;
+        }
+
+        /* ── ABOUT ── */
+        .about {
+            padding: 120px clamp(24px, 4vw, 60px);
+            background: var(--navy);
+            color: var(--white);
+            overflow: hidden;
+        }
+        .about-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+        .about-top {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+            margin-bottom: 80px;
+        }
+        .about-copy h2 {
+            font-size: clamp(36px, 4.5vw, 56px);
+            color: var(--white);
+            margin-bottom: 24px;
+        }
+        .about-copy h2 em { color: var(--pink); font-style: normal; }
+        .about-copy p {
+            font-size: 16px;
+            color: var(--text-light);
+            line-height: 1.85;
+            margin-bottom: 16px;
+        }
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .about-stat {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border-dark);
+            border-radius: 12px;
+            padding: 28px;
+            transition: border-color 0.3s;
+        }
+        .about-stat:hover { border-color: rgba(239,92,141,0.3); }
+        .about-stat-num {
+            font-family: 'Raleway', sans-serif;
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--pink);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .about-stat-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.5;
+        }
+
+        /* credentials */
+        .cred-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .cred-card {
+            background: rgba(255,255,255,0.03);
+            padding: 36px 28px;
+            text-align: center;
+            transition: background 0.3s;
+        }
+        .cred-card:hover { background: rgba(255,255,255,0.06); }
+        .cred-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(239,92,141,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+        .cred-icon svg { width: 22px; height: 22px; color: var(--pink); }
+        .cred-card h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+        .cred-card p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.6;
+        }
+
+        /* ── TEAM ── */
+        .team {
+            padding: 120px clamp(24px, 4vw, 60px);
+            background: var(--cream);
+        }
+        .team-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+        .team-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        .team-header h2 {
+            font-size: clamp(32px, 4vw, 52px);
+            color: var(--navy);
+            margin-bottom: 12px;
+        }
+        .team-header p {
+            font-size: 17px;
+            color: var(--text-muted);
+            max-width: 460px;
+            margin: 0 auto;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        .team-card {
+            text-align: center;
+        }
+        .team-photo {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 24px;
+            display: block;
+            filter: grayscale(0.15);
+            transition: filter 0.3s, transform 0.3s;
+        }
+        .team-card:hover .team-photo {
+            filter: grayscale(0);
+            transform: scale(1.04);
+        }
+        .team-card h4 {
+            font-size: 18px;
+            color: var(--navy);
+            margin-bottom: 4px;
+        }
+        .team-card .team-role {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ── CTA ── */
+        .cta-section {
+            padding: 140px clamp(24px, 4vw, 60px);
+            background: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80vw;
+            height: 80vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(239,92,141,0.05) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .cta-section h2 {
+            font-size: clamp(36px, 5vw, 64px);
+            color: var(--navy);
+            margin-bottom: 20px;
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta-section h2 em { color: var(--pink); font-style: normal; }
+        .cta-section > p {
+            font-size: 17px;
+            color: var(--text-muted);
+            max-width: 520px;
+            margin: 0 auto 44px;
+            line-height: 1.7;
+        }
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        /* ── CONTACT ── */
+        .contact {
+            padding: 100px clamp(24px, 4vw, 60px);
+            background: var(--navy);
+            color: var(--white);
+        }
+        .contact-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 80px;
+            align-items: start;
+        }
+        .contact-info h2 {
+            font-size: clamp(32px, 3.5vw, 44px);
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+        .contact-info > p {
+            font-size: 16px;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 36px;
+        }
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+        .contact-detail-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .contact-detail-icon svg { width: 18px; height: 18px; color: var(--pink); }
+        .contact-detail span {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        .contact-detail a {
+            color: var(--pink);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .contact-detail a:hover { color: #f792b3; }
+
+        .contact-form-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border-dark);
+            border-radius: 20px;
+            padding: 48px;
+        }
+        .contact-form-card h3 {
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+        .contact-form-card > p {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 32px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+        .form-group label {
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 0.04em;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--white);
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s, background 0.2s;
+            width: 100%;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--pink);
+            background: rgba(255,255,255,0.08);
+        }
+        .form-group select option { background: var(--navy); }
+        .form-group textarea { height: 100px; resize: vertical; }
+        .form-submit {
+            width: 100%;
+            padding: 14px;
+            justify-content: center;
+            margin-top: 8px;
+            border-radius: 8px;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--navy-deep);
+            border-top: 1px solid var(--border-dark);
+            padding: 36px clamp(24px, 4vw, 60px);
+        }
+        .footer-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        footer p { font-size: 12px; color: rgba(255,255,255,0.25); }
+        footer a { color: var(--pink); text-decoration: none; font-size: 12px; }
+
+        /* ── ANIMATIONS ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.08s; }
+        .reveal-delay-2 { transition-delay: 0.16s; }
+        .reveal-delay-3 { transition-delay: 0.24s; }
+        .reveal-delay-4 { transition-delay: 0.32s; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1024px) {
+            .hero-inner { grid-template-columns: 1fr; gap: 60px; }
+            .hero-visual { display: none; }
+            .services-header { grid-template-columns: 1fr; gap: 20px; }
+            .service-item { grid-template-columns: auto 1fr; gap: 28px; }
+            .service-tags { display: none; }
+            .about-top { grid-template-columns: 1fr; gap: 48px; }
+            .cred-grid { grid-template-columns: 1fr 1fr; }
+            .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+        }
+        @media (max-width: 768px) {
+            .nav-links a:not(.nav-cta) { display: none; }
+            .audience-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .cases-grid { grid-template-columns: 1fr; }
+            .process-steps { grid-template-columns: 1fr; gap: 48px; }
+            .process-steps::before { display: none; }
+            .team-grid { grid-template-columns: 1fr; gap: 48px; }
+            .cred-grid { grid-template-columns: 1fr; }
+            .about-stats { grid-template-columns: 1fr 1fr; }
+            .service-num { width: 60px; font-size: 40px; }
+        }
+        @media (max-width: 520px) {
+            .hero { padding: 100px 20px 60px; }
+            .hero h1 { font-size: 34px; }
+            .hero-ctas { flex-direction: column; align-items: stretch; }
+            .hero-ctas .btn-primary,
+            .hero-ctas .btn-ghost { justify-content: center; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .about-stats { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .service-item { grid-template-columns: 1fr; gap: 8px; }
+            .service-num { width: auto; font-size: 32px; }
+            .audience-card { padding: 36px 28px; }
+            .footer-inner { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ══════════ NAV ══════════ -->
+<nav id="nav">
+    <a href="https://touchstorm.com" class="logo">
+        <div class="logo-mark"></div>
+        <span class="logo-text">touchstorm <span>DATAlabs</span></span>
+    </a>
+    <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#results">Results</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="nav-cta">Get Started</a>
+    </div>
+</nav>
+
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+    <div class="hero-inner">
+        <div class="hero-content">
+            <div class="hero-eyebrow">Pre-Approved YouTube Vendor &middot; DIF Eligible</div>
+            <h1>The YouTube Intelligence Your <em>Top Advertisers</em> Are Asking&nbsp;For</h1>
+            <p class="hero-desc">Data, strategy, and channel management for the brands that matter most to you. Touchstorm is pre-approved for DIF fund deployment &mdash; we handle the execution, you deliver the&nbsp;value.</p>
+            <div class="hero-ctas">
+                <a href="#contact" class="btn-primary">
+                    Schedule a Meeting
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8h9m0 0L9 4.5M12.5 8L9 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <a href="#services" class="btn-ghost">Explore Services</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-card-stack">
+                <div class="hero-floating-badge">
+                    <div class="badge-dot"></div>
+                    DIF Pre-Approved
+                </div>
+                <div class="hero-stat-card">
+                    <div class="hero-stat-label">Toyota USA</div>
+                    <div class="hero-stat-value">Moved from #3 to <em>#1</em></div>
+                    <div class="hero-stat-sub">Auto brand on YouTube</div>
+                </div>
+                <div class="hero-stat-card">
+                    <div class="hero-stat-label">CoverGirl</div>
+                    <div class="hero-stat-value">1,700 &rarr; <em>581K</em></div>
+                    <div class="hero-stat-sub">Subscribers &mdash; now #1 in category</div>
+                </div>
+                <div class="hero-stat-card">
+                    <div class="hero-stat-label">Touchstorm DATAlabs</div>
+                    <div class="hero-stat-value"><em>3B+</em> Videos Indexed</div>
+                    <div class="hero-stat-sub">The largest structured YouTube database in the world</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════ TRUST STRIP ══════════ -->
+<div class="trust-strip">
+    <div class="trust-inner">
+        <span class="trust-label">Trusted by</span>
+        <div class="trust-logos">
+            <span class="trust-logo">Toyota</span>
+            <span class="trust-logo">P&amp;G</span>
+            <span class="trust-logo">Gillette</span>
+            <span class="trust-logo">T-Mobile</span>
+            <span class="trust-logo">CoverGirl</span>
+            <span class="trust-logo">Bosch</span>
+            <span class="trust-logo">Grey Goose</span>
+            <span class="trust-logo">Jack Daniel's</span>
+            <span class="trust-logo">Sony</span>
+        </div>
+    </div>
+</div>
+
+
+<!-- ══════════ AUDIENCE ══════════ -->
+<section class="audience" id="audience">
+    <div class="audience-inner">
+        <div class="audience-header reveal">
+            <div class="section-eyebrow">Who This Is For</div>
+            <h2>Built for Two Audiences,<br>One Shared Goal</h2>
+            <p>Whether you deploy DIF funds or benefit from them, Touchstorm is ready to execute on the YouTube services your brands need most.</p>
+        </div>
+        <div class="audience-grid">
+            <div class="audience-card audience-card--rep reveal">
+                <div class="audience-card-eyebrow">For Google Account Reps</div>
+                <h3>Deliver the value-added services your clients keep requesting</h3>
+                <p>Your biggest advertisers want more from YouTube. You don't have the bandwidth to execute it. We do &mdash; and we're already approved.</p>
+                <ul class="audience-card-list">
+                    <li>
+                        <span class="check-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                        Pre-approved vendor &mdash; no procurement friction
+                    </li>
+                    <li>
+                        <span class="check-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                        DIF funds deployed on proven YouTube services
+                    </li>
+                    <li>
+                        <span class="check-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                        We execute, you look great &mdash; zero lift on your end
+                    </li>
+                    <li>
+                        <span class="check-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                        Measurable results you can share with your clients
+                    </li>
+                </ul>
+            </div>
+            <div class="audience-card audience-card--brand reveal reveal-delay-1">
+                <div class="audience-card-eyebrow">For Top Brands</div>
+                <h3>Unlock YouTube growth with funds you may already have</h3>
+                <p>Your Google relationship may include DIF funds available for approved vendors. Ask your rep &mdash; Touchstorm is eligible and ready to execute immediately.</p>
+                <ul class="audience-card-list">
+                    <li>
+                        <span class="check-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                        Access YouTube expertise funded by your DIF allocation
+                    </li>
+                    <li>
+                        <span class="check-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                        Proprietary data insights no one else can provide
+                    </li>
+                    <li>
+                        <span class="check-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                        From strategy to full channel management
+                    </li>
+                    <li>
+                        <span class="check-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                        Proven results with Fortune 500 brands
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════ SERVICES ══════════ -->
+<section class="services" id="services">
+    <div class="services-inner">
+        <div class="services-header">
+            <div>
+                <div class="section-eyebrow" style="color: var(--pink);">DIF-Eligible Services</div>
+                <h2>Six Ways to Win<br>on <em>YouTube</em></h2>
+            </div>
+            <p>Each service is powered by Touchstorm DATAlabs &mdash; our proprietary platform built on 3B+ indexed videos and 30M+ channels. Every offering is eligible for DIF fund&nbsp;deployment.</p>
+        </div>
+
+        <div class="service-item reveal">
+            <div class="service-num">01</div>
+            <div class="service-body">
+                <h3>YouTube Social Listening</h3>
+                <p>Monitor everything being said about your brand on YouTube &mdash; product reviews, influencer mentions, consumer sentiment, and competitive buzz. Real-time intelligence built on the most comprehensive YouTube data platform in the&nbsp;world.</p>
+            </div>
+            <div class="service-tags">
+                <span class="service-tag">Brand Monitoring</span>
+                <span class="service-tag">Sentiment Analysis</span>
+                <span class="service-tag">Review Tracking</span>
+            </div>
+        </div>
+
+        <div class="service-item reveal">
+            <div class="service-num">02</div>
+            <div class="service-body">
+                <h3>Category Trends</h3>
+                <p>Know what's rising in your category before competitors do. We detect spikes in search volume, emerging topics, and rising content formats specific to your space &mdash; then validate across Instagram and&nbsp;TikTok.</p>
+            </div>
+            <div class="service-tags">
+                <span class="service-tag">Trend Detection</span>
+                <span class="service-tag">Search Intelligence</span>
+                <span class="service-tag">Cross-Platform</span>
+            </div>
+        </div>
+
+        <div class="service-item reveal">
+            <div class="service-num">03</div>
+            <div class="service-body">
+                <h3>Competitive Monitoring &amp; Analysis</h3>
+                <p>See exactly how you stack up. Track competitor share of voice, upload cadence, top-performing content, subscriber growth, and engagement &mdash; with strategic recommendations to close the gap or extend your&nbsp;lead.</p>
+            </div>
+            <div class="service-tags">
+                <span class="service-tag">Share of Voice</span>
+                <span class="service-tag">Benchmarking</span>
+                <span class="service-tag">Head-to-Head</span>
+            </div>
+        </div>
+
+        <div class="service-item reveal">
+            <div class="service-num">04</div>
+            <div class="service-body">
+                <h3>Custom Strategic Analyses</h3>
+                <p>A bespoke YouTube Strategic Business Plan &mdash; full channel audit, competitive landscape, audience strategy, content recommendations, KPI baselines, and growth projections tied to your business&nbsp;goals.</p>
+            </div>
+            <div class="service-tags">
+                <span class="service-tag">Channel Audit</span>
+                <span class="service-tag">Content Strategy</span>
+                <span class="service-tag">Growth Projections</span>
+            </div>
+        </div>
+
+        <div class="service-item reveal">
+            <div class="service-num">05</div>
+            <div class="service-body">
+                <h3>Channel Management</h3>
+                <p>Full-service YouTube channel management &mdash; our bread and butter. Strategy, optimization, publishing, thumbnail A/B testing, SEO, community management, paid media coordination, and ongoing reporting. Toyota went from #3 to #1. CoverGirl grew from 1,700 to 581K&nbsp;subscribers.</p>
+            </div>
+            <div class="service-tags">
+                <span class="service-tag">Optimization</span>
+                <span class="service-tag">Publishing</span>
+                <span class="service-tag">SEO</span>
+                <span class="service-tag">Reporting</span>
+            </div>
+        </div>
+
+        <div class="service-item reveal">
+            <div class="service-num">06</div>
+            <div class="service-body">
+                <h3>Finding &amp; Analyzing Influencers</h3>
+                <p>Stop guessing on influencers. Our Talent Finder is the most expansive catalog of YouTube creators &mdash; 12 quantitative and 3 qualitative data points per creator. Know who to hire, what to pay, and how they'll perform before you spend a&nbsp;dollar.</p>
+            </div>
+            <div class="service-tags">
+                <span class="service-tag">Influencer ID</span>
+                <span class="service-tag">Fair Pricing</span>
+                <span class="service-tag">Performance Data</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════ RESULTS ══════════ -->
+<section class="results" id="results">
+    <div class="results-inner">
+        <div class="results-header reveal">
+            <div class="section-eyebrow">Proven Results</div>
+            <h2>Numbers That Speak<br><em>for Themselves</em></h2>
+            <p>From Fortune 500 brands to category challengers &mdash; measurable YouTube wins across every industry.</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card reveal">
+                <div class="stat-number"><em>+4,916%</em></div>
+                <div class="stat-desc">Website traffic increase from YouTube</div>
+                <div class="stat-brand">Ethicon (J&amp;J)</div>
+            </div>
+            <div class="stat-card reveal reveal-delay-1">
+                <div class="stat-number"><em>2,840%</em></div>
+                <div class="stat-desc">Above organic views goal</div>
+                <div class="stat-brand">Gillette India</div>
+            </div>
+            <div class="stat-card reveal reveal-delay-2">
+                <div class="stat-number"><em>581K</em></div>
+                <div class="stat-desc">Subscribers grown from 1,700</div>
+                <div class="stat-brand">CoverGirl</div>
+            </div>
+            <div class="stat-card reveal reveal-delay-3">
+                <div class="stat-number"><em>#1</em></div>
+                <div class="stat-desc">Auto brand on YouTube, up from #3</div>
+                <div class="stat-brand">Toyota USA</div>
+            </div>
+        </div>
+
+        <div class="cases-grid">
+            <div class="case-card reveal">
+                <div class="case-brand">Gillette</div>
+                <p>200 videos across 14 languages. 17MM+ organic views in 2 years with zero paid support. Videos still ranking page one on Google and YouTube search globally.</p>
+            </div>
+            <div class="case-card reveal reveal-delay-1">
+                <div class="case-brand">Grey Goose</div>
+                <p>Trend-driven cocktail series drove 33% more views, 39% more subscribers, and 52% higher engagement vs. prior campaigns. First series to include YouTube Shorts.</p>
+            </div>
+            <div class="case-card reveal reveal-delay-2">
+                <div class="case-brand">Veer by Discovery</div>
+                <p>Channel launched and live in 5 days. 120K subscribers and 7.2MM organic views in 4 months. Today: nearly 2M subscribers. Top video: 38M views.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════ PROCESS ══════════ -->
+<section class="process" id="process">
+    <div class="process-inner">
+        <div class="process-header reveal">
+            <div class="section-eyebrow">For Google Account Reps</div>
+            <h2>Simple to Deploy,<br><em>Powerful</em> for Your Clients</h2>
+            <p>Recommending Touchstorm is straightforward. We handle everything from there.</p>
+        </div>
+        <div class="process-steps">
+            <div class="process-step reveal">
+                <div class="step-number">1</div>
+                <h3>Identify the Opportunity</h3>
+                <p>Your client has DIF funds and a need for YouTube strategy, data, or channel execution. Touchstorm is pre-approved and ready to engage.</p>
+            </div>
+            <div class="process-step reveal reveal-delay-1">
+                <div class="step-number">2</div>
+                <h3>Make the Introduction</h3>
+                <p>Introduce us or share this page. We'll schedule a call and match the right service to their goals and budget.</p>
+            </div>
+            <div class="process-step reveal reveal-delay-2">
+                <div class="step-number">3</div>
+                <h3>We Execute, You Win</h3>
+                <p>Touchstorm delivers measurable results. Your client gets real value, DIF funds are deployed effectively, and you look great.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════ ABOUT ══════════ -->
+<section class="about" id="about">
+    <div class="about-inner">
+        <div class="about-top">
+            <div class="about-copy reveal">
+                <div class="section-eyebrow" style="color: var(--pink);">About Touchstorm</div>
+                <h2>We <em>Cracked</em> the YouTube Code</h2>
+                <p>Touchstorm is a YouTube-first social media agency and data platform founded in 2007. We proved our approach by building Howdini &mdash; our own channel that grew to 700K+ subscribers and nearly half a billion views, 99.9% organically.</p>
+                <p>We stopped uploading optimized content seven years ago. It's still&nbsp;growing.</p>
+                <p>Touchstorm DATAlabs is our proprietary data arm &mdash; the only platform to replicate, structure, and append YouTube's full database. It powers insights and analyses no one else can&nbsp;deliver.</p>
+            </div>
+            <div class="about-stats">
+                <div class="about-stat reveal">
+                    <div class="about-stat-num">2007</div>
+                    <div class="about-stat-label">Founded &mdash; YouTube-first from day one</div>
+                </div>
+                <div class="about-stat reveal reveal-delay-1">
+                    <div class="about-stat-num">3B+</div>
+                    <div class="about-stat-label">Videos indexed in DATAlabs</div>
+                </div>
+                <div class="about-stat reveal reveal-delay-2">
+                    <div class="about-stat-num">26</div>
+                    <div class="about-stat-label">Countries with native speaker execution</div>
+                </div>
+                <div class="about-stat reveal reveal-delay-3">
+                    <div class="about-stat-num">35</div>
+                    <div class="about-stat-label">Languages supported globally</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cred-grid">
+            <div class="cred-card reveal">
+                <div class="cred-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <h4>Pre-Approved Vendor</h4>
+                <p>DIF funds deploy directly to Touchstorm &mdash; no additional procurement</p>
+            </div>
+            <div class="cred-card reveal reveal-delay-1">
+                <div class="cred-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+                </div>
+                <h4>Google Partner</h4>
+                <p>Certified with deep YouTube platform expertise</p>
+            </div>
+            <div class="cred-card reveal reveal-delay-2">
+                <div class="cred-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <h4>Women-Owned</h4>
+                <p>Certified with a proudly global, multicultural team</p>
+            </div>
+            <div class="cred-card reveal reveal-delay-3">
+                <div class="cred-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 000 20 14.5 14.5 0 000-20"/><path d="M2 12h20"/></svg>
+                </div>
+                <h4>Global Execution</h4>
+                <p>Native speakers in 26 countries, 35 languages</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════ TEAM ══════════ -->
+<section class="team" id="team">
+    <div class="team-inner">
+        <div class="team-header reveal">
+            <div class="section-eyebrow">Your Points of Contact</div>
+            <h2>Meet the Team</h2>
+            <p>The people behind Touchstorm's YouTube expertise.</p>
+        </div>
+        <div class="team-grid">
+            <div class="team-card reveal">
+                <img src="AlexdeClosset.png" alt="Alex de Closset" class="team-photo">
+                <h4>Alex de Closset</h4>
+                <div class="team-role">CEO</div>
+            </div>
+            <div class="team-card reveal reveal-delay-1">
+                <img src="CharlotteErmatinger.png" alt="Charlotte Ermatinger" class="team-photo">
+                <h4>Charlotte Ermatinger</h4>
+                <div class="team-role">VP, Business Development</div>
+            </div>
+            <div class="team-card reveal reveal-delay-2">
+                <img src="FabrizioFaillace_v2.png" alt="Fabrizio Faillace" class="team-photo">
+                <h4>Fabrizio Faillace</h4>
+                <div class="team-role">VP, Strategy &amp; Analytics</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════ CTA ══════════ -->
+<section class="cta-section">
+    <div class="section-eyebrow">Let's Talk</div>
+    <h2>Ready to Deliver<br><em>More Value</em> on YouTube?</h2>
+    <p>Schedule a 30-minute call. We'll match the right services to your client's goals and make DIF deployment seamless.</p>
+    <div class="cta-buttons">
+        <a href="#contact" class="btn-primary">
+            Schedule a Meeting
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8h9m0 0L9 4.5M12.5 8L9 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#contact" class="btn-ghost" style="color: var(--navy);">Contact Us</a>
+    </div>
+</section>
+
+
+<!-- ══════════ CONTACT ══════════ -->
+<section class="contact" id="contact">
+    <div class="contact-inner">
+        <div class="contact-info">
+            <h2>Get in Touch</h2>
+            <p>Whether you're a Google rep deploying DIF funds or a brand ready to unlock YouTube &mdash; let's connect.</p>
+            <div class="contact-detail">
+                <div class="contact-detail-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </div>
+                <span><a href="mailto:contact@touchstorm.com">contact@touchstorm.com</a></span>
+            </div>
+            <div class="contact-detail">
+                <div class="contact-detail-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+                </div>
+                <span><a href="https://touchstorm.com">touchstorm.com</a></span>
+            </div>
+        </div>
+
+        <div class="contact-form-card">
+            <h3>Send Us a Message</h3>
+            <p>We'll respond within one business day.</p>
+            <form>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" placeholder="Jane">
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" placeholder="Smith">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Work Email</label>
+                    <input type="email" placeholder="jane@brand.com">
+                </div>
+                <div class="form-group">
+                    <label>Company</label>
+                    <input type="text" placeholder="Your brand or organization">
+                </div>
+                <div class="form-group">
+                    <label>I am a...</label>
+                    <select>
+                        <option value="">Select one</option>
+                        <option>Google Account Rep</option>
+                        <option>Brand Marketer</option>
+                        <option>Agency Partner</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea placeholder="Tell us about your brand or client need..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary form-submit">
+                    Send Message
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8h9m0 0L9 4.5M12.5 8L9 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+    <div class="footer-inner">
+        <a href="https://touchstorm.com" class="logo">
+            <div class="logo-mark" style="width:16px; height:20px;"></div>
+            <span class="logo-text" style="font-size:15px; color: rgba(255,255,255,0.35);">touchstorm</span>
+        </a>
+        <p>&copy; 2025 Touchstorm. All rights reserved.</p>
+        <a href="https://touchstorm.com">touchstorm.com</a>
+    </div>
+</footer>
+
+
+<script>
+    // Scroll reveal with stagger
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                io.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    const onScroll = () => {
+        nav.classList.toggle('scrolled', window.scrollY > 40);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            const target = document.querySelector(a.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                const offset = nav.offsetHeight + 20;
+                window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(brew install:*)",
+      "Bash(pdftoppm -v)",
+      "Bash(pdftotext \"/Users/ajoythomas/Documents/Sites/DIF-Claude/Touchstorm_StyleGuide.pdf\" -)",
+      "Bash(export PATH=\"$HOME/.bun/bin:$PATH\")",
+      "Read(//Users/ajoythomas/.claude/skills/gstack/**)",
+      "Bash(./setup)",
+      "Bash(ls -lh /Users/ajoythomas/Documents/Sites/DIF-Claude/*.pdf)",
+      "Bash(ls -lh /Users/ajoythomas/Documents/Sites/DIF-Claude/*.png)",
+      "WebFetch(domain:www.fizzy.do)",
+      "mcp__Claude_Preview__preview_start",
+      "WebFetch(domain:www.touchstorm.com)"
+    ]
+  }
+}

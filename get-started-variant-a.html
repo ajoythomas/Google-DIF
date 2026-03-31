@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Started — Meet Your Touchstorm Team</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --pink: #EF5C8D;
+      --gray-bg: #f5f5f5;
+    }
+
+    body {
+      background: #ffffff;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    }
+
+    /* ── Section ── */
+    .get-started {
+      background: var(--gray-bg);
+      padding: 80px 24px;
+    }
+
+    /* ── Header ── */
+    .get-started__header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .get-started__eyebrow {
+      display: inline-block;
+      color: var(--pink);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-variant: small-caps;
+      margin-bottom: 14px;
+    }
+
+    .get-started__h2 {
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: clamp(28px, 4vw, 38px);
+      font-weight: 800;
+      color: #222;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .get-started__subtitle {
+      font-size: 16px;
+      color: #666;
+      font-weight: 400;
+      line-height: 1.6;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ── Grid ── */
+    .get-started__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* ── Card ── */
+    .team-card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+      padding: 40px 32px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── Photo ── */
+    .team-card__photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--pink);
+      display: block;
+      margin: 0 auto 20px;
+    }
+
+    /* ── Name ── */
+    .team-card__name {
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: #333;
+      line-height: 1.25;
+      margin-bottom: 0;
+    }
+
+    /* ── Title ── */
+    .team-card__title {
+      font-size: 14px;
+      color: var(--pink);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin: 6px 0 16px;
+      line-height: 1.4;
+    }
+
+    /* ── Pink rule ── */
+    .team-card__rule {
+      display: block;
+      width: 32px;
+      height: 2px;
+      background: var(--pink);
+      border: none;
+      margin: 0 auto 20px;
+    }
+
+    /* ── Button ── */
+    .team-card__btn {
+      display: block;
+      width: 100%;
+      background: var(--pink);
+      color: #ffffff;
+      border-radius: 100px;
+      padding: 12px 24px;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.2s ease, transform 0.15s ease;
+      cursor: pointer;
+    }
+
+    .team-card__btn:hover {
+      background: #d94878;
+      transform: translateY(-1px);
+    }
+
+    /* ── LinkedIn link ── */
+    .team-card__linkedin {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 12px;
+      color: #999;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .team-card__linkedin:hover {
+      color: #555;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .get-started__grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 960px) {
+      .get-started__grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 640px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="get-started">
+
+    <div class="get-started__header">
+      <span class="get-started__eyebrow">Get Started</span>
+      <h2 class="get-started__h2">Meet Your Touchstorm Team</h2>
+      <p class="get-started__subtitle">Dedicated YouTube specialists ready to help your advertisers grow.</p>
+    </div>
+
+    <div class="get-started__grid">
+
+      <!-- Card 1: Charlotte Ermatinger -->
+      <div class="team-card">
+        <img
+          class="team-card__photo"
+          src="CharlotteErmatinger.png"
+          alt="Charlotte Ermatinger"
+        >
+        <h3 class="team-card__name">Charlotte Ermatinger</h3>
+        <p class="team-card__title">VP, Business Development</p>
+        <span class="team-card__rule"></span>
+        <a class="team-card__btn" href="https://calendly.com/charlotte-touchstorm" target="_blank" rel="noopener">Book a Meeting</a>
+        <a class="team-card__linkedin" href="https://www.linkedin.com/in/charlotte-ermatinger/" target="_blank" rel="noopener">LinkedIn Profile &rarr;</a>
+      </div>
+
+      <!-- Card 2: Fabrizio Faillace -->
+      <div class="team-card">
+        <img
+          class="team-card__photo"
+          src="FabrizioFaillace_v2.png"
+          alt="Fabrizio Faillace"
+        >
+        <h3 class="team-card__name">Fabrizio Faillace</h3>
+        <p class="team-card__title">Global Director, Business Development</p>
+        <span class="team-card__rule"></span>
+        <a class="team-card__btn" href="https://calendly.com/fabrizio-touchstorm" target="_blank" rel="noopener">Book a Meeting</a>
+        <a class="team-card__linkedin" href="https://www.linkedin.com/in/fabrizio-faillace/" target="_blank" rel="noopener">LinkedIn Profile &rarr;</a>
+      </div>
+
+      <!-- Card 3: Alexandra de Closset -->
+      <div class="team-card">
+        <img
+          class="team-card__photo"
+          src="AlexdeClosset.png"
+          alt="Alexandra de Closset"
+        >
+        <h3 class="team-card__name">Alexandra de Closset</h3>
+        <p class="team-card__title">Enterprise Account Executive</p>
+        <span class="team-card__rule"></span>
+        <a class="team-card__btn" href="https://calendly.com/alex-touchstorm" target="_blank" rel="noopener">Book a Meeting</a>
+        <a class="team-card__linkedin" href="https://www.linkedin.com/in/alexandra-de-closset/" target="_blank" rel="noopener">LinkedIn Profile &rarr;</a>
+      </div>
+
+    </div>
+
+  </section>
+
+</body>
+</html>
