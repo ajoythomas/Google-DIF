@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Touchstorm YouTube Services - Variant E</title>
+<style>
+  :root {
+    --pink: #EF5C8D;
+    --pink-dark: #d94a7a;
+    --pink-light: #fde8ef;
+    --gray-bg: #f5f5f5;
+    --white: #ffffff;
+    --text-dark: #333333;
+    --shadow: 0 2px 8px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 24px rgba(0,0,0,0.12);
+    --shadow-expanded: 0 12px 40px rgba(0,0,0,0.14);
+    --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    --border: rgba(0,0,0,0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: Helvetica, Arial, sans-serif;
+    background: var(--gray-bg);
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Section ── */
+  .services-section {
+    padding: 80px 24px 100px;
+    background: var(--gray-bg);
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 40px;
+  }
+
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 16px;
+  }
+
+  .heading {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800;
+    color: var(--text-dark);
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+
+  .heading .amp {
+    display: inline-block;
+    font-size: 0.65em;
+    vertical-align: middle;
+    margin: 0 4px;
+    opacity: 0.5;
+  }
+
+  .subtitle {
+    font-size: 17px;
+    color: #777;
+    line-height: 1.5;
+  }
+
+  .subtitle strong {
+    color: var(--pink);
+    font-weight: 700;
+  }
+
+  /* ── TAB BAR ── */
+  .tab-bar-wrap {
+    background: var(--white);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 0 var(--border), 0 2px 8px rgba(0,0,0,0.06);
+    margin-bottom: 40px;
+  }
+
+  .tab-bar {
+    display: flex;
+    align-items: stretch;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .tab-bar::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    flex-shrink: 0;
+    padding: 18px 22px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #888;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+    white-space: nowrap;
+    position: relative;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+
+  .tab-btn:hover { color: var(--text-dark); }
+  .tab-btn.active { color: var(--pink); }
+
+  .tab-count {
+    font-size: 11px;
+    font-weight: 700;
+    background: var(--gray-bg);
+    color: #999;
+    border-radius: 100px;
+    padding: 2px 7px;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .tab-btn.active .tab-count {
+    background: var(--pink-light);
+    color: var(--pink);
+  }
+
+  .tab-indicator {
+    position: absolute;
+    bottom: 0;
+    height: 3px;
+    background: var(--pink);
+    border-radius: 2px 2px 0 0;
+    transition: left 0.25s cubic-bezier(0.4,0,0.2,1), width 0.25s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  /* ── Grid ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ── Card (collapsed) ── */
+  .card {
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 24px;
+    cursor: pointer;
+    position: relative;
+    transition: transform var(--transition), box-shadow var(--transition);
+    overflow: hidden;
+    /* entrance animation */
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  .card.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s ease, box-shadow var(--transition);
+  }
+
+  .card:not(.expanded):hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .card.visible:not(.expanded):hover {
+    transform: translateY(-2px);
+  }
+
+  /* hidden by tab filter */
+  .card.tab-hidden {
+    display: none;
+  }
+
+  /* Collapsed interior */
+  .card-collapsed {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: opacity 0.25s ease;
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .card-number {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--pink);
+    line-height: 1;
+    opacity: 0.85;
+  }
+
+  .card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--gray-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .card-icon svg {
+    width: 20px;
+    height: 20px;
+    color: #aaa;
+  }
+
+  .card-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.3;
+    margin-top: 4px;
+  }
+
+  .card-price {
+    font-size: 13px;
+    color: #999;
+    font-weight: 500;
+  }
+
+  .card-chevron {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    width: 24px;
+    height: 24px;
+    color: #ccc;
+    transition: transform var(--transition), color var(--transition);
+  }
+
+  .card:not(.expanded):hover .card-chevron {
+    color: var(--pink);
+    transform: translateY(2px);
+  }
+
+  /* ── Card (expanded) ── */
+  .card.expanded {
+    grid-column: 1 / -1;
+    box-shadow: var(--shadow-expanded);
+    cursor: default;
+    padding: 0;
+  }
+
+  .card.expanded .card-collapsed {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  .card.expanded .card-chevron {
+    display: none;
+  }
+
+  /* Expanded interior */
+  .card-expanded {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease 0.1s;
+  }
+
+  .card.expanded .card-expanded {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    opacity: 1;
+    min-height: 300px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .expanded-left {
+    padding: 48px 40px 48px 52px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .expanded-watermark {
+    position: absolute;
+    top: -20px;
+    left: -10px;
+    font-size: 180px;
+    font-weight: 900;
+    color: var(--pink);
+    opacity: 0.05;
+    line-height: 1;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .expanded-number {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--pink);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    position: relative;
+  }
+
+  .expanded-name {
+    font-size: clamp(22px, 2.5vw, 30px);
+    font-weight: 800;
+    color: var(--text-dark);
+    line-height: 1.2;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .expanded-desc {
+    font-size: 15px;
+    color: #666;
+    line-height: 1.65;
+    margin-bottom: 24px;
+    max-width: 460px;
+    position: relative;
+  }
+
+  .expanded-price-pill {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 20px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+    position: relative;
+  }
+
+  .expanded-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--pink);
+    text-decoration: none;
+    border: 2px solid var(--pink);
+    border-radius: 8px;
+    padding: 10px 24px;
+    transition: background var(--transition), color var(--transition);
+    align-self: flex-start;
+    position: relative;
+  }
+
+  .expanded-cta:hover {
+    background: var(--pink);
+    color: var(--white);
+  }
+
+  .expanded-right {
+    background: linear-gradient(135deg, #f0f0f0, #e8e8e8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 0 12px 12px 0;
+    overflow: hidden;
+  }
+
+  .expanded-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(239,92,141,0.06), rgba(239,92,141,0.02));
+  }
+
+  .image-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    color: #bbb;
+  }
+
+  .image-placeholder svg {
+    width: 64px;
+    height: 64px;
+    opacity: 0.5;
+  }
+
+  .image-placeholder span {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  /* Close button */
+  .close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: var(--white);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background var(--transition), transform var(--transition);
+  }
+
+  .close-btn:hover {
+    background: var(--pink);
+    transform: rotate(90deg);
+  }
+
+  .close-btn svg {
+    width: 16px;
+    height: 16px;
+    color: var(--text-dark);
+    transition: color var(--transition);
+  }
+
+  .close-btn:hover svg {
+    color: var(--white);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 700px) {
+    .services-section {
+      padding: 48px 16px 64px;
+    }
+
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .card.expanded .card-expanded {
+      grid-template-columns: 1fr;
+    }
+
+    .expanded-left {
+      padding: 32px 24px;
+    }
+
+    .expanded-right {
+      border-radius: 0 0 12px 12px;
+      min-height: 180px;
+    }
+
+    .expanded-watermark {
+      font-size: 100px;
+    }
+
+    .tab-btn { padding: 16px 14px 14px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="services-section">
+  <div class="section-header">
+    <div class="eyebrow">Our Menu of Services</div>
+    <h2 class="heading">Touchstorm <span class="amp">&amp;</span> Google</h2>
+    <p class="subtitle"><strong>13</strong> DIF-eligible YouTube services - browse by category or explore all</p>
+  </div>
+
+  <!-- TAB BAR -->
+  <div class="tab-bar-wrap">
+    <div class="tab-bar" id="tabBar">
+      <button class="tab-btn active" data-tab="all">All Services <span class="tab-count">13</span></button>
+      <button class="tab-btn" data-tab="analytics">Analytics &amp; Trends <span class="tab-count">4</span></button>
+      <button class="tab-btn" data-tab="listening">Social Listening <span class="tab-count">3</span></button>
+      <button class="tab-btn" data-tab="competitive">Competitive Intelligence <span class="tab-count">4</span></button>
+      <button class="tab-btn" data-tab="strategy">Strategy &amp; Management <span class="tab-count">2</span></button>
+      <div class="tab-indicator" id="tabIndicator"></div>
+    </div>
+  </div>
+
+  <div class="card-grid" id="cardGrid">
+    <!-- Cards injected by JS -->
+  </div>
+</section>
+
+<script>
+const services = [
+  {
+    num: "01",
+    name: "Custom Strategy Analysis",
+    price: "Starting at $2,500 per engagement",
+    tabs: ["all","competitive"],
+    desc: "A deep-dive YouTube audit and custom growth strategy built for your brand. We analyze channel health, content performance, audience behavior, and competitive gaps - then deliver a prioritized roadmap your team can act on immediately."
+  },
+  {
+    num: "02",
+    name: "Brand Buzz Monitor",
+    price: "Starting at $1,000/year",
+    tabs: ["all","analytics"],
+    desc: "Monthly reports surfacing how your brand is being talked about across YouTube. What creators are saying, how sentiment is shifting, and which videos are driving perception - 12 reports/year, 3 seats included."
+  },
+  {
+    num: "03",
+    name: "Category Trends",
+    price: "Starting at $1,200/year",
+    tabs: ["all","analytics"],
+    desc: "Know what's rising in your category before competitors do. We detect spikes in search volume, emerging topics, and rising content formats - validated across YouTube, Instagram, and TikTok. Quarterly trend briefings built for your vertical."
+  },
+  {
+    num: "04",
+    name: "Topic Finder",
+    price: "Starting at $800/year",
+    tabs: ["all","analytics"],
+    desc: "Stop guessing what to make. Topic Finder identifies the highest-demand, lowest-competition content opportunities for your brand on YouTube - ranked by search volume, audience fit, and monetization potential. Never run out of ideas that actually perform."
+  },
+  {
+    num: "05",
+    name: "Global Brand Consistency",
+    price: "Starting at $3,000/year",
+    tabs: ["all","competitive"],
+    desc: "For brands with multi-market YouTube presence, we audit and align content, tone, and strategy across regions. Ensure your brand shows up consistently whether a viewer is in Tokyo, Toronto, or Sao Paulo - while still resonating locally."
+  },
+  {
+    num: "06",
+    name: "Casting Cards",
+    price: "Starting at $1,500 per search",
+    tabs: ["all","competitive"],
+    desc: "Find and hire the right YouTube creator with confidence. Our Talent Finder covers 15 data points per creator - audience demographics, engagement rates, brand safety signals, and estimated rates. Know who to hire and what they'll cost before you make contact."
+  },
+  {
+    num: "07",
+    name: "Competitive Insights - Ranker",
+    price: "Starting at $2,000/year",
+    tabs: ["all","competitive"],
+    desc: "See exactly where your brand ranks against competitors on YouTube. We track upload cadence, subscriber growth, view velocity, and top-performing content for your entire competitive set - then tell you what it would take to move up one rank."
+  },
+  {
+    num: "08",
+    name: "YT Social Listening - Influencer Focus",
+    price: "Starting at $1,500/year",
+    tabs: ["all","listening"],
+    desc: "Track which creators are talking about your brand or category - organically. Identify rising voices before they become expensive, spot partnership opportunities early, and monitor existing creator relationships for shifts in tone or reach."
+  },
+  {
+    num: "09",
+    name: "YT Social Listening - Sentiment Focus",
+    price: "Starting at $1,500/year",
+    tabs: ["all","listening"],
+    desc: "Understand how audiences actually feel about your brand on YouTube. We analyze comment sentiment, like/dislike signals, and conversation tone across thousands of videos to surface what's driving love, concern, or indifference toward your brand."
+  },
+  {
+    num: "10",
+    name: "Share of Voice",
+    price: "Starting at $2,500/year",
+    tabs: ["all","analytics"],
+    desc: "What would it cost to become the #1 brand on YouTube in your category? We quantify it. Our Share of Voice model maps current category ownership, models the content investment required to lead, and gives your team a clear, data-backed answer."
+  },
+  {
+    num: "11",
+    name: "Strategic Channel Business Plan",
+    price: "Starting at $5,000 per plan",
+    tabs: ["all","strategy"],
+    desc: "A full 12-month channel roadmap - content pillars, publishing cadence, growth targets, monetization paths, and resource requirements. Built for brands serious about YouTube as a long-term owned media channel, not just a place to upload ads."
+  },
+  {
+    num: "12",
+    name: "Community Management",
+    price: "Starting at $1,200/month",
+    tabs: ["all","listening"],
+    desc: "Your YouTube comments are a goldmine of audience signal - and most brands ignore them. We monitor, moderate, and respond to comments on your behalf, surfacing the highest-value questions and conversations while keeping your channel community healthy and engaged."
+  },
+  {
+    num: "13",
+    name: "Channel Management",
+    price: "Starting at $3,500/month",
+    tabs: ["all","strategy"],
+    desc: "Full-service YouTube channel management - strategy, optimization, publishing, SEO, and ongoing reporting. We've taken Toyota from #3 to #1 in their category and grown CoverGirl from 1,700 to 581,000 subscribers. We run your channel like a media business."
+  }
+];
+
+const icons = [
+  // 01 strategy/analytics
+  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`,
+  // 02 buzz/bell
+  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>`,
+  // 03 trends/wave
+  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+  // 04 topic finder/search
+  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`,
+  // 05 global/globe
+  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+  // 06 casting/people
+  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+  // 07 ranker/bars
+  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="5" width="4" height="16" rx="1"/><rect x="17" y="8" width="4" height="13" rx="1"/></svg>`,
+  // 08 influencer/star
+  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+  // 09 sentiment/smile
+  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>`,
+  // 10 share of voice/megaphone
+  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>`,
+  // 11 business plan/document
+  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
+  // 12 community/chat
+  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
+  // 13 channel mgmt/settings
+  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`
+];
+
+const chevronSVG = `<svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
+const closeSVG  = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
+const imgSVG    = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`;
+
+// ── Build cards ──────────────────────────────────────────────
+const grid = document.getElementById('cardGrid');
+
+services.forEach((s, i) => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.dataset.index = i;
+  card.dataset.tabs = s.tabs.join(' ');
+
+  card.innerHTML = `
+    <div class="card-collapsed">
+      <div class="card-top">
+        <span class="card-number">${s.num}</span>
+        <div class="card-icon">${icons[i]}</div>
+      </div>
+      <div class="card-name">${s.name}</div>
+      <div class="card-price">${s.price}</div>
+    </div>
+    ${chevronSVG}
+    <div class="card-expanded">
+      <div class="expanded-left">
+        <div class="expanded-watermark">${s.num}</div>
+        <div class="expanded-number">Service ${s.num}</div>
+        <div class="expanded-name">${s.name}</div>
+        <p class="expanded-desc">${s.desc}</p>
+        <div class="expanded-price-pill">${s.price}</div>
+        <a href="#" class="expanded-cta" onclick="event.preventDefault()">Learn More &rarr;</a>
+      </div>
+      <div class="expanded-right">
+        <button class="close-btn" aria-label="Close" onclick="event.stopPropagation(); collapseCard(this.closest('.card'));">${closeSVG}</button>
+        <div class="image-placeholder">
+          ${imgSVG}
+          <span>Add Image Here</span>
+        </div>
+      </div>
+    </div>
+  `;
+
+  card.addEventListener('click', () => toggleCard(card));
+  grid.appendChild(card);
+});
+
+
+// ── Expand / collapse logic ──────────────────────────────────
+let currentExpanded = null;
+
+function toggleCard(card) {
+  if (card.classList.contains('expanded')) {
+    collapseCard(card);
+    return;
+  }
+  if (currentExpanded && currentExpanded !== card) {
+    collapseCard(currentExpanded);
+  }
+  card.classList.add('expanded');
+  currentExpanded = card;
+
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 50);
+  });
+}
+
+function collapseCard(card) {
+  card.classList.remove('expanded');
+  if (currentExpanded === card) currentExpanded = null;
+}
+
+
+// ── Tab logic ───────────────────────────────────────────────
+const tabBtns   = document.querySelectorAll('.tab-btn');
+const allCards  = document.querySelectorAll('.card');
+const indicator = document.getElementById('tabIndicator');
+let activeTab   = 'all';
+
+function positionIndicator(btn) {
+  indicator.style.left  = btn.offsetLeft + 'px';
+  indicator.style.width = btn.offsetWidth + 'px';
+}
+
+function switchTab(tab, btn) {
+  if (tab === activeTab) return;
+
+  // collapse any open card first
+  if (currentExpanded) collapseCard(currentExpanded);
+
+  activeTab = tab;
+  tabBtns.forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  positionIndicator(btn);
+  history.replaceState(null, '', tab === 'all' ? location.pathname : '#' + tab);
+
+  // filter with staggered fade
+  let delay = 0;
+  allCards.forEach(card => {
+    const cardTabs = card.dataset.tabs.split(' ');
+    const show = cardTabs.includes(tab);
+    if (show) {
+      card.classList.remove('tab-hidden');
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(16px)';
+      const d = delay;
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        card.style.transition = `opacity 0.35s ease ${d}ms, transform 0.35s ease ${d}ms, box-shadow var(--transition)`;
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }));
+      delay += 45;
+    } else {
+      card.classList.add('tab-hidden');
+    }
+  });
+}
+
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', () => switchTab(btn.dataset.tab, btn));
+});
+
+// indicator on load
+requestAnimationFrame(() => {
+  const active = document.querySelector('.tab-btn.active');
+  if (active) positionIndicator(active);
+});
+
+// handle hash on load
+const initHash = location.hash.replace('#','') || 'all';
+const initBtn  = document.querySelector(`[data-tab="${initHash}"]`);
+if (initBtn && initHash !== 'all') switchTab(initHash, initBtn);
+
+window.addEventListener('hashchange', () => {
+  const h = location.hash.replace('#','') || 'all';
+  const b = document.querySelector(`[data-tab="${h}"]`);
+  if (b) switchTab(h, b);
+});
+
+window.addEventListener('resize', () => {
+  const active = document.querySelector('.tab-btn.active');
+  if (active) positionIndicator(active);
+});
+
+
+// ── Scroll reveal ─────────────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.filter(e => e.isIntersecting).forEach((entry, i) => {
+    const card = entry.target;
+    if (!card.classList.contains('visible')) {
+      const idx = [...grid.children].indexOf(card);
+      setTimeout(() => card.classList.add('visible'), (idx % 4) * 80);
+    }
+    observer.unobserve(card);
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.card').forEach(card => observer.observe(card));
+</script>
+
+</body>
+</html>

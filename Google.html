@@ -506,9 +506,9 @@
         }
         .gs-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 20px;
-            max-width: 960px;
+            max-width: 1400px;
             margin: 0 auto;
         }
         .gs-card {
@@ -521,7 +521,7 @@
         }
         .gs-card-photo-wrap {
             width: 100%;
-            height: 350px;
+            height: 260px;
             overflow: hidden;
             position: relative;
         }
@@ -551,17 +551,23 @@
             color: white;
             margin-bottom: 5px;
         }
-        .gs-card-title {
-            font-size: 10px;
+        .gs-card-region {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
             font-weight: 700;
             letter-spacing: 0.05em;
             text-transform: uppercase;
-            color: var(--pink);
+            color: #888;
             margin-bottom: 20px;
             line-height: 1.4;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        }
+        .gs-card-region svg {
+            width: 13px;
+            height: 13px;
+            color: var(--pink);
+            flex-shrink: 0;
         }
         .gs-card-cta {
             display: block;
@@ -617,7 +623,7 @@
 
         /* ── RESPONSIVE ── */
         @media (max-width: 768px) {
-            .gs-grid { grid-template-columns: 1fr; max-width: 400px; }
+            .gs-grid { grid-template-columns: repeat(2, 1fr); max-width: 600px; }
             .nav-links a:not(.nav-cta) { display: none; }
             .letter-card { grid-template-columns: 1fr; }
             .letter-left {
@@ -922,7 +928,7 @@ Touchstorm can help with all this and more. <br><br>We are a global YouTube agen
             </div>
             <div class="gs-card-body">
                 <div class="gs-card-name">Charlotte Ermatinger</div>
-                <div class="gs-card-title">VP, Business Development</div>
+                <div class="gs-card-region"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Americas (EST/CST)</span></div>
                 <div class="gs-card-icons">
                     <a class="gs-card-icon-link" href="https://www.linkedin.com/in/charlotte-ermatinger/" target="_blank" rel="noopener" aria-label="LinkedIn">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452H17.21v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.985V9h3.102v1.561h.046c.431-.816 1.485-1.676 3.057-1.676 3.268 0 3.868 2.151 3.868 4.948v6.619zM5.337 7.433a1.8 1.8 0 110-3.601 1.8 1.8 0 010 3.601zM6.762 20.452H3.908V9h2.854v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
@@ -940,7 +946,7 @@ Touchstorm can help with all this and more. <br><br>We are a global YouTube agen
             </div>
             <div class="gs-card-body">
                 <div class="gs-card-name">Fabrizio Faillace</div>
-                <div class="gs-card-title">Global Director, Business Development</div>
+                <div class="gs-card-region"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>EMEA (GMT/CET)</span></div>
                 <div class="gs-card-icons">
                     <a class="gs-card-icon-link" href="https://www.linkedin.com/in/fabrizio-faillace/" target="_blank" rel="noopener" aria-label="LinkedIn">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452H17.21v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.985V9h3.102v1.561h.046c.431-.816 1.485-1.676 3.057-1.676 3.268 0 3.868 2.151 3.868 4.948v6.619zM5.337 7.433a1.8 1.8 0 110-3.601 1.8 1.8 0 010 3.601zM6.762 20.452H3.908V9h2.854v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
@@ -958,9 +964,45 @@ Touchstorm can help with all this and more. <br><br>We are a global YouTube agen
             </div>
             <div class="gs-card-body">
                 <div class="gs-card-name">Alexandra de Closset</div>
-                <div class="gs-card-title">Enterprise Account Executive</div>
+                <div class="gs-card-region"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>EMEA (CET/EET)</span></div>
                 <div class="gs-card-icons">
                     <a class="gs-card-icon-link" href="https://www.linkedin.com/in/alexandra-de-closset/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452H17.21v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.985V9h3.102v1.561h.046c.431-.816 1.485-1.676 3.057-1.676 3.268 0 3.868 2.151 3.868 4.948v6.619zM5.337 7.433a1.8 1.8 0 110-3.601 1.8 1.8 0 010 3.601zM6.762 20.452H3.908V9h2.854v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                    <a class="gs-card-icon-link" href="#" aria-label="Email">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="gs-card reveal reveal-delay-1">
+            <div class="gs-card-photo-wrap">
+                <img class="gs-card-photo" src="AjoyThomas.png" alt="Ajoy Thomas">
+            </div>
+            <div class="gs-card-body">
+                <div class="gs-card-name">Ajoy Thomas</div>
+                <div class="gs-card-region"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Americas (PST/MT)</span></div>
+                <div class="gs-card-icons">
+                    <a class="gs-card-icon-link" href="#" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452H17.21v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.985V9h3.102v1.561h.046c.431-.816 1.485-1.676 3.057-1.676 3.268 0 3.868 2.151 3.868 4.948v6.619zM5.337 7.433a1.8 1.8 0 110-3.601 1.8 1.8 0 010 3.601zM6.762 20.452H3.908V9h2.854v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                    <a class="gs-card-icon-link" href="#" aria-label="Email">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="gs-card reveal reveal-delay-1">
+            <div class="gs-card-photo-wrap">
+                <img class="gs-card-photo" src="KavyaPeerbhoy.png" alt="Kavya Peerbhoy">
+            </div>
+            <div class="gs-card-body">
+                <div class="gs-card-name">Kavya Peerbhoy</div>
+                <div class="gs-card-region"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>APAC (IST/PHT)</span></div>
+                <div class="gs-card-icons">
+                    <a class="gs-card-icon-link" href="#" target="_blank" rel="noopener" aria-label="LinkedIn">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452H17.21v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.985V9h3.102v1.561h.046c.431-.816 1.485-1.676 3.057-1.676 3.268 0 3.868 2.151 3.868 4.948v6.619zM5.337 7.433a1.8 1.8 0 110-3.601 1.8 1.8 0 010 3.601zM6.762 20.452H3.908V9h2.854v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                     </a>
                     <a class="gs-card-icon-link" href="#" aria-label="Email">

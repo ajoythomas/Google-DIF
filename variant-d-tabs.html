@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Touchstorm YouTube Services - Category Tabs</title>
+<style>
+  :root {
+    --pink: #EF5C8D;
+    --pink-dark: #d94a7a;
+    --gray-bg: #f5f5f5;
+    --white: #ffffff;
+    --text-dark: #333333;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: Helvetica, Arial, sans-serif;
+    background: var(--gray-bg);
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Section ── */
+  .services-section {
+    padding: 80px 24px 100px;
+  }
+
+  /* ── Header ── */
+  .section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 48px;
+  }
+
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 14px;
+  }
+
+  .section-heading {
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+  }
+
+  .section-subtitle {
+    font-size: 17px;
+    line-height: 1.6;
+    color: #666;
+  }
+
+  /* ── Tab bar ── */
+  .tab-bar-wrapper {
+    max-width: 960px;
+    margin: 0 auto 36px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tab-bar {
+    display: flex;
+    gap: 0;
+    position: relative;
+    border-bottom: 2px solid #e0e0e0;
+    min-width: max-content;
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    color: #777;
+    padding: 14px 22px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.25s;
+    position: relative;
+  }
+
+  .tab-btn:hover {
+    color: var(--text-dark);
+  }
+
+  .tab-btn.active {
+    color: var(--pink);
+  }
+
+  .tab-btn .badge {
+    font-size: 12px;
+    font-weight: 700;
+    color: #999;
+    margin-left: 4px;
+  }
+
+  .tab-btn.active .badge {
+    color: var(--pink-dark);
+  }
+
+  /* sliding underline */
+  .tab-indicator {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    height: 3px;
+    background: var(--pink);
+    border-radius: 3px 3px 0 0;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+
+  /* ── Counter ── */
+  .service-counter {
+    text-align: center;
+    font-size: 13px;
+    color: #aaa;
+    margin-bottom: 24px;
+    min-height: 20px;
+    transition: opacity 0.25s;
+  }
+
+  /* ── Card grid ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  /* ── Card ── */
+  .service-card {
+    background: var(--white);
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    padding: 28px 28px 24px 28px;
+    border-left: 3px solid var(--pink);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s, box-shadow 0.25s, border-left-width 0.25s;
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  .service-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.1);
+    border-left-width: 5px;
+  }
+
+  .service-card.visible:hover {
+    transform: translateY(-4px);
+  }
+
+  .card-top {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .card-number {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--pink);
+    line-height: 1;
+  }
+
+  .card-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.3;
+  }
+
+  .card-desc {
+    font-size: 14px;
+    line-height: 1.65;
+    color: #777;
+    flex: 1;
+    margin-bottom: 20px;
+  }
+
+  .card-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .price-pill {
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+    background: var(--gray-bg);
+    padding: 5px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .learn-more {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--pink);
+    text-decoration: none;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+
+  .learn-more:hover {
+    color: var(--pink-dark);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 700px) {
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+    .section-heading {
+      font-size: 28px;
+    }
+    .tab-btn {
+      padding: 12px 16px;
+      font-size: 14px;
+    }
+    .service-card {
+      padding: 22px 20px 20px 20px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<section class="services-section">
+  <!-- Header -->
+  <div class="section-header">
+    <p class="eyebrow">Our Menu of Services</p>
+    <h2 class="section-heading">Touchstorm &amp; Google</h2>
+    <p class="section-subtitle">Data-driven YouTube solutions built on a unique partnership with Google. Choose the services that fit your brand's needs.</p>
+  </div>
+
+  <!-- Tab bar -->
+  <div class="tab-bar-wrapper">
+    <div class="tab-bar" id="tabBar">
+      <button class="tab-btn active" data-tab="all">All Services <span class="badge">(13)</span></button>
+      <button class="tab-btn" data-tab="analytics">Analytics &amp; Trends <span class="badge">(4)</span></button>
+      <button class="tab-btn" data-tab="listening">Social Listening <span class="badge">(3)</span></button>
+      <button class="tab-btn" data-tab="competitive">Competitive Intelligence <span class="badge">(4)</span></button>
+      <button class="tab-btn" data-tab="strategy">Strategy &amp; Management <span class="badge">(2)</span></button>
+      <div class="tab-indicator" id="tabIndicator"></div>
+    </div>
+  </div>
+
+  <!-- Counter -->
+  <div class="service-counter" id="serviceCounter">13 services</div>
+
+  <!-- Card grid -->
+  <div class="card-grid" id="cardGrid"></div>
+</section>
+
+<script>
+(function () {
+  /* ── Service data ── */
+  const services = [
+    { id: 1,  name: "Custom Strategy Analysis",                cat: "competitive", price: "$2,500 per engagement",
+      desc: "A tailored deep-dive into your brand's YouTube presence and competitive landscape. Our analysts identify whitespace opportunities and deliver an actionable roadmap to accelerate growth." },
+    { id: 2,  name: "Brand Buzz Monitor",                      cat: "analytics",   price: "$1,000/year",
+      desc: "Track real-time mentions and sentiment around your brand across YouTube. Receive automated alerts and weekly digest reports so you never miss a conversation that matters." },
+    { id: 3,  name: "Category Trends",                         cat: "analytics",   price: "$1,200/year",
+      desc: "Stay ahead of shifting viewer interests with monthly trend reports for your content category. Understand which topics are rising, plateauing, or declining to inform your content calendar." },
+    { id: 4,  name: "Topic Finder",                            cat: "analytics",   price: "$800/year",
+      desc: "Discover high-potential video topics your audience is actively searching for. Our algorithm surfaces keyword gaps and emerging queries so you can create content viewers already want." },
+    { id: 5,  name: "Global Brand Consistency",                cat: "competitive", price: "$3,000/year",
+      desc: "Audit and align your brand's YouTube presence across multiple regions and languages. Ensure consistent messaging, visual identity, and metadata standards worldwide." },
+    { id: 6,  name: "Casting Cards",                           cat: "competitive", price: "$1,500 per search",
+      desc: "Find the perfect creator partners for your next campaign with data-backed talent profiles. Each Casting Card includes audience overlap analysis, engagement benchmarks, and brand-safety scoring." },
+    { id: 7,  name: "Competitive Insights \u2013 Ranker",      cat: "competitive", price: "$2,000/year",
+      desc: "Benchmark your channel against key competitors with monthly ranking dashboards. Track relative performance on views, subscribers, and engagement to spot threats and opportunities early." },
+    { id: 8,  name: "YT Social Listening \u2013 Influencer Focus", cat: "listening", price: "$1,500/year",
+      desc: "Monitor how influencers discuss your brand, products, and competitors on YouTube. Surface partnership opportunities and track the impact of existing collaborations over time." },
+    { id: 9,  name: "YT Social Listening \u2013 Sentiment Focus",  cat: "listening", price: "$1,500/year",
+      desc: "Measure audience sentiment toward your brand through comment and transcript analysis. Identify emerging PR risks and positive momentum before they hit mainstream channels." },
+    { id: 10, name: "Share of Voice",                          cat: "analytics",   price: "$2,500/year",
+      desc: "Quantify your brand's visibility relative to competitors within your YouTube category. Monthly reports break down share by views, impressions, and search presence for clear strategic insight." },
+    { id: 11, name: "Strategic Channel Business Plan",         cat: "strategy",    price: "$5,000 per plan",
+      desc: "A comprehensive 12-month blueprint for your YouTube channel covering content pillars, publishing cadence, audience growth targets, and monetization strategy. Delivered with executive-ready documentation." },
+    { id: 12, name: "Community Management",                    cat: "listening",   price: "$1,200/month",
+      desc: "Dedicated community managers moderate comments, respond to viewers, and foster loyal engagement on your channel. Includes sentiment escalation workflows and monthly community health reports." },
+    { id: 13, name: "Channel Management",                      cat: "strategy",    price: "$3,500/month",
+      desc: "End-to-end operational management of your YouTube channel including uploads, metadata optimization, thumbnail QA, and performance reporting. Your always-on channel operations team." }
+  ];
+
+  const catCounts = { all: 13, analytics: 4, listening: 3, competitive: 4, strategy: 2 };
+  const hashMap   = { all: "", analytics: "#analytics", listening: "#listening", competitive: "#competitive", strategy: "#strategy" };
+  const hashToCat = { "": "all", "#analytics": "analytics", "#listening": "listening", "#competitive": "competitive", "#strategy": "strategy" };
+
+  const grid      = document.getElementById("cardGrid");
+  const counter   = document.getElementById("serviceCounter");
+  const tabBar    = document.getElementById("tabBar");
+  const indicator = document.getElementById("tabIndicator");
+  const tabs      = Array.from(tabBar.querySelectorAll(".tab-btn"));
+
+  let activeCat   = "all";
+
+  /* ── Build card HTML ── */
+  function cardHTML(s) {
+    const num = String(s.id).padStart(2, "0");
+    return `<div class="service-card" data-cat="${s.cat}" data-id="${s.id}">
+      <div class="card-top">
+        <span class="card-number">${num}</span>
+        <span class="card-name">${s.name}</span>
+      </div>
+      <p class="card-desc">${s.desc}</p>
+      <div class="card-bottom">
+        <span class="price-pill">${s.price}</span>
+        <a href="#" class="learn-more" onclick="return false">Learn More &rarr;</a>
+      </div>
+    </div>`;
+  }
+
+  /* ── Render cards ── */
+  function renderCards(cat) {
+    const filtered = cat === "all" ? services : services.filter(s => s.cat === cat);
+
+    /* fade out existing */
+    const existing = grid.querySelectorAll(".service-card");
+    existing.forEach(c => {
+      c.style.transition = "opacity 0.2s, transform 0.2s";
+      c.classList.remove("visible");
+    });
+
+    setTimeout(() => {
+      grid.innerHTML = filtered.map(cardHTML).join("");
+      counter.textContent = filtered.length + (filtered.length === 1 ? " service" : " services");
+
+      const cards = grid.querySelectorAll(".service-card");
+      /* staggered fade-in */
+      cards.forEach((card, i) => {
+        card.style.transition = `opacity 0.35s ${i * 50}ms, transform 0.35s ${i * 50}ms, box-shadow 0.25s, border-left-width 0.25s`;
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            card.classList.add("visible");
+          });
+        });
+      });
+
+      /* IntersectionObserver for cards entering viewport (e.g. on scroll) */
+      if ("IntersectionObserver" in window) {
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+              obs.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        cards.forEach(c => obs.observe(c));
+      }
+    }, existing.length ? 200 : 0);
+  }
+
+  /* ── Move indicator ── */
+  function moveIndicator(btn) {
+    const barRect = tabBar.getBoundingClientRect();
+    const btnRect = btn.getBoundingClientRect();
+    indicator.style.width = btnRect.width + "px";
+    indicator.style.transform = "translateX(" + (btnRect.left - barRect.left) + "px)";
+  }
+
+  /* ── Tab click ── */
+  tabs.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const cat = btn.dataset.tab;
+      if (cat === activeCat) return;
+      activeCat = cat;
+      tabs.forEach(t => t.classList.remove("active"));
+      btn.classList.add("active");
+      moveIndicator(btn);
+      renderCards(cat);
+      history.replaceState(null, "", hashMap[cat] || window.location.pathname);
+    });
+  });
+
+  /* ── Init ── */
+  function init() {
+    const hash = window.location.hash || "";
+    activeCat = hashToCat[hash] || "all";
+    const activeBtn = tabs.find(t => t.dataset.tab === activeCat) || tabs[0];
+    tabs.forEach(t => t.classList.remove("active"));
+    activeBtn.classList.add("active");
+    moveIndicator(activeBtn);
+    renderCards(activeCat);
+  }
+
+  init();
+
+  /* recalc indicator on resize */
+  window.addEventListener("resize", () => {
+    const activeBtn = tabs.find(t => t.classList.contains("active"));
+    if (activeBtn) moveIndicator(activeBtn);
+  });
+
+  /* handle back/forward */
+  window.addEventListener("hashchange", init);
+})();
+</script>
+</body>
+</html>
