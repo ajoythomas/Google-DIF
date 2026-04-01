@@ -11,7 +11,8 @@
       "Bash(ls -lh /Users/ajoythomas/Documents/Sites/DIF-Claude/*.png)",
       "WebFetch(domain:www.fizzy.do)",
       "mcp__Claude_Preview__preview_start",
-      "WebFetch(domain:www.touchstorm.com)"
+      "WebFetch(domain:www.touchstorm.com)",
+      "Bash(ls /Users/ajoythomas/Documents/Sites/DIF-Claude/images/CM-CaseStudy-*)"
     ]
   }
 }

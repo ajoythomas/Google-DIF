@@ -85,21 +85,70 @@
             transition: color 0.2s;
         }
         .nav-links a:hover { color: var(--pink); }
+        /* Animated rotating border wrapper (shared by nav CTA and bottom CTA) */
+        @property --border-angle {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
+        @keyframes spin-border {
+            to { --border-angle: 360deg; }
+        }
+
+        /* Nav CTA – outline ghost with animated rotating border */
+        .nav-cta-wrap {
+            position: relative;
+            border-radius: 50px;
+            display: inline-flex;
+            flex-shrink: 0;
+        }
+        .nav-cta-wrap::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 52px;
+            background: conic-gradient(from var(--border-angle),
+                var(--pink) 0%,
+                #ff9cc0 20%,
+                transparent 45%,
+                #ff9cc0 80%,
+                var(--pink) 100%);
+            animation: spin-border 2.5s linear infinite;
+            z-index: 0;
+        }
         .nav-cta {
-            background: var(--pink) !important;
-            color: var(--white) !important;
-            padding: 12px 28px !important;
-            border-radius: 50px !important;
+            position: relative !important;
+            z-index: 1 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 7px !important;
+            background: var(--white) !important;
+            color: var(--pink) !important;
+            padding: 10px 24px !important;
+            border-radius: 48px !important;
             font-weight: 700 !important;
             font-size: 15px !important;
-            transition: background 0.2s, transform 0.15s, box-shadow 0.2s !important;
-            box-shadow: 0 4px 14px rgba(239,92,141,0.3) !important;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: background 0.2s, color 0.2s !important;
+            box-shadow: none !important;
         }
         .nav-cta:hover {
-            background: var(--pink-dark) !important;
-            transform: translateY(-1px) !important;
-            box-shadow: 0 6px 20px rgba(239,92,141,0.4) !important;
+            background: var(--pink) !important;
+            color: var(--white) !important;
+            transform: none !important;
+            box-shadow: none !important;
         }
+        .cta-chevron {
+            display: inline-block;
+            font-size: 20px;
+            line-height: 1;
+            font-weight: 400;
+            transition: transform 0.2s ease;
+        }
+        .cta-chevron::before { content: '›'; }
+        .nav-cta:hover .cta-chevron::before { content: '→'; }
+        .nav-cta:hover .cta-chevron { transform: translateX(2px); }
 
         /* ── PINK ANGLED BANNER (below nav) ── */
         .pink-banner {
@@ -208,10 +257,10 @@
             font-style: italic;
             font-size: 34px;
             color: #222;
-            opacity: 0.65;
             letter-spacing: -1px;
-            margin-top: 32px;
+            margin-top: -20px;
             margin-bottom: 8px;
+            width:90%;
         }
         .letter-signature {
             display: flex;
@@ -259,10 +308,11 @@
 
         /* ── YOUTUBE SERVICES ── */
         .services-section {
-            background: var(--white);
+            background: var(--gray-bg);
+            padding-bottom: 80px;
         }
         .services-header {
-            padding: 80px clamp(24px, 4vw, 80px) 0;
+            padding: 10px clamp(24px, 4vw, 80px) 48px;
             text-align: center;
         }
         .services-header .section-eyebrow {
@@ -279,154 +329,317 @@
             font-weight: 800;
         }
 
-        /* Each service panel — full width, alternating bg */
-        .service-panel {
-            display: grid;
-            grid-template-columns: 60fr 40fr;
-            min-height: 580px;
+        /* ── TAB BAR ── */
+        .svc-tab-bar-wrap {
+            background: var(--white);
+            position: sticky;
+            top: 76px; /* below fixed nav */
+            z-index: 150;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.07), 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+        .svc-tab-bar {
+            display: flex;
+            align-items: stretch;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .svc-tab-bar::-webkit-scrollbar { display: none; }
+        .svc-tab-btn {
+            flex-shrink: 0;
+            padding: 18px 22px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: Helvetica, Arial, sans-serif;
+            color: #888;
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.2s;
+            white-space: nowrap;
             position: relative;
         }
-        .service-panel:nth-child(odd) { background: var(--white); }
-        .service-panel:nth-child(even) { background: var(--gray-bg); }
-
-        /* Flip columns on even panels for visual rhythm */
-        .service-panel:nth-child(even) {
-            direction: rtl;
+        .svc-tab-btn:hover { color: var(--text-dark); }
+        .svc-tab-btn.active { color: var(--pink); }
+        .svc-tab-count {
+            font-size: 11px;
+            font-weight: 700;
+            background: var(--gray-bg);
+            color: #999;
+            border-radius: 100px;
+            padding: 2px 7px;
+            transition: background 0.2s, color 0.2s;
         }
-        .service-panel:nth-child(even) > * {
-            direction: ltr;
+        .svc-tab-btn.active .svc-tab-count {
+            background: #fde8ef;
+            color: var(--pink);
+        }
+        .svc-tab-indicator {
+            position: absolute;
+            bottom: 0;
+            height: 3px;
+            background: var(--pink);
+            border-radius: 2px 2px 0 0;
+            transition: left 0.25s cubic-bezier(0.4,0,0.2,1), width 0.25s cubic-bezier(0.4,0,0.2,1);
         }
 
-        /* Image side */
-        .service-img {
+        /* ── CARD GRID ── */
+        .svc-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ── Card (collapsed) ── */
+        .svc-card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 24px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.35s cubic-bezier(0.4,0,0.2,1);
+        }
+        .svc-card.visible { opacity: 1; transform: translateY(0); }
+        .svc-card:not(.expanded):hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+        .svc-card.visible:not(.expanded):hover { transform: translateY(-2px); }
+        .svc-card.tab-hidden { display: none; }
+
+        .svc-card-collapsed {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: opacity 0.25s ease;
+        }
+        .svc-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .svc-card-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--pink);
+            line-height: 1;
+            opacity: 0.85;
+        }
+        .svc-card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gray-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .svc-card-icon svg { width: 20px; height: 20px; color: #aaa; }
+        .svc-card-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.3;
+            margin-top: 4px;
+        }
+        .svc-card-price { font-size: 13px; color: #999; font-weight: 500; }
+        .svc-card-chevron {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+            width: 24px;
+            height: 24px;
+            color: #ccc;
+            transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), color 0.35s cubic-bezier(0.4,0,0.2,1);
+        }
+        .svc-card:not(.expanded):hover .svc-card-chevron { color: var(--pink); transform: translateY(2px); }
+
+        /* ── Card (expanded) ── */
+        .svc-card.expanded {
+            grid-column: 1 / -1;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.14);
+            cursor: default;
+            padding: 0;
+        }
+        .svc-card.expanded .svc-card-collapsed {
+            opacity: 0; height: 0; overflow: hidden;
+            padding: 0; pointer-events: none; position: absolute;
+        }
+        .svc-card.expanded .svc-card-chevron { display: none; }
+
+        .svc-card-expanded { display: none; opacity: 0; transition: opacity 0.3s ease 0.1s; }
+        .svc-card.expanded .svc-card-expanded {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            opacity: 1;
+            min-height: 300px;
             position: relative;
             overflow: hidden;
         }
-        .service-img-placeholder {
-            width: 100%;
-            height: 100%;
-            min-height: 480px;
-            background: #e8e8e8;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .service-img-placeholder:hover { background: #ddd; }
-        .service-img-placeholder svg {
-            width: 48px;
-            height: 48px;
-            color: #aaa;
-        }
-        .service-img-placeholder span {
-            font-size: 13px;
-            font-weight: 600;
-            color: #aaa;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-        }
-        /* When an actual image is set */
-        .service-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* Content side */
-        .service-content {
-            padding: clamp(48px, 6vw, 80px) clamp(40px, 5vw, 72px);
+        .svc-expanded-left {
+            padding: 48px 40px 48px 52px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             position: relative;
+            z-index: 1;
         }
-        .service-price {
-            display: inline-block;
-            margin-top: 16px;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.04em;
-            color: var(--text-muted);
-            background: var(--gray-bg);
-            border: 1px solid var(--border-light);
-            border-radius: 100px;
-            padding: 5px 14px;
-            align-self: flex-start;
-        }
-        .service-panel:nth-child(even) .service-price {
-            background: var(--white);
-        }
-
-        .service-num-watermark {
-            font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
-            font-size: clamp(80px, 10vw, 130px);
+        .svc-expanded-watermark {
+            position: absolute;
+            top: -20px; left: -10px;
+            font-size: 180px;
             font-weight: 900;
-            color: #f0f0f0;
-            line-height: 1;
-            margin-bottom: -20px;
-            user-select: none;
-            letter-spacing: -4px;
-        }
-        .service-panel:nth-child(even) .service-num-watermark {
-            color: #e8e8e8;
-        }
-        .service-name {
-            font-size: clamp(28px, 3.5vw, 42px);
-            font-weight: 800;
-            color: var(--text-dark);
-            line-height: 1.15;
-            margin-bottom: 16px;
-        }
-        .service-rule {
-            width: 40px;
-            height: 3px;
-            background: var(--pink);
-            border: none;
-            margin: 0 0 20px 0;
-        }
-        .service-desc {
-            font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
-            font-size: 16px;
-            line-height: 1.8;
-            color: var(--text-muted);
-            margin-bottom: 28px;
-            max-width: 380px;
-        }
-        .service-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
             color: var(--pink);
-            text-decoration: none;
-            transition: gap 0.2s;
+            opacity: 0.05;
+            line-height: 1;
+            z-index: 0;
+            pointer-events: none;
         }
-        .service-cta:hover { gap: 12px; }
-        .service-cta svg {
-            width: 18px;
-            height: 18px;
-            border: 2px solid var(--pink);
+        .svc-expanded-number {
+            font-size: 14px; font-weight: 700;
+            color: var(--pink); letter-spacing: 2px;
+            text-transform: uppercase; margin-bottom: 8px; position: relative;
+        }
+        .svc-expanded-name {
+            font-size: clamp(22px, 2.5vw, 30px);
+            font-weight: 800; color: var(--text-dark);
+            line-height: 1.2; margin-bottom: 16px; position: relative;
+        }
+        .svc-expanded-desc {
+            font-size: 15px; color: #666;
+            line-height: 1.65; margin-bottom: 24px;
+            max-width: 460px; position: relative;
+        }
+        .svc-expanded-price-pill {
+            display: block;
+            border-left: 3px solid var(--pink);
+            padding: 4px 0 4px 12px;
+            color: #888; font-size: 13px; font-weight: 600;
+            margin-bottom: 20px; letter-spacing: 0.2px; position: relative;
+        }
+        .svc-expanded-cta {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 14px; font-weight: 700;
+            color: var(--pink); text-decoration: none;
+            border: 2px solid var(--pink); border-radius: 8px;
+            padding: 10px 24px;
+            transition: background 0.35s cubic-bezier(0.4,0,0.2,1), color 0.35s cubic-bezier(0.4,0,0.2,1);
+            align-self: flex-start; position: relative;
+        }
+        .svc-expanded-cta:hover { background: var(--pink); color: var(--white); }
+        .svc-expanded-right {
+            background: linear-gradient(135deg, #f0f0f0, #e8e8e8);
+            display: flex; align-items: center; justify-content: center;
+            position: relative; border-radius: 0 12px 12px 0; overflow: hidden;
+        }
+        .svc-expanded-right::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(239,92,141,0.06), rgba(239,92,141,0.02));
+        }
+        .svc-img-placeholder {
+            display: flex; flex-direction: column;
+            align-items: center; gap: 12px; color: #bbb;
+        }
+        .svc-img-placeholder svg { width: 64px; height: 64px; opacity: 0.5; }
+        .svc-img-placeholder span {
+            font-size: 13px; font-weight: 600;
+            letter-spacing: 1px; text-transform: uppercase; opacity: 0.5;
+        }
+        .svc-close-btn {
+            position: absolute; top: 16px; right: 16px;
+            width: 36px; height: 36px; border-radius: 50%;
+            border: none; background: var(--white);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer; display: flex;
+            align-items: center; justify-content: center;
+            z-index: 10;
+            transition: background 0.35s cubic-bezier(0.4,0,0.2,1), transform 0.35s cubic-bezier(0.4,0,0.2,1);
+        }
+        .svc-close-btn:hover { background: var(--pink); transform: rotate(90deg); }
+        .svc-close-btn svg { width: 16px; height: 16px; color: var(--text-dark); transition: color 0.35s; }
+        .svc-close-btn:hover svg { color: var(--white); }
+
+        /* ── Slideshow (Service 13) ── */
+        .svc-slideshow {
+            position: absolute;
+            inset: 0;
+            border-radius: 0 12px 12px 0;
+            overflow: hidden;
+        }
+        .svc-slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #111;
+            opacity: 0;
+            transition: opacity 0.75s ease;
+        }
+        .svc-slide.active { opacity: 1; }
+        .svc-slide-dots {
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 7px;
+            z-index: 5;
+        }
+        .svc-slide-dot {
+            width: 7px; height: 7px;
             border-radius: 50%;
-            padding: 2px;
-            flex-shrink: 0;
+            border: none;
+            background: rgba(255,255,255,0.45);
+            cursor: pointer;
+            padding: 0;
+            transition: background 0.25s, transform 0.25s;
         }
+        .svc-slide-dot.active { background: #fff; transform: scale(1.3); }
+        .svc-slide-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(0,0,0,0.25);
+            backdrop-filter: blur(6px);
+            color: #fff;
+            font-size: 22px;
+            cursor: pointer;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            line-height: 1;
+        }
+        .svc-slide-arrow:hover { background: rgba(0,0,0,0.45); }
+        .svc-slide-arrow.prev { left: 12px; }
+        .svc-slide-arrow.next { right: 56px; }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .service-panel {
-                grid-template-columns: 1fr;
-                direction: ltr !important;
-            }
-            .service-panel:nth-child(even) > * { direction: ltr; }
-            .service-img-placeholder { min-height: 260px; }
-            .service-num-watermark { font-size: 72px; }
+            .svc-card-grid { grid-template-columns: 1fr; }
+            .svc-card.expanded .svc-card-expanded { grid-template-columns: 1fr; }
+            .svc-expanded-left { padding: 32px 24px; }
+            .svc-expanded-right { border-radius: 0 0 12px 12px; min-height: 180px; }
+            .svc-expanded-watermark { font-size: 100px; }
+            .svc-tab-btn { padding: 16px 14px 14px; font-size: 12px; }
         }
 
         /* ── FOOTER ── */
@@ -603,8 +816,32 @@
             text-align: center;
             margin-top: 48px;
         }
-        .gs-cta-single {
+        /* Bottom CTA – solid pink with animated rotating border */
+        .gs-cta-border-wrap {
+            position: relative;
+            border-radius: 102px;
             display: inline-block;
+        }
+        .gs-cta-border-wrap::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 104px;
+            background: conic-gradient(from var(--border-angle),
+                white 0%,
+                rgba(255,255,255,0.5) 25%,
+                var(--pink-dark) 50%,
+                rgba(255,255,255,0.5) 75%,
+                white 100%);
+            animation: spin-border 2.5s linear infinite;
+            z-index: 0;
+        }
+        .gs-cta-single {
+            position: relative;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             background: var(--pink);
             color: white;
             padding: 16px 48px;
@@ -615,6 +852,9 @@
             transition: background 0.2s;
         }
         .gs-cta-single:hover { background: var(--pink-dark); }
+        .gs-cta-single .cta-chevron::before { content: '›'; }
+        .gs-cta-single:hover .cta-chevron::before { content: '→'; }
+        .gs-cta-single:hover .cta-chevron { transform: translateX(2px); }
         .gs-cta-note {
             margin-top: 14px;
             font-size: 13px;
@@ -659,7 +899,9 @@
     <div class="nav-links">
         <a href="#letter">👋</a>
         <a href="#services">DIF Approved Services</a>
-        <a href="#contact" class="nav-cta">Get Started</a>
+        <div class="nav-cta-wrap">
+            <a href="#contact" class="nav-cta">Get Started <span class="cta-chevron"></span></a>
+        </div>
     </div>
 </nav>
 
@@ -702,7 +944,7 @@
 
             <p>We welcome the opportunity to be a resource for you when the opportunity arises. We look forward to answering any questions and to working together soon.</p>
 
-            <div class="sig-handwritten"><img src="AjoySignature-1.png" width="200"></div>
+            <div class="sig-handwritten"><img src="images/AlisonSignature.png" width="100%"></div>
 
             
         </div>
@@ -714,191 +956,32 @@
 <section class="services-section" id="services">
 
     <div class="services-header reveal">
-        <div class="section-eyebrow">Our Menu of Servivces</div>
-         <h2 class="handshake">
+        <div class="section-eyebrow">Our Menu of Services</div>
+        <h2 class="handshake">
             <img width="167"
                 src="https://www.touchstorm.com/wp-content/uploads/2021/05/Touchstorm_Header_Logo-167x36.png"
                 class="custom-logo" alt="Touchstorm" decoding="async"
                 srcset="https://www.touchstorm.com/wp-content/uploads/2021/05/Touchstorm_Header_Logo-167x36.png 1x, https://www.touchstorm.com/wp-content/uploads/2022/11/Touchstorm_Header_Logo.png 2x"
-                sizes="(max-width: 167px) 100vw, 167px"> 
-                🤝
-                <img width="127" 
-                src="Google-logo.png"
-                class="custom-logo" alt="Google" decoding="async"
-                
-                sizes="(max-width: 167px) 100vw, 167px"> 
+                sizes="(max-width: 167px) 100vw, 167px">
+            🤝
+            <img width="127" src="images/Google-logo.png" class="custom-logo" alt="Google" decoding="async" sizes="(max-width: 167px) 100vw, 167px">
         </h2>
-     
     </div>
 
-    <!-- 01 Custom Strategy Analysis -->
-    <div class="service-panel reveal">
-        <div class="service-img"><div class="service-img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add Image Here</span></div></div>
-        <div class="service-content">
-            <div class="service-num-watermark">01</div>
-            <h3 class="service-name">Custom Strategy Analysis</h3>
-            <hr class="service-rule">
-            <p class="service-desc">A deep-dive YouTube audit and custom growth strategy built specifically for your brand. We analyze your channel health, content performance, audience behavior, and competitive gaps - then deliver a prioritized roadmap your team can act on immediately.</p>
-            <span class="service-price">Starting at $2,500 per engagement</span>
-            <a href="#contact" class="service-cta">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8h9m0 0L9 4.5M12.5 8L9 11.5"/></svg></a>
+    <!-- TAB BAR -->
+    <div class="svc-tab-bar-wrap">
+        <div class="svc-tab-bar" id="svcTabBar">
+            <button class="svc-tab-btn active" data-tab="all">All Services <span class="svc-tab-count">13</span></button>
+            <button class="svc-tab-btn" data-tab="analytics">Analytics &amp; Trends <span class="svc-tab-count">4</span></button>
+            <button class="svc-tab-btn" data-tab="listening">Social Listening <span class="svc-tab-count">3</span></button>
+            <button class="svc-tab-btn" data-tab="competitive">Competitive Intelligence <span class="svc-tab-count">4</span></button>
+            <button class="svc-tab-btn" data-tab="strategy">Strategy &amp; Management <span class="svc-tab-count">2</span></button>
+            <div class="svc-tab-indicator" id="svcTabIndicator"></div>
         </div>
     </div>
 
-    <!-- 02 Brand Buzz Monitor -->
-    <div class="service-panel reveal">
-        <div class="service-img"><div class="service-img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add Image Here</span></div></div>
-        <div class="service-content">
-            <div class="service-num-watermark">02</div>
-            <h3 class="service-name">Brand Buzz Monitor</h3>
-            <hr class="service-rule">
-            <p class="service-desc">Monthly reports surfacing how your brand is being talked about across YouTube - what creators are saying, how sentiment is shifting, and which videos are driving perception. 12 reports per year, shareable across your team.</p>
-            <span class="service-price">Starting at $1,000/year - 12 reports, 3 seats</span>
-            <a href="#contact" class="service-cta">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8h9m0 0L9 4.5M12.5 8L9 11.5"/></svg></a>
-        </div>
-    </div>
-
-    <!-- 03 Category Trends -->
-    <div class="service-panel reveal">
-        <div class="service-img"><div class="service-img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add Image Here</span></div></div>
-        <div class="service-content">
-            <div class="service-num-watermark">03</div>
-            <h3 class="service-name">Category Trends</h3>
-            <hr class="service-rule">
-            <p class="service-desc">Know what's rising in your category before competitors do. We detect spikes in search volume, emerging topics, and rising content formats - validated across YouTube, Instagram, and TikTok. Stay ahead with quarterly trend briefings built for your vertical.</p>
-            <span class="service-price">Starting at $1,200/year</span>
-            <a href="#contact" class="service-cta">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8h9m0 0L9 4.5M12.5 8L9 11.5"/></svg></a>
-        </div>
-    </div>
-
-    <!-- 04 Topic Finder -->
-    <div class="service-panel reveal">
-        <div class="service-img"><div class="service-img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add Image Here</span></div></div>
-        <div class="service-content">
-            <div class="service-num-watermark">04</div>
-            <h3 class="service-name">Topic Finder</h3>
-            <hr class="service-rule">
-            <p class="service-desc">Stop guessing what to make. Topic Finder identifies the highest-demand, lowest-competition content opportunities for your brand on YouTube - ranked by search volume, audience fit, and monetization potential. Never run out of ideas that actually perform.</p>
-            <span class="service-price">Starting at $800/year</span>
-            <a href="#contact" class="service-cta">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8h9m0 0L9 4.5M12.5 8L9 11.5"/></svg></a>
-        </div>
-    </div>
-
-    <!-- 05 Global Brand Consistency -->
-    <div class="service-panel reveal">
-        <div class="service-img"><div class="service-img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add Image Here</span></div></div>
-        <div class="service-content">
-            <div class="service-num-watermark">05</div>
-            <h3 class="service-name">Global Brand Consistency</h3>
-            <hr class="service-rule">
-            <p class="service-desc">For brands with multi-market YouTube presence, we audit and align content, tone, and strategy across regions. Ensure your brand shows up consistently whether a viewer is in Tokyo, Toronto, or Sao Paulo - while still resonating locally.</p>
-            <span class="service-price">Starting at $3,000/year</span>
-            <a href="#contact" class="service-cta">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8h9m0 0L9 4.5M12.5 8L9 11.5"/></svg></a>
-        </div>
-    </div>
-
-    <!-- 06 Casting Cards -->
-    <div class="service-panel reveal">
-        <div class="service-img"><div class="service-img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add Image Here</span></div></div>
-        <div class="service-content">
-            <div class="service-num-watermark">06</div>
-            <h3 class="service-name">Casting Cards</h3>
-            <hr class="service-rule">
-            <p class="service-desc">Finding and hiring the right YouTube creator is the hardest part of influencer marketing. Our Talent Finder covers 15 data points per creator - audience demographics, engagement rates, brand safety signals, and estimated rates. Know who to hire and exactly what they'll cost before you make contact.</p>
-            <span class="service-price">Starting at $1,500 per search</span>
-            <a href="#contact" class="service-cta">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8h9m0 0L9 4.5M12.5 8L9 11.5"/></svg></a>
-        </div>
-    </div>
-
-    <!-- 07 Competitive Insights - Ranker -->
-    <div class="service-panel reveal">
-        <div class="service-img"><div class="service-img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add Image Here</span></div></div>
-        <div class="service-content">
-            <div class="service-num-watermark">07</div>
-            <h3 class="service-name">Competitive Insights - Ranker</h3>
-            <hr class="service-rule">
-            <p class="service-desc">See exactly where your brand ranks against competitors on YouTube. We track upload cadence, subscriber growth, view velocity, and top-performing content for your entire competitive set - then tell you what it would take to move up one rank or hold your current position.</p>
-            <span class="service-price">Starting at $2,000/year</span>
-            <a href="#contact" class="service-cta">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8h9m0 0L9 4.5M12.5 8L9 11.5"/></svg></a>
-        </div>
-    </div>
-
-    <!-- 08 YT Social Listening - Influencer Focus -->
-    <div class="service-panel reveal">
-        <div class="service-img"><div class="service-img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add Image Here</span></div></div>
-        <div class="service-content">
-            <div class="service-num-watermark">08</div>
-            <h3 class="service-name">YT Social Listening - Influencer Focus</h3>
-            <hr class="service-rule">
-            <p class="service-desc">Track which creators are talking about your brand or category - organically. Identify rising voices before they become expensive, spot partnership opportunities early, and monitor existing creator relationships for shifts in tone or reach.</p>
-            <span class="service-price">Starting at $1,500/year</span>
-            <a href="#contact" class="service-cta">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8h9m0 0L9 4.5M12.5 8L9 11.5"/></svg></a>
-        </div>
-    </div>
-
-    <!-- 09 YT Social Listening - Sentiment Focus -->
-    <div class="service-panel reveal">
-        <div class="service-img"><div class="service-img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add Image Here</span></div></div>
-        <div class="service-content">
-            <div class="service-num-watermark">09</div>
-            <h3 class="service-name">YT Social Listening - Sentiment Focus</h3>
-            <hr class="service-rule">
-            <p class="service-desc">Understand how audiences actually feel about your brand on YouTube - beyond view counts. We analyze comment sentiment, like/dislike signals, and conversation tone across thousands of videos to surface what's driving love, concern, or indifference toward your brand.</p>
-            <span class="service-price">Starting at $1,500/year</span>
-            <a href="#contact" class="service-cta">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8h9m0 0L9 4.5M12.5 8L9 11.5"/></svg></a>
-        </div>
-    </div>
-
-    <!-- 10 Share of Voice -->
-    <div class="service-panel reveal">
-        <div class="service-img"><div class="service-img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add Image Here</span></div></div>
-        <div class="service-content">
-            <div class="service-num-watermark">10</div>
-            <h3 class="service-name">Share of Voice - How Much to Earn #1</h3>
-            <hr class="service-rule">
-            <p class="service-desc">What would it cost to become the #1 brand on YouTube in your category? We quantify it. Our Share of Voice model maps current category ownership, models the content investment required to lead, and gives your team a clear, data-backed answer to the question every CMO is asking.</p>
-            <span class="service-price">Starting at $2,500/year</span>
-            <a href="#contact" class="service-cta">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8h9m0 0L9 4.5M12.5 8L9 11.5"/></svg></a>
-        </div>
-    </div>
-
-    <!-- 11 Strategic Channel Business Plan -->
-    <div class="service-panel reveal">
-        <div class="service-img"><div class="service-img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add Image Here</span></div></div>
-        <div class="service-content">
-            <div class="service-num-watermark">11</div>
-            <h3 class="service-name">Strategic Channel Business Plan</h3>
-            <hr class="service-rule">
-            <p class="service-desc">A full 12-month channel roadmap - content pillars, publishing cadence, growth targets, monetization paths, and resource requirements. Built for brands that are serious about YouTube as a long-term owned media channel, not just a place to upload ads.</p>
-            <span class="service-price">Starting at $5,000 per plan</span>
-            <a href="#contact" class="service-cta">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8h9m0 0L9 4.5M12.5 8L9 11.5"/></svg></a>
-        </div>
-    </div>
-
-    <!-- 12 Community Management -->
-    <div class="service-panel reveal">
-        <div class="service-img"><div class="service-img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add Image Here</span></div></div>
-        <div class="service-content">
-            <div class="service-num-watermark">12</div>
-            <h3 class="service-name">Community Management</h3>
-            <hr class="service-rule">
-            <p class="service-desc">Your YouTube comments are a goldmine of audience signal - and most brands ignore them. We monitor, moderate, and respond to comments on your behalf, surfacing the highest-value questions and conversations for your team while keeping your channel community healthy and engaged.</p>
-            <span class="service-price">Starting at $1,200/month</span>
-            <a href="#contact" class="service-cta">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8h9m0 0L9 4.5M12.5 8L9 11.5"/></svg></a>
-        </div>
-    </div>
-
-    <!-- 13 Channel Management -->
-    <div class="service-panel reveal">
-        <div class="service-img"><div class="service-img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add Image Here</span></div></div>
-        <div class="service-content">
-            <div class="service-num-watermark">13</div>
-            <h3 class="service-name">Channel Management</h3>
-            <hr class="service-rule">
-            <p class="service-desc">Full-service YouTube channel management - strategy, optimization, publishing, SEO, and ongoing reporting. We've taken Toyota from #3 to #1 in their category and grown CoverGirl from 1,700 to 581,000 subscribers. We run your channel like a media business because that's what it is.</p>
-            <span class="service-price">Starting at $3,500/month</span>
-            <a href="#contact" class="service-cta">Learn More <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8h9m0 0L9 4.5M12.5 8L9 11.5"/></svg></a>
-        </div>
-    </div>
+    <!-- CARD GRID (populated by JS) -->
+    <div class="svc-card-grid" id="svcCardGrid"></div>
 
 </section>
 
@@ -909,14 +992,14 @@
     <div class="gs-header reveal">
         <div class="gs-eyebrow">Get Started</div>
         <h2>Let's talk about your advertisers.</h2>
-        <p>We work directly with Google teams to deploy DIF-eligible YouTube strategies. We provide the kind of value that makes your DIF recommendations look great.</p>
+        <p>We work directly with Google. Let's get to know you and build a custom value added service for your brands.</p>
     </div>
 
     <div class="gs-grid">
 
         <div class="gs-card reveal">
             <div class="gs-card-photo-wrap">
-                <img class="gs-card-photo" src="CharlotteErmatinger.png" alt="Charlotte Ermatinger">
+                <img class="gs-card-photo" src="images/CharlotteErmatinger.png" alt="Charlotte Ermatinger">
             </div>
             <div class="gs-card-body">
                 <div class="gs-card-name">Charlotte Ermatinger</div>
@@ -934,7 +1017,7 @@
 
         <div class="gs-card reveal reveal-delay-1">
             <div class="gs-card-photo-wrap">
-                <img class="gs-card-photo" src="FabrizioFaillace_v2.png" alt="Fabrizio Faillace">
+                <img class="gs-card-photo" src="images/FabrizioFaillace_v2.png" alt="Fabrizio Faillace">
             </div>
             <div class="gs-card-body">
                 <div class="gs-card-name">Fabrizio Faillace</div>
@@ -952,7 +1035,7 @@
 
         <div class="gs-card reveal reveal-delay-1">
             <div class="gs-card-photo-wrap">
-                <img class="gs-card-photo" src="AlexdeClosset.png" alt="Alexandra de Closset">
+                <img class="gs-card-photo" src="images/AlexdeClosset.png" alt="Alexandra de Closset">
             </div>
             <div class="gs-card-body">
                 <div class="gs-card-name">Alexandra de Closset</div>
@@ -970,7 +1053,7 @@
 
         <div class="gs-card reveal reveal-delay-1">
             <div class="gs-card-photo-wrap">
-                <img class="gs-card-photo" src="AjoyThomas.png" alt="Ajoy Thomas">
+                <img class="gs-card-photo" src="images/AjoyThomas.png" alt="Ajoy Thomas">
             </div>
             <div class="gs-card-body">
                 <div class="gs-card-name">Ajoy Thomas</div>
@@ -988,7 +1071,7 @@
 
         <div class="gs-card reveal reveal-delay-1">
             <div class="gs-card-photo-wrap">
-                <img class="gs-card-photo" src="KavyaPeerbhoy.png" alt="Kavya Peerbhoy">
+                <img class="gs-card-photo" src="images/KavyaPeerbhoy.png" alt="Kavya Peerbhoy">
             </div>
             <div class="gs-card-body">
                 <div class="gs-card-name">Kavya Peerbhoy</div>
@@ -1007,7 +1090,9 @@
     </div>
 
     <div class="gs-cta-wrap reveal">
-        <a class="gs-cta-single" href="https://calendly.com/touchstorm" target="_blank" rel="noopener">Book a Meeting</a>
+        <div class="gs-cta-border-wrap">
+            <a class="gs-cta-single" href="https://calendly.com/touchstorm" target="_blank" rel="noopener">Book a Meeting <span class="cta-chevron"></span></a>
+        </div>
         <p class="gs-cta-note">We'll match you with the right person based on your timezone.</p>
     </div>
 
@@ -1045,6 +1130,185 @@
         });
     }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // ── SERVICES: data ────────────────────────────────────────
+    const svcServices = [
+        { num:"01", name:"Custom Strategy Analysis",           price:"$2,500/month",  tabs:["all","competitive"], desc:"A deep-dive YouTube audit and custom growth strategy built for your brand. We analyze channel health, content performance, audience behavior, and competitive gaps - then deliver a prioritized roadmap your team can act on immediately." },
+        { num:"02", name:"Brand Buzz Monitor",                 price:"$1,000/month",  tabs:["all","analytics"],   desc:"Monthly reports surfacing how your brand is being talked about across YouTube. What creators are saying, how sentiment is shifting, and which videos are driving perception - 12 reports/year, 3 seats included." },
+        { num:"03", name:"Category Trends",                    price:"$1,200/month",  tabs:["all","analytics"],   desc:"Know what's rising in your category before competitors do. We detect spikes in search volume, emerging topics, and rising content formats - validated across YouTube, Instagram, and TikTok. Quarterly trend briefings built for your vertical." },
+        { num:"04", name:"Topic Finder",                       price:"$800/month",    tabs:["all","analytics"],   desc:"Stop guessing what to make. Topic Finder identifies the highest-demand, lowest-competition content opportunities for your brand on YouTube - ranked by search volume, audience fit, and monetization potential." },
+        { num:"05", name:"Global Brand Consistency",           price:"$3,000/month",  tabs:["all","competitive"], desc:"For brands with multi-market YouTube presence, we audit and align content, tone, and strategy across regions. Ensure your brand shows up consistently whether a viewer is in Tokyo, Toronto, or Sao Paulo - while still resonating locally." },
+        { num:"06", name:"Casting Cards",                      price:"$1,500/month",  tabs:["all","competitive"], desc:"Find and hire the right YouTube creator with confidence. Our Talent Finder covers 15 data points per creator - audience demographics, engagement rates, brand safety signals, and estimated rates. Know who to hire and what they'll cost before you make contact." },
+        { num:"07", name:"Competitive Insights - Ranker",      price:"$2,000/month",  tabs:["all","competitive"], desc:"See exactly where your brand ranks against competitors on YouTube. We track upload cadence, subscriber growth, view velocity, and top-performing content for your entire competitive set - then tell you what it would take to move up one rank." },
+        { num:"08", name:"YT Social Listening - Influencer",   price:"$1,500/month",  tabs:["all","listening"],   desc:"Track which creators are talking about your brand or category - organically. Identify rising voices before they become expensive, spot partnership opportunities early, and monitor existing creator relationships for shifts in tone or reach." },
+        { num:"09", name:"YT Social Listening - Sentiment",    price:"$1,500/month",  tabs:["all","listening"],   desc:"Understand how audiences actually feel about your brand on YouTube. We analyze comment sentiment, like/dislike signals, and conversation tone across thousands of videos to surface what's driving love, concern, or indifference toward your brand." },
+        { num:"10", name:"Share of Voice",                     price:"$2,500/month",  tabs:["all","analytics"],   desc:"What would it cost to become the #1 brand on YouTube in your category? We quantify it. Our Share of Voice model maps current category ownership, models the content investment required to lead, and gives your team a clear, data-backed answer." },
+        { num:"11", name:"Strategic Channel Business Plan",    price:"$5,000/month",  tabs:["all","strategy"],    desc:"A full 12-month channel roadmap - content pillars, publishing cadence, growth targets, monetization paths, and resource requirements. Built for brands serious about YouTube as a long-term owned media channel." },
+        { num:"12", name:"Community Management",               price:"$1,200/month",  tabs:["all","listening"],   desc:"Your YouTube comments are a goldmine of audience signal - and most brands ignore them. We monitor, moderate, and respond to comments on your behalf, surfacing the highest-value questions and conversations while keeping your community healthy." },
+        { num:"13", name:"Channel Management",                 price:"$3,500/month",  tabs:["all","strategy"],    desc:"Full-service YouTube channel management - strategy, optimization, publishing, SEO, and ongoing reporting. We've taken Toyota from #3 to #1 in their category and grown CoverGirl from 1,700 to 581,000 subscribers." }
+    ];
+
+    const svcIcons = [
+        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`,
+        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>`,
+        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`,
+        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="5" width="4" height="16" rx="1"/><rect x="17" y="8" width="4" height="13" rx="1"/></svg>`,
+        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>`,
+        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>`,
+        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
+        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
+        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`
+    ];
+
+    const svcChevron = `<svg class="svc-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
+    const svcClose   = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
+    const svcImgSVG  = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`;
+
+    const svcCaseStudies = [
+        { src: 'images/CM-CaseStudy-COVERGIRL-1.png', alt: 'CoverGirl' },
+        { src: 'images/CM-CaseStudy-Ethicon-1.png',   alt: 'Ethicon'   },
+        { src: 'images/CM-CaseStudy-GreyGoose.png',   alt: 'Grey Goose'},
+        { src: 'images/CM-CaseStudy-Sony.png',        alt: 'Sony'      },
+        { src: 'images/CM-CaseStudy-Swiffer.png',     alt: 'Swiffer'   },
+        { src: 'images/CM-CaseStudy-_DSP.png',        alt: 'DSP'       }
+    ];
+
+    function svcBuildSlideshow() {
+        const imgs  = svcCaseStudies.map((cs, i) => `<img class="svc-slide${i===0?' active':''}" src="${cs.src}" alt="${cs.alt} Case Study">`).join('');
+        const dots  = svcCaseStudies.map((_, i) => `<button class="svc-slide-dot${i===0?' active':''}"></button>`).join('');
+        return `<div class="svc-slideshow">
+                    ${imgs}
+                    <button class="svc-slide-arrow prev">&#8249;</button>
+                    <button class="svc-slide-arrow next">&#8250;</button>
+                    <div class="svc-slide-dots">${dots}</div>
+                </div>`;
+    }
+
+    function svcInitSlideshow(el) {
+        const slides = el.querySelectorAll('.svc-slide');
+        const dots   = el.querySelectorAll('.svc-slide-dot');
+        let cur = 0, timer;
+        function goTo(n) {
+            slides[cur].classList.remove('active'); dots[cur].classList.remove('active');
+            cur = (n + slides.length) % slides.length;
+            slides[cur].classList.add('active'); dots[cur].classList.add('active');
+        }
+        function startTimer() { timer = setInterval(() => goTo(cur + 1), 5000); }
+        function resetTimer() { clearInterval(timer); startTimer(); }
+        el.querySelector('.svc-slide-arrow.prev').addEventListener('click', e => { e.stopPropagation(); goTo(cur - 1); resetTimer(); });
+        el.querySelector('.svc-slide-arrow.next').addEventListener('click', e => { e.stopPropagation(); goTo(cur + 1); resetTimer(); });
+        dots.forEach((dot, i) => dot.addEventListener('click', e => { e.stopPropagation(); goTo(i); resetTimer(); }));
+        startTimer();
+    }
+
+    // ── Build cards ──────────────────────────────────────────
+    const svcGrid = document.getElementById('svcCardGrid');
+    svcServices.forEach((s, i) => {
+        const card = document.createElement('div');
+        card.className = 'svc-card';
+        card.dataset.tabs = s.tabs.join(' ');
+        card.innerHTML = `
+            <div class="svc-card-collapsed">
+                <div class="svc-card-top">
+                    <span class="svc-card-number">${s.num}</span>
+                    <div class="svc-card-icon">${svcIcons[i]}</div>
+                </div>
+                <div class="svc-card-name">${s.name}</div>
+                <div class="svc-card-price">${s.price}</div>
+            </div>
+            ${svcChevron}
+            <div class="svc-card-expanded">
+                <div class="svc-expanded-left">
+                    <div class="svc-expanded-watermark">${s.num}</div>
+                    <div class="svc-expanded-name">${s.name}</div>
+                    <p class="svc-expanded-desc">${s.desc}</p>
+                    <div class="svc-expanded-price-pill">${s.price}</div>
+                    <a href="#contact" class="svc-expanded-cta">Learn More &rarr;</a>
+                </div>
+                <div class="svc-expanded-right">
+                    <button class="svc-close-btn" aria-label="Close" onclick="event.stopPropagation(); svcCollapseCard(this.closest('.svc-card'));">${svcClose}</button>
+                    ${i === 12 ? svcBuildSlideshow() : `<div class="svc-img-placeholder">${svcImgSVG}<span>Add Image Here</span></div>`}
+                </div>
+            </div>`;
+        card.addEventListener('click', () => svcToggleCard(card));
+        svcGrid.appendChild(card);
+    });
+
+    // ── Expand / collapse ────────────────────────────────────
+    let svcCurrentExpanded = null;
+    function svcToggleCard(card) {
+        if (card.classList.contains('expanded')) { svcCollapseCard(card); return; }
+        if (svcCurrentExpanded && svcCurrentExpanded !== card) svcCollapseCard(svcCurrentExpanded);
+        card.classList.add('expanded');
+        svcCurrentExpanded = card;
+        requestAnimationFrame(() => setTimeout(() => card.scrollIntoView({ behavior:'smooth', block:'nearest' }), 50));
+    }
+    function svcCollapseCard(card) {
+        card.classList.remove('expanded');
+        if (svcCurrentExpanded === card) svcCurrentExpanded = null;
+    }
+
+    // ── Tab logic ────────────────────────────────────────────
+    const svcTabBtns   = document.querySelectorAll('.svc-tab-btn');
+    const svcAllCards  = document.querySelectorAll('.svc-card');
+    const svcIndicator = document.getElementById('svcTabIndicator');
+    let svcActiveTab   = 'all';
+
+    function svcPositionIndicator(btn) {
+        svcIndicator.style.left  = btn.offsetLeft + 'px';
+        svcIndicator.style.width = btn.offsetWidth + 'px';
+    }
+
+    function svcSwitchTab(tab, btn) {
+        if (tab === svcActiveTab) return;
+        if (svcCurrentExpanded) svcCollapseCard(svcCurrentExpanded);
+        svcActiveTab = tab;
+        svcTabBtns.forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+        svcPositionIndicator(btn);
+        let delay = 0;
+        svcAllCards.forEach(card => {
+            const show = card.dataset.tabs.split(' ').includes(tab);
+            if (show) {
+                card.classList.remove('tab-hidden');
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(16px)';
+                const d = delay;
+                requestAnimationFrame(() => requestAnimationFrame(() => {
+                    card.style.transition = `opacity 0.35s ease ${d}ms, transform 0.35s ease ${d}ms, box-shadow 0.35s`;
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }));
+                delay += 45;
+            } else {
+                card.classList.add('tab-hidden');
+            }
+        });
+    }
+
+    svcTabBtns.forEach(btn => btn.addEventListener('click', () => svcSwitchTab(btn.dataset.tab, btn)));
+    requestAnimationFrame(() => { const a = document.querySelector('.svc-tab-btn.active'); if (a) svcPositionIndicator(a); });
+    window.addEventListener('resize', () => { const a = document.querySelector('.svc-tab-btn.active'); if (a) svcPositionIndicator(a); });
+
+    // ── Card scroll reveal ───────────────────────────────────
+    const svcObserver = new IntersectionObserver((entries) => {
+        entries.filter(e => e.isIntersecting).forEach(entry => {
+            const card = entry.target;
+            if (!card.classList.contains('visible')) {
+                const idx = [...svcGrid.children].indexOf(card);
+                setTimeout(() => card.classList.add('visible'), (idx % 4) * 80);
+            }
+            svcObserver.unobserve(card);
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    svcAllCards.forEach(c => svcObserver.observe(c));
+
+    // Init slideshow for card 13
+    const svcSlideshowEl = svcGrid.querySelector('.svc-slideshow');
+    if (svcSlideshowEl) svcInitSlideshow(svcSlideshowEl);
 </script>
 </body>
 </html>
