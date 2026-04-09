@@ -200,7 +200,7 @@
 
         /* ── FOUNDER LETTER ── */
         .letter-section {
-            background: url('images/DIF_LetterBackground_v2.jpg') center top / 100% auto no-repeat;
+            background: url('images/DIF_LetterBackground_v3.jpg') center top / 100% auto no-repeat;
             background-color: #353F51;
             padding: 60px clamp(24px, 4vw, 80px) 0;
         }
@@ -476,7 +476,10 @@
         .svc-card-expanded { display: none; opacity: 0; transition: opacity 0.3s ease 0.1s; }
         .svc-card.expanded .svc-card-expanded {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            grid-template-areas:
+                "summary media"
+                "details details";
             gap: 0;
             opacity: 1;
             min-height: 300px;
@@ -484,6 +487,7 @@
             overflow: hidden;
         }
         .svc-expanded-left {
+            grid-area: summary;
             padding: 48px 40px 48px 52px;
             display: flex;
             flex-direction: column;
@@ -533,12 +537,85 @@
             background: transparent;
             transition: background 0.25s ease, color 0.25s ease;
             align-self: flex-start; position: relative;
+            cursor: pointer;
+            appearance: none;
         }
         .svc-expanded-cta:hover { background: var(--pink); color: #fff; }
+        .svc-expanded-cta.is-hidden { display: none; }
+        .svc-detail-accordion {
+            grid-area: details;
+            margin-top: 0;
+            padding: 0 34px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(243,245,248,0.96));
+            border-top: 1px solid rgba(16, 21, 47, 0);
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.24s ease, border-color 0.24s ease;
+        }
+        .svc-detail-accordion.is-visible {
+            padding: 28px 34px 44px;
+            opacity: 1;
+            border-top-color: rgba(16, 21, 47, 0.08);
+        }
+        .svc-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            align-items: start;
+        }
+        .svc-detail-item {
+            display: flex;
+            flex-direction: column;
+            padding: 22px 22px 36px;
+            border: 1px solid rgba(16, 21, 47, 0.08);
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(129, 207, 248, 0.08), rgba(248, 87, 166, 0.06));
+            box-shadow: 0 8px 20px rgba(16, 21, 47, 0.04);
+        }
+        .svc-expanded-cta:focus-visible {
+            outline: 3px solid rgba(129, 207, 248, 0.45);
+            outline-offset: 2px;
+        }
+        .svc-detail-heading {
+            margin: 0 0 10px;
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+        .svc-detail-body {
+            color: var(--text-muted);
+            padding-bottom: 4px;
+        }
+        .svc-detail-body p {
+            margin: 0;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        .svc-detail-list {
+            margin: 0;
+            padding: 0 0 8px 20px;
+        }
+        .svc-detail-list li {
+            margin: 0 0 10px;
+            color: var(--text-muted);
+            font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
+            font-size: 15px;
+            line-height: 1.65;
+        }
+        .svc-detail-list li:last-child {
+            margin-bottom: 6px;
+        }
         .svc-expanded-right {
+            grid-area: media;
             background: #1e2035;
             display: flex; align-items: center; justify-content: center;
             position: relative; border-radius: 0 12px 12px 0; overflow: hidden;
+            min-height: 320px;
+            padding: 40px 28px 28px;
+        }
+        .svc-card.details-visible .svc-expanded-right {
+            border-radius: 0 12px 0 0;
         }
         .svc-expanded-right::before {
             content: ''; position: absolute; inset: 0;
@@ -555,9 +632,10 @@
         }
         .svc-service-image {
             position: relative;
-            width: 88%;
+            width: 100%;
             height: auto;
-            max-height: 85%;
+            max-width: 470px;
+            max-height: 100%;
             object-fit: contain;
             border-radius: 8px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.45);
@@ -577,7 +655,7 @@
         .svc-close-btn svg { width: 16px; height: 16px; color: var(--text-dark); transition: color 0.35s; }
         .svc-close-btn:hover svg { color: var(--white); }
 
-        /* ── Slideshow (Service 13) ── */
+        /* ── Slideshow (Channel Management) ── */
         .svc-slideshow {
             position: absolute;
             inset: 0;
@@ -640,11 +718,25 @@
         /* Responsive */
         @media (max-width: 768px) {
             .svc-card-grid { grid-template-columns: 1fr; }
-            .svc-card.expanded .svc-card-expanded { grid-template-columns: 1fr; }
+            .svc-card.expanded .svc-card-expanded {
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    "summary"
+                    "media"
+                    "details";
+            }
             .svc-expanded-left { padding: 32px 24px; }
-            .svc-expanded-right { border-radius: 0 0 12px 12px; min-height: 180px; }
+            .svc-expanded-right {
+                border-radius: 0 0 12px 12px;
+                min-height: 220px;
+                padding: 28px 20px 24px;
+            }
+            .svc-card.details-visible .svc-expanded-right { border-radius: 0; }
+            .svc-detail-accordion.is-visible { padding: 24px 20px 32px; }
+            .svc-detail-grid { grid-template-columns: 1fr; }
             .svc-expanded-watermark { font-size: 100px; }
             .svc-tab-btn { padding: 16px 14px 14px; font-size: 12px; }
+            .svc-detail-item { padding: 18px 18px 28px; }
         }
 
         /* ── FOOTER ── */
@@ -966,9 +1058,9 @@
     <!-- TAB BAR -->
     <div class="svc-tab-bar-wrap">
         <div class="svc-tab-bar" id="svcTabBar">
-            <button class="svc-tab-btn active" data-tab="all">All Services <span class="svc-tab-count">13</span></button>
+            <button class="svc-tab-btn active" data-tab="all">All Services <span class="svc-tab-count">12</span></button>
             <button class="svc-tab-btn" data-tab="analytics">Analytics &amp; Trends <span class="svc-tab-count">4</span></button>
-            <button class="svc-tab-btn" data-tab="listening">Social Listening <span class="svc-tab-count">3</span></button>
+            <button class="svc-tab-btn" data-tab="listening">Social Listening <span class="svc-tab-count">2</span></button>
             <button class="svc-tab-btn" data-tab="competitive">Competitive Intelligence <span class="svc-tab-count">4</span></button>
             <button class="svc-tab-btn" data-tab="strategy">Strategy &amp; Management <span class="svc-tab-count">2</span></button>
             <div class="svc-tab-indicator" id="svcTabIndicator"></div>
@@ -1151,12 +1243,24 @@
         { num:"06", name:"Hiring Influencers",                      price:"$1,500/month",  tabs:["all","competitive"], desc:"Find and hire the right YouTube creator with confidence. Our Talent Finder covers 15 data points per creator - audience demographics, engagement rates, brand safety signals, and estimated rates. Know who to hire and what they'll cost before you make contact." },
         { num:"07", name:"Competitive Monitoring",      price:"$2,000/month",  tabs:["all","competitive"], desc:"See exactly where your brand ranks against competitors on YouTube. We track upload cadence, subscriber growth, view velocity, and top-performing content for your entire competitive set - then tell you what it would take to move up one rank." },
         { num:"08", name:"YouTube Listening Tool",   price:"$1,500/month",  tabs:["all","listening"],   desc:"Track which creators are talking about your brand or category - organically. Identify rising voices before they become expensive, spot partnership opportunities early, and monitor existing creator relationships for shifts in tone or reach." },
-        { num:"09", name:"YouTube Listening - Sentiment",    price:"$1,500/month",  tabs:["all","listening"],   desc:"Understand how audiences actually feel about your brand on YouTube. We analyze comment sentiment, like/dislike signals, and conversation tone across thousands of videos to surface what's driving love, concern, or indifference toward your brand." },
-        { num:"10", name:"Share of Voice",                     price:"$2,500/month",  tabs:["all","analytics"],   desc:"What would it cost to become the #1 brand on YouTube in your category? We quantify it. Our Share of Voice model maps current category ownership, models the content investment required to lead, and gives your team a clear, data-backed answer." },
-        { num:"11", name:"Strategic Channel Business Plan",    price:"$5,000/month",  tabs:["all","strategy"],    desc:"A full 12-month channel roadmap - content pillars, publishing cadence, growth targets, monetization paths, and resource requirements. Built for brands serious about YouTube as a long-term owned media channel." },
-        { num:"12", name:"Community Management",               price:"$1,200/month",  tabs:["all","listening"],   desc:"Your YouTube comments are a goldmine of audience signal - and most brands ignore them. We monitor, moderate, and respond to comments on your behalf, surfacing the highest-value questions and conversations while keeping your community healthy." },
-        { num:"13", name:"Channel Management",                 price:"$3,500/month",  tabs:["all","strategy"],    desc:"Full-service YouTube channel management - strategy, optimization, publishing, SEO, and ongoing reporting. We've taken Toyota from #3 to #1 in their category and grown CoverGirl from 1,700 to 581,000 subscribers." }
-    ];
+        { num:"09", name:"Share of Voice",                     price:"$2,500/month",  tabs:["all","analytics"],   desc:"What would it cost to become the #1 brand on YouTube in your category? We quantify it. Our Share of Voice model maps current category ownership, models the content investment required to lead, and gives your team a clear, data-backed answer." },
+        { num:"10", name:"Strategic Channel Business Plan",    price:"$5,000/month",  tabs:["all","strategy"],    desc:"A full 12-month channel roadmap - content pillars, publishing cadence, growth targets, monetization paths, and resource requirements. Built for brands serious about YouTube as a long-term owned media channel." },
+        { num:"11", name:"Community Management",               price:"$1,200/month",  tabs:["all","listening"],   desc:"Your YouTube comments are a goldmine of audience signal - and most brands ignore them. We monitor, moderate, and respond to comments on your behalf, surfacing the highest-value questions and conversations while keeping your community healthy." },
+        { num:"12", name:"Channel Management",                 price:"$3,500/month",  tabs:["all","strategy"],    desc:"Full-service YouTube channel management - strategy, optimization, publishing, SEO, and ongoing reporting. We've taken Toyota from #3 to #1 in their category and grown CoverGirl from 1,700 to 581,000 subscribers." }
+    ].map(service => ({
+        ...service,
+        overview: `${service.desc} This is placeholder long-form copy for the DIF service page and can be replaced with approved client-facing messaging when you are ready.`,
+        deliverables: [
+            `A clearly scoped ${service.name.toLowerCase()} engagement aligned to your brand goals and DIF workflow.`,
+            `A concise output package with findings, recommendations, and next-step actions your team can review quickly.`,
+            `A working deliverable structure calibrated to the current ${service.price} pricing tier.`
+        ],
+        bestFor: [
+            `Brands that want a stronger YouTube recommendation before committing more budget or internal resources.`,
+            `Google account teams looking for a practical value-add with a clear output and use case.`,
+            `Teams that need a sharper read on priorities, opportunities, or next actions tied to YouTube growth.`
+        ]
+    }));
 
     const svcIcons = [
         `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`,
@@ -1167,7 +1271,6 @@
         `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
         `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="5" width="4" height="16" rx="1"/><rect x="17" y="8" width="4" height="13" rx="1"/></svg>`,
         `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
-        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>`,
         `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>`,
         `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
         `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
@@ -1185,10 +1288,9 @@
         "06": { src: "images/06_Casting_Cards.jpg",                              alt: "Casting Cards" },
         "07": { src: "images/07_CompetitiveInsights-Ranker.jpg",                alt: "Competitive Insights Ranker" },
         "08": { src: "images/08_YouTubeListening-Influencer.jpg",               alt: "YouTube Listening Influencer" },
-        "09": { src: "images/09_YouTubeListening-Sentiment.jpg",                alt: "YouTube Listening Sentiment" },
-        "10": { src: "images/10_ShareOfVoice.jpg",                               alt: "Share of Voice" },
-        "11": { src: "images/11_StrategicChannelBusinessPlan.jpg",              alt: "Strategic Channel Business Plan" },
-        "12": { src: "images/12_CommunityManagement.jpg",                        alt: "Community Management" }
+        "09": { src: "images/10_ShareOfVoice.jpg",                               alt: "Share of Voice" },
+        "10": { src: "images/11_StrategicChannelBusinessPlan.jpg",              alt: "Strategic Channel Business Plan" },
+        "11": { src: "images/12_CommunityManagement.jpg",                        alt: "Community Management" }
     };
 
     const svcCaseStudies = [
@@ -1228,6 +1330,81 @@
         startTimer();
     }
 
+    function svcDetailListMarkup(items) {
+        return `<ul class="svc-detail-list">${items.map(item => `<li>${item}</li>`).join('')}</ul>`;
+    }
+
+    function svcBuildDetailMarkup(service) {
+        const sections = [
+            { key: 'overview', label: 'Overview', content: `<p>${service.overview}</p>` },
+            { key: 'deliverables', label: 'Deliverables', content: svcDetailListMarkup(service.deliverables) },
+            { key: 'bestFor', label: 'Best for', content: svcDetailListMarkup(service.bestFor) }
+        ];
+
+        return `<div class="svc-detail-grid">${sections.map(section => {
+            return `
+                <div class="svc-detail-item" data-section="${section.key}">
+                    <h3 class="svc-detail-heading">${section.label}</h3>
+                    <div class="svc-detail-body">
+                        ${section.content}
+                    </div>
+                </div>`;
+        }).join('')}</div>`;
+    }
+
+    function svcGetAccordionHeight(accordion) {
+        const grid = accordion.querySelector('.svc-detail-grid');
+        if (!grid) return 0;
+        const styles = getComputedStyle(accordion);
+        const paddingTop = parseFloat(styles.paddingTop) || 0;
+        const paddingBottom = parseFloat(styles.paddingBottom) || 0;
+        return Math.ceil(grid.getBoundingClientRect().height + paddingTop + paddingBottom + 2);
+    }
+
+    function svcSyncAccordionHeight(card) {
+        const accordion = card.querySelector('.svc-detail-accordion');
+        if (!accordion) return;
+        accordion.style.maxHeight = accordion.classList.contains('is-visible') ? `${svcGetAccordionHeight(accordion)}px` : '0px';
+    }
+
+    const svcDetailResizeObserver = typeof ResizeObserver !== 'undefined'
+        ? new ResizeObserver(entries => {
+            entries.forEach(entry => {
+                const accordion = entry.target.closest('.svc-detail-accordion');
+                if (!accordion || !accordion.classList.contains('is-visible')) return;
+                accordion.style.maxHeight = `${svcGetAccordionHeight(accordion)}px`;
+            });
+        })
+        : null;
+
+    function svcResetCardDetails(card) {
+        const revealBtn = card.querySelector('.svc-expanded-cta');
+        const accordion = card.querySelector('.svc-detail-accordion');
+        if (!accordion || !revealBtn) return;
+
+        revealBtn.classList.remove('is-hidden');
+        revealBtn.setAttribute('aria-expanded', 'false');
+        accordion.classList.remove('is-visible');
+        card.classList.remove('details-visible');
+        svcSyncAccordionHeight(card);
+    }
+
+    function svcToggleDetails(card) {
+        const revealBtn = card.querySelector('.svc-expanded-cta');
+        const accordion = card.querySelector('.svc-detail-accordion');
+        if (!accordion || !revealBtn) return;
+
+        if (accordion.classList.contains('is-visible')) return;
+        accordion.classList.add('is-visible');
+        revealBtn.classList.add('is-hidden');
+        revealBtn.setAttribute('aria-expanded', 'true');
+        card.classList.add('details-visible');
+        requestAnimationFrame(() => {
+            svcSyncAccordionHeight(card);
+            setTimeout(() => svcSyncAccordionHeight(card), 50);
+        });
+    }
+
     // ── Build cards ──────────────────────────────────────────
     const svcGrid = document.getElementById('svcCardGrid');
     svcServices.forEach((s, i) => {
@@ -1253,14 +1430,24 @@
                     <div class="svc-expanded-name">${s.name}</div>
                     <p class="svc-expanded-desc">${s.desc}</p>
                     <div class="svc-expanded-price-pill">${s.price}</div>
-                    <a href="#contact" class="svc-expanded-cta">Learn More &rarr;</a>
+                    <button class="svc-expanded-cta" type="button" aria-expanded="false" aria-controls="svc-detail-accordion-${s.num}">Learn More <span class="cta-chevron"></span></button>
                 </div>
                 <div class="svc-expanded-right">
                     <button class="svc-close-btn" aria-label="Close" onclick="event.stopPropagation(); svcCollapseCard(this.closest('.svc-card'));">${svcClose}</button>
-                    ${i === 12 ? svcBuildSlideshow() : serviceImageMarkup}
+                    ${s.name === 'Channel Management' ? svcBuildSlideshow() : serviceImageMarkup}
+                </div>
+                <div class="svc-detail-accordion" id="svc-detail-accordion-${s.num}">
+                    ${svcBuildDetailMarkup(s)}
                 </div>
             </div>`;
         card.addEventListener('click', () => svcToggleCard(card));
+        const revealBtn = card.querySelector('.svc-expanded-cta');
+        revealBtn.addEventListener('click', event => {
+            event.stopPropagation();
+            svcToggleDetails(card);
+        });
+        const detailGrid = card.querySelector('.svc-detail-grid');
+        if (svcDetailResizeObserver && detailGrid) svcDetailResizeObserver.observe(detailGrid);
         svcGrid.appendChild(card);
     });
 
@@ -1274,6 +1461,7 @@
         requestAnimationFrame(() => setTimeout(() => card.scrollIntoView({ behavior:'smooth', block:'nearest' }), 50));
     }
     function svcCollapseCard(card) {
+        svcResetCardDetails(card);
         card.classList.remove('expanded');
         if (svcCurrentExpanded === card) svcCurrentExpanded = null;
     }
@@ -1317,7 +1505,11 @@
 
     svcTabBtns.forEach(btn => btn.addEventListener('click', () => svcSwitchTab(btn.dataset.tab, btn)));
     requestAnimationFrame(() => { const a = document.querySelector('.svc-tab-btn.active'); if (a) svcPositionIndicator(a); });
-    window.addEventListener('resize', () => { const a = document.querySelector('.svc-tab-btn.active'); if (a) svcPositionIndicator(a); });
+    window.addEventListener('resize', () => {
+        const a = document.querySelector('.svc-tab-btn.active');
+        if (a) svcPositionIndicator(a);
+        if (svcCurrentExpanded) svcSyncAccordionHeight(svcCurrentExpanded);
+    });
 
     // ── Card scroll reveal ───────────────────────────────────
     const svcObserver = new IntersectionObserver((entries) => {
@@ -1332,7 +1524,7 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     svcAllCards.forEach(c => svcObserver.observe(c));
 
-    // Init slideshow for card 13
+    // Init slideshow for Channel Management card
     const svcSlideshowEl = svcGrid.querySelector('.svc-slideshow');
     if (svcSlideshowEl) svcInitSlideshow(svcSlideshowEl);
 
