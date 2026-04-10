@@ -532,7 +532,7 @@
             display: inline-flex; align-items: center; gap: 8px;
             font-size: 14px; font-weight: 700;
             color: var(--pink); text-decoration: none;
-            border: 2px solid var(--pink); border-radius: 999px;
+            border: 2px solid var(--pink); border-radius: 10px;
             padding: 10px 24px;
             background: transparent;
             transition: background 0.25s ease, color 0.25s ease;
@@ -612,7 +612,7 @@
             display: flex; align-items: center; justify-content: center;
             position: relative; border-radius: 0 12px 12px 0; overflow: hidden;
             min-height: 320px;
-            padding: 40px 28px 28px;
+            padding: 0;
         }
         .svc-card.details-visible .svc-expanded-right {
             border-radius: 0 12px 0 0;
@@ -622,8 +622,12 @@
             background: linear-gradient(135deg, rgba(11,12,35,0.4) 0%, rgba(30,32,53,0) 60%);
         }
         .svc-img-placeholder {
+            position: absolute;
+            inset: 0;
             display: flex; flex-direction: column;
             align-items: center; gap: 12px; color: #bbb;
+            justify-content: center;
+            z-index: 1;
         }
         .svc-img-placeholder svg { width: 64px; height: 64px; opacity: 0.5; }
         .svc-img-placeholder span {
@@ -631,14 +635,11 @@
             letter-spacing: 1px; text-transform: uppercase; opacity: 0.5;
         }
         .svc-service-image {
-            position: relative;
+            position: absolute;
+            inset: 0;
             width: 100%;
-            height: auto;
-            max-width: 470px;
-            max-height: 100%;
-            object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+            height: 100%;
+            object-fit: cover;
             z-index: 1;
         }
         .svc-close-btn {
@@ -667,7 +668,7 @@
             inset: 0;
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
             background: #111;
             opacity: 0;
             transition: opacity 0.75s ease;
@@ -729,7 +730,7 @@
             .svc-expanded-right {
                 border-radius: 0 0 12px 12px;
                 min-height: 220px;
-                padding: 28px 20px 24px;
+                padding: 0;
             }
             .svc-card.details-visible .svc-expanded-right { border-radius: 0; }
             .svc-detail-accordion.is-visible { padding: 24px 20px 32px; }
