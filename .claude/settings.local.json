@@ -12,7 +12,10 @@
       "WebFetch(domain:www.fizzy.do)",
       "mcp__Claude_Preview__preview_start",
       "WebFetch(domain:www.touchstorm.com)",
-      "Bash(ls /Users/ajoythomas/Documents/Sites/DIF-Claude/images/CM-CaseStudy-*)"
+      "Bash(ls /Users/ajoythomas/Documents/Sites/DIF-Claude/images/CM-CaseStudy-*)",
+      "Skill(browse)",
+      "Skill(browse:*)",
+      "Bash(python3 -m http.server 8765)"
     ]
   }
 }

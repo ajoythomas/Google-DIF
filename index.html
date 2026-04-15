@@ -494,7 +494,7 @@
         }
         .svc-expanded-left {
             grid-area: summary;
-            padding: 48px 40px 48px 52px;
+            padding: 40px 28px 40px 44px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -1008,7 +1008,7 @@
 
 
 
-        /* ── Details list in expanded card ── */
+        /* ── Details list in expanded card (no-tier services) ── */
         .svc-details-list {
             margin: 4px 0 0 0;
             padding: 0;
@@ -1023,6 +1023,98 @@
         }
         .svc-details-list li:last-child { border-bottom: none; }
         .svc-details-list li strong { color: var(--text-dark); }
+
+        /* ── Tier grid ── */
+        .svc-tier-grid {
+            display: flex;
+            gap: 7px;
+            margin-top: 4px;
+            flex-wrap: nowrap;
+        }
+        .svc-tier-col {
+            flex: 1;
+            min-width: 0;
+            border: 1px solid rgba(16,21,47,0.1);
+            border-radius: 10px;
+            padding: 11px 10px 10px;
+            background: #f5f6fb;
+        }
+        .svc-tier-badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            color: #3d4166;
+            background: #dde0f0;
+            border-radius: 20px;
+            padding: 3px 11px;
+            margin-bottom: 9px;
+            white-space: nowrap;
+        }
+        .svc-tier-name {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1.2;
+            margin-bottom: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(16,21,47,0.08);
+        }
+        .svc-tier-row {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            padding: 7px 0;
+            border-bottom: 1px solid rgba(16,21,47,0.08);
+        }
+        .svc-tier-row:first-of-type { padding-top: 8px; }
+        .svc-tier-row:last-child { border-bottom: none; padding-bottom: 0; }
+        .svc-tier-row-label {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        .svc-tier-row-label svg {
+            width: 10px; height: 10px;
+            flex-shrink: 0;
+            opacity: 0.55;
+        }
+        .svc-tier-row-value {
+            font-size: 11.5px;
+            color: var(--text-dark);
+            font-weight: 500;
+            line-height: 1.3;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .svc-tier-resource {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-wrap: nowrap;
+        }
+        .svc-tier-resource img {
+            height: 12px;
+            width: auto;
+            display: block;
+            flex-shrink: 0;
+        }
+        .svc-tier-resource-sep {
+            font-size: 10px;
+            color: var(--text-muted);
+            line-height: 1;
+            flex-shrink: 0;
+        }
 
         /* ── Open / Close All button ── */
         .svc-toggle-all-wrap {
@@ -1085,7 +1177,7 @@
             <p class="letter-intro">&#128075; Google,</p>
             <p>Although we have been working in and around YouTube for nearly 20 years, some of the account teams we could be supporting still don't know enough about us. This page is here to fix that and (re)introduce you to the tools and services that will help make your recommendations stronger and your clients more successful. <span class="highlight">Bonus: we are an approved vendor for DIF deployment.</span></p>
         
-            <p><strong>Touchstorm</strong> is a global YouTube agency for major brands, and <strong>Touchstorm&nbsp;DataLabs</strong> is our YouTube insights platform. Together, we help our brand clients turn YouTube into something even more useful than &ldquo;just&rdquo; a media channel. Our services and platform tools deliver actionable strategies, audience insights, competitive intelligence, and result in measurable growth. We advise companies in multiple business categories using this simple guiding principle: <em>when brands better understand what is truly happening on YouTube, they make better decisions on what content to produce, what creators to work with, what media to invest in, and what messaging will resonate with everyone from their prospects and loyal fans, and to convert detractors.</em></p>
+            <p><strong>Touchstorm</strong> is a global YouTube agency for major brands, and <strong>Touchstorm&nbsp;DataLabs</strong> is our YouTube insights platform. Together, we help our brand clients turn YouTube into something even more useful than &ldquo;just&rdquo; a media channel. Our services and platform tools deliver actionable strategies, audience insights, competitive intelligence, and result in measurable growth. We advise companies in multiple business categories using this simple guiding principle: when brands better understand what is truly happening on YouTube, they make better decisions on what content to produce, what creators to work with, what media to invest in, and what messaging will resonate with everyone from their prospects and loyal fans, and to convert detractors.</p>
             <p>We welcome the opportunity to be a resource for you when the opportunity arises. We look forward to answering any questions and to working together soon.</p>
             <div class="sig-handwritten"><img src="images/AlisonSignature-05.png" width="60%"></div>
             
@@ -1254,12 +1346,10 @@
             num:"01", name:"Custom Strategic Analysis", price:"Starting at ~$7,500",
             tabs:["all","competitive"],
             desc:"A deep-dive YouTube audit and custom growth strategy plan. Includes an analysis of channel health, content performance, audience behavior, and competitive gaps. Results delivered in a prioritized roadmap ready for immediate action.",
-            details:[
-                { label:"Tiers",      value:"(a) Confined Topic, (b) Expansive Topic, (c) Complete Detailed Strategy" },
-                { label:"Timing",     value:"(a) Two Weeks, (b) One Month, (c) Three Months" },
-                { label:"Starting At",value:"(a) ~$7,500, (b) ~$20,000, (c) ~$35,000" },
-                { label:"Delivery",   value:"(a) Emailed Presentation; (b) and (c) Virtual Meeting + Emailed Presentation" },
-                { label:"Resource",   value:"Touchstorm + Touchstorm DataLabs" }
+            tiers:[
+                { label:"Tier A", name:"Confined Topic",        timing:"2 Weeks",   startingAt:"~$7,500",   delivery:"Email Presentation",              resource:"both" },
+                { label:"Tier B", name:"Expansive Topic",       timing:"1 Month",   startingAt:"~$20,000",  delivery:"+Virtual Presentation",           resource:"both" },
+                { label:"Tier C", name:"Complete Strategy",     timing:"3 Months",  startingAt:"~$35,000",  delivery:"+Full Package",                   resource:"both" }
             ]
         },
         {
@@ -1277,36 +1367,27 @@
             num:"03", name:"Category Trend Analysis", price:"Starting at ~$3,500",
             tabs:["all","analytics"],
             desc:"Know what's rising in a category before competitors do. Detect spikes in search volume, emerging topics, and rising content formats, all validated across YouTube, Instagram, and TikTok. Monitor overall trends or focus on a specific category or vertical.",
-            details:[
-                { label:"Tiers",      value:"(a) One Time Starter Analysis, (b) Quarterly Analysis — requires full year commitment" },
-                { label:"Timing",     value:"(a) One Month, (b) Every Quarter for One Year" },
-                { label:"Starting At",value:"(a) ~$3,500, (b) ~$1,000 per month" },
-                { label:"Delivery",   value:"(a) Emailed Presentation; (b) Virtual Meeting + Emailed Presentation" },
-                { label:"Resource",   value:"Touchstorm + Touchstorm DataLabs" }
+            tiers:[
+                { label:"Tier A", name:"One Time Starter Analysis",                         timing:"1 Month",                       startingAt:"~$3,500",           delivery:"Emailed Presentation",                        resource:"both" },
+                { label:"Tier B", name:"Quarterly Analysis",                                timing:"Every Quarter / Full Year",     startingAt:"~$1,000/month",     delivery:"Virtual Meeting + Email",                     resource:"both" }
             ]
         },
         {
             num:"04", name:"Topic Finder Content Study", price:"Starting at ~$30,000",
             tabs:["all","analytics"],
             desc:"Stop guessing what content to make. Topic Finder identifies the highest-demand, lowest-competition content opportunities on YouTube ranked by search volume, audience fit, and monetization potential.",
-            details:[
-                { label:"Tiers",      value:"(a) Single Category, (b) Multiple Categories" },
-                { label:"Timing",     value:"(a) NEED, (b) NEED" },
-                { label:"Starting At",value:"(a) ~$30,000, (b) Custom Quote" },
-                { label:"Delivery",   value:"(a) and (b) Virtual Meeting + Emailed Presentation" },
-                { label:"Resource",   value:"Touchstorm + Touchstorm DataLabs" }
+            tiers:[
+                { label:"Tier A", name:"Single Category",       timing:"TBD",   startingAt:"~$30,000",      delivery:"Virtual Meeting + Email",     resource:"both" },
+                { label:"Tier B", name:"Multiple Categories",   timing:"TBD",   startingAt:"Custom Quote",  delivery:"Virtual Meeting + Email",     resource:"both" }
             ]
         },
         {
             num:"05", name:"Global Brand Consistency", price:"$1,000/year",
             tabs:["all","competitive"],
             desc:"Audit content, tone, templates, thumbnails, avatars, banners, &ldquo;About Us&rdquo; blurbs, strategy and more across multiple markets. Bring channels into alignment and ensure the brand shows up consistently—whether a viewer is in Tokyo, Toronto, or Tel Aviv—while still resonating locally.",
-            details:[
-                { label:"Tiers",      value:"(a) As Needed, (b) Global Consistency Repair" },
-                { label:"Timing",     value:"(a) As Needed, (b) Custom Quote" },
-                { label:"Starting At",value:"(a) $1,000 per year, (b) Custom Quote" },
-                { label:"Delivery",   value:"(a) On Demand / Self Serve, (b) Custom Quote" },
-                { label:"Resource",   value:"Touchstorm DataLabs" }
+            tiers:[
+                { label:"Tier A", name:"As Needed",                 timing:"As Needed",     startingAt:"$1,000/year",   delivery:"On Demand / Self Serve",  resource:"tdl" },
+                { label:"Tier B", name:"Global Consistency Repair", timing:"Custom Quote",   startingAt:"Custom Quote",  delivery:"Custom Quote",            resource:"tdl" }
             ]
         },
         {
@@ -1324,24 +1405,18 @@
             num:"07", name:"Competitive Monitoring and Benchmarking", price:"Custom Quote",
             tabs:["all","competitive"],
             desc:"See exactly where your brand ranks against category / vertical / custom competitors on YouTube. Track upload cadence, subscriber growth, view velocity, and top-performing content for a custom competitive set and learn what it will take to move up in rankings.",
-            details:[
-                { label:"Tiers",      value:"(a) As Needed, (b) Custom Strategic Guidance" },
-                { label:"Timing",     value:"(a) As Needed, (b) Every Quarter for One Year" },
-                { label:"Starting At",value:"(a) NEED, (b) NEED" },
-                { label:"Delivery",   value:"(a) On Demand / Self Serve; (b) Virtual Meetings to Review Findings and Course of Action" },
-                { label:"Resource",   value:"Touchstorm + Touchstorm DataLabs" }
+            tiers:[
+                { label:"Tier A", name:"As Needed",                 timing:"As Needed",                 startingAt:"TBD",   delivery:"On Demand / Self Serve",              resource:"both" },
+                { label:"Tier B", name:"Custom Strategic Guidance", timing:"Every Quarter / Full Year",  startingAt:"TBD",   delivery:"Virtual Meetings + Course of Action",  resource:"both" }
             ]
         },
         {
-            num:"08", name:"YouTube Listening Tool", price:"NEED",
+            num:"08", name:"YouTube Listening Tool", price:"TBD",
             tabs:["all","listening"],
             desc:"Organically understand how audiences truly feel about a brand on YouTube. Analyze comment sentiment, shifts in tone or reach, like/dislike signals, and conversation topics across thousands of videos to surface what's driving love, concern, or indifference toward a brand.",
-            details:[
-                { label:"Tiers",      value:"NEED" },
-                { label:"Timing",     value:"NEED" },
-                { label:"Starting At",value:"NEED" },
-                { label:"Delivery",   value:"NEED" },
-                { label:"Resource",   value:"Touchstorm DataLabs" }
+            tiers:[
+                { label:"Tier A", name:"TBD", timing:"TBD", startingAt:"TBD", delivery:"TBD", resource:"tdl" },
+                { label:"Tier B", name:"TBD", timing:"TBD", startingAt:"TBD", delivery:"TBD", resource:"tdl" }
             ]
         },
         {
@@ -1367,15 +1442,12 @@
             ]
         },
         {
-            num:"11", name:"Community Management", price:"NEED",
+            num:"11", name:"Community Management", price:"TBD",
             tabs:["all","listening"],
             desc:"YouTube comments are a goldmine of audience signal, and most brands ignore them instead of surfacing the highest-value questions and conversations while keeping the community healthy. Use the self-serve tools to monitor, moderate, and respond to comments, or make it turn-key and our trained-by-you team will manage responses on your behalf.",
-            details:[
-                { label:"Tiers",      value:"(a) As Needed, (b) Management Services" },
-                { label:"Timing",     value:"(a) As Needed, (b) Custom Quote" },
-                { label:"Starting At",value:"(a) NEED, (b) NEED" },
-                { label:"Delivery",   value:"(a) On Demand / Self Serve, (b) Custom Quote" },
-                { label:"Resource",   value:"Touchstorm + Touchstorm DataLabs" }
+            tiers:[
+                { label:"Tier A", name:"As Needed",         timing:"As Needed",     startingAt:"TBD",           delivery:"On Demand / Self Serve",  resource:"both" },
+                { label:"Tier B", name:"Management Services",timing:"Custom Quote",  startingAt:"Custom Quote",  delivery:"Custom Quote",            resource:"both" }
             ]
         },
         {
@@ -1423,7 +1495,7 @@
     const svcImgSVG  = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`;
     const svcServiceImages = {
         "01": { src: "images/01-CustomStrategyAnalysis_V2.jpg", alt: "Custom Strategy Analysis" },
-        "02": { src: "images/02_BrandBuzzMonitor.jpg",                         alt: "Brand Buzz Monitor" },
+        "02": { src: "images/02_BrandBuzzMonitor_V2.jpg",                         alt: "Brand Buzz Monitor" },
         "03":{ src: "images/03_CategoryTrends_V2.jpg",                             alt: "Category Trends" },
         "04":{ src: "images/04_TopicFinder_V2.jpg",                             alt: "Topic Finder" },
         "05": { src: "images/05_GlobalBrandConsistency_V2.jpg",                    alt: "Global Brand Consistency" },
@@ -1433,7 +1505,8 @@
         "09": { src: "images/10_ShareOfVoice_V2.jpg",                               alt: "Share of Voice" },
         "10": { src: "images/11_StrategicChannelBusinessPlan_V2.jpg",              alt: "Strategic Channel Business Plan" },
         "11": { src: "images/12_CommunityManagement_V2.jpg",                        alt: "Community Management" },
-        "12": { src: "images/13_ChannelManagement_V2.jpg",                        alt: "Channel Management" }
+        "12": { src: "images/13_ChannelManagement_V2.jpg",                        alt: "Channel Management" },
+        "13": { src: "images/14_CustomProject.jpg",                        alt: "Custom Project" }
     };
 
     const svcCaseStudies = [
@@ -1548,6 +1621,42 @@
         });
     }
 
+    // ── Tier SVG icons ───────────────────────────────────────
+    const svcTierIcons = {
+        timing:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+        startingAt:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+        delivery:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+        resources: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`
+    };
+
+    function svcBuildTierGrid(tiers) {
+        return `<div class="svc-tier-grid">${tiers.map(t => {
+            const resourceMarkup = t.resource === 'both'
+                ? `<img src="images/TS-logo-short.png" alt="Touchstorm"><span class="svc-tier-resource-sep">+</span><img src="images/TDL-logo-short.png" alt="TDL">`
+                : `<img src="images/TDL-logo-short.png" alt="TDL">`;
+            return `<div class="svc-tier-col">
+                <span class="svc-tier-badge">${t.label}</span>
+                <div class="svc-tier-name">${t.name}</div>
+                <div class="svc-tier-row">
+                    <div class="svc-tier-row-label">${svcTierIcons.timing} Timeline</div>
+                    <div class="svc-tier-row-value">${t.timing}</div>
+                </div>
+                <div class="svc-tier-row">
+                    <div class="svc-tier-row-label">${svcTierIcons.startingAt} Starting At</div>
+                    <div class="svc-tier-row-value">${t.startingAt}</div>
+                </div>
+                <div class="svc-tier-row">
+                    <div class="svc-tier-row-label">${svcTierIcons.delivery} Delivery</div>
+                    <div class="svc-tier-row-value">${t.delivery}</div>
+                </div>
+                <div class="svc-tier-row">
+                    <div class="svc-tier-row-label">${svcTierIcons.resources} Resources</div>
+                    <div class="svc-tier-resource">${resourceMarkup}</div>
+                </div>
+            </div>`;
+        }).join('')}</div>`;
+    }
+
     // ── Build cards ──────────────────────────────────────────
     const svcGrid = document.getElementById('svcCardGrid');
     svcServices.forEach((s, i) => {
@@ -1572,7 +1681,7 @@
                     <div class="svc-expanded-name">${s.name}</div>
                     <p class="svc-expanded-desc">${s.desc}</p>
                     <div class="svc-expanded-price-pill">${s.price}</div>
-                    ${s.details ? `<ul class="svc-details-list">${s.details.map(d => `<li><strong>${d.label}:</strong> ${d.value}</li>`).join('')}</ul>` : ''}
+                    ${s.tiers ? svcBuildTierGrid(s.tiers) : s.details ? `<ul class="svc-details-list">${s.details.map(d => `<li><strong>${d.label}:</strong> ${d.value}</li>`).join('')}</ul>` : ''}
                 </div>
                 <div class="svc-expanded-right">
                     <button class="svc-close-btn" aria-label="Close" onclick="event.stopPropagation(); svcCollapseCard(this.closest('.svc-card'));">${svcClose}</button>
