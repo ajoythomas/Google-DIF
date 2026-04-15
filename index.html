@@ -1431,8 +1431,9 @@
         "07": { src: "images/07_CompetitiveInsights-Ranker_V2.jpg",                alt: "Competitive Insights Ranker" },
         "08": { src: "images/08_YouTubeListening-Influencer_V2.jpg",               alt: "YouTube Listening Influencer" },
         "09": { src: "images/10_ShareOfVoice_V2.jpg",                               alt: "Share of Voice" },
-        "10": { src: "images/11_StrategicChannelBusinessPlan.jpg",              alt: "Strategic Channel Business Plan" },
-        "11": { src: "images/12_CommunityManagement.jpg",                        alt: "Community Management" }
+        "10": { src: "images/11_StrategicChannelBusinessPlan_V2.jpg",              alt: "Strategic Channel Business Plan" },
+        "11": { src: "images/12_CommunityManagement_V2.jpg",                        alt: "Community Management" },
+        "12": { src: "images/13_ChannelManagement_V2.jpg",                        alt: "Channel Management" }
     };
 
     const svcCaseStudies = [
@@ -1575,7 +1576,7 @@
                 </div>
                 <div class="svc-expanded-right">
                     <button class="svc-close-btn" aria-label="Close" onclick="event.stopPropagation(); svcCollapseCard(this.closest('.svc-card'));">${svcClose}</button>
-                    ${s.name === 'Channel Management' ? svcBuildSlideshow() : serviceImageMarkup}
+                    ${serviceImageMarkup}
                 </div>
             </div>`;
         card.addEventListener('click', () => svcToggleCard(card));
