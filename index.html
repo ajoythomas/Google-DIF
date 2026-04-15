@@ -1011,18 +1011,25 @@
         /* ── Details list in expanded card (no-tier services) ── */
         .svc-details-list {
             margin: 4px 0 0 0;
-            padding: 0;
+            padding: 10px 14px;
             list-style: none;
+            background: #f5f6fb;
+            border: 1px solid rgba(16,21,47,0.1);
+            border-radius: 10px;
         }
         .svc-details-list li {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.6;
-            padding: 5px 0;
-            border-bottom: 1px solid rgba(16,21,47,0.07);
+            font-size: 13.5px;
+            color: #666;
+            line-height: 1.5;
+            padding: 7px 0;
+            border-bottom: 1px solid rgba(16,21,47,0.08);
         }
-        .svc-details-list li:last-child { border-bottom: none; }
-        .svc-details-list li strong { color: var(--text-dark); }
+        .svc-details-list li:last-child { border-bottom: none; padding-bottom: 0; }
+        .svc-details-list li:first-child { padding-top: 0; }
+        .svc-details-list li strong {
+            color: var(--text-dark);
+            font-weight: 700;
+        }
 
         /* ── Tier grid ── */
         .svc-tier-grid {
@@ -1357,7 +1364,7 @@
             tabs:["all","analytics"],
             desc:"Monthly reports surfacing how a brand is being talked about across YouTube: what creators are saying, how sentiment is shifting, and which videos are driving perception. Includes 12 monthly reports for one year delivered to up to three recipients.",
             details:[
-                { label:"Timing",     value:"Monthly" },
+                { label:"Timeline",     value:"Monthly" },
                 { label:"Starting At",value:"$1,000 per year" },
                 { label:"Delivery",   value:"Email" },
                 { label:"Resource",   value:"Touchstorm DataLabs" }
@@ -1395,7 +1402,7 @@
             tabs:["all","competitive"],
             desc:"Find and hire the right YouTube creators with confidence based on 15+ strategic data points, including: audience demographics, engagement rates, brand safety signals, our Rising Star predictive analysis, and estimated rates. Know who to hire and what they'll cost before making contact. Make it turn-key and we'll contact and manage the entire creator relationship from briefing to content delivery and payment.",
             details:[
-                { label:"Timing",     value:"Custom Quote" },
+                { label:"Timeline",     value:"Custom Quote" },
                 { label:"Starting At",value:"Custom Quote" },
                 { label:"Delivery",   value:"Virtual Meetings to Review and Discuss Recommendations" },
                 { label:"Resource",   value:"Touchstorm + Touchstorm DataLabs" }
@@ -1424,7 +1431,7 @@
             tabs:["all","analytics"],
             desc:"What would it cost to become the #1 brand on YouTube in a category? Quantify it with the Share of Voice model and map current category ownership, model the content investment required to lead, and confidently move ahead with a clear, data-backed answer.",
             details:[
-                { label:"Timing",     value:"As Needed" },
+                { label:"Timeline",     value:"As Needed" },
                 { label:"Starting At",value:"~$500 per year" },
                 { label:"Delivery",   value:"On Demand / Self Serve" },
                 { label:"Resource",   value:"Touchstorm DataLabs" }
@@ -1435,7 +1442,7 @@
             tabs:["all","strategy"],
             desc:"Take action with a detailed 12-month channel roadmap, including: content pillars, publishing cadence, growth targets, monetization paths, and resource requirements. Built for brands serious about YouTube as a long-term owned media channel.",
             details:[
-                { label:"Timing",     value:"3 Months" },
+                { label:"Timeline",     value:"3 Months" },
                 { label:"Starting At",value:"~$15,000" },
                 { label:"Delivery",   value:"Virtual Meeting + Emailed Presentation" },
                 { label:"Resource",   value:"Touchstorm + Touchstorm DataLabs" }
@@ -1455,7 +1462,7 @@
             tabs:["all","strategy"],
             desc:"Full-service YouTube channel management, including: strategy, optimization, publishing, SEO, and ongoing reporting. Experience growth like the international auto brand that rocketed from being stuck at #3 to #1 in their category, and the global makeup brand that grew subscribers from 1,700 to 581,000.",
             details:[
-                { label:"Timing",     value:"Start Immediately — requires full year commitment" },
+                { label:"Timeline",     value:"Start Immediately — requires full year commitment" },
                 { label:"Starting At",value:"Custom Quote" },
                 { label:"Delivery",   value:"Custom Quote" },
                 { label:"Resource",   value:"Touchstorm + Touchstorm DataLabs" }
@@ -1466,7 +1473,7 @@
             tabs:["all","strategy"],
             desc:"Create the tools, products, and services you need to succeed but could never find elsewhere. YouTube is the World's Largest Focus Group if only the data is pulled out, analyzed, and presented properly. Recent projects include: political landscape analyses, attitudinal studies, specialty industry ratings, media monitoring for PR, and API access for data aggregation.",
             details:[
-                { label:"Timing",     value:"Custom Quote" },
+                { label:"Timeline",     value:"Custom Quote" },
                 { label:"Starting At",value:"Custom Quote" },
                 { label:"Delivery",   value:"Custom Quote" },
                 { label:"Resource",   value:"Touchstorm + Touchstorm DataLabs" }
