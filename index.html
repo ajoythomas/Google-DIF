@@ -1150,11 +1150,11 @@
 <!-- ══════════ NAV ══════════ -->
 <nav id="nav">
     <span class="site-logo-img">
-        <a href="https://www.touchstorm.com/" class="custom-logo-link" rel="home">
-            <img height="26" src="images/TouchStorm_Logo_Rev.png" alt="Touchstorm" decoding="async">
-        </a>
         <a href="https://www.touchstormdatalabs.com/" class="custom-logo-link" rel="home">
-            <img height="26" src="images/logo_TDL.png" alt="Touchstorm DATAlabs" decoding="async">
+            <img height="30" src="images/logo_TDL.png" alt="Touchstorm DATAlabs" decoding="async">
+        </a>
+        <a href="https://www.touchstorm.com/" class="custom-logo-link" rel="home">
+            <img height="22" src="images/TouchStorm_Logo_Rev.png" alt="Touchstorm" decoding="async">
         </a>
     </span>
     <div class="nav-links">
@@ -1194,7 +1194,7 @@
     <div class="services-header reveal">
         <div class="hero-menu">Our Menu of Services</div>
         <h2 class="handshake">
-            <img height="26" src="images/Touchstorm_Logo_Rev.png" alt="Touchstorm" decoding="async">
+            <img height="26" src="images/logo_TDL.png" alt="Touchstorm DATAlabs" decoding="async">
             🤝
             <img width="127" src="images/Google-logo.png" class="custom-logo" alt="Google" decoding="async">
         </h2>
@@ -1208,18 +1208,20 @@
     <!-- TAB BAR -->
     <div class="svc-tab-bar-wrap">
         <div class="svc-tab-bar" id="svcTabBar">
-            <button class="svc-tab-btn active" data-tab="all">All Services <span class="svc-tab-count">13</span></button>
+            <button class="svc-tab-btn active" data-tab="all">All Services <span class="svc-tab-count">14</span></button>
             <button class="svc-tab-btn" data-tab="analytics">Analytics &amp; Trends <span class="svc-tab-count">4</span></button>
             <button class="svc-tab-btn" data-tab="listening">Social Listening <span class="svc-tab-count">2</span></button>
             <button class="svc-tab-btn" data-tab="competitive">Competitive Intelligence <span class="svc-tab-count">4</span></button>
-            <button class="svc-tab-btn" data-tab="strategy">Strategy &amp; Management <span class="svc-tab-count">3</span></button>
+            <button class="svc-tab-btn" data-tab="strategy">Strategy &amp; Management <span class="svc-tab-count">4</span></button>
             <div class="svc-tab-indicator" id="svcTabIndicator"></div>
         </div>
     </div>
 
     <!-- OPEN / CLOSE ALL -->
     <div class="svc-toggle-all-wrap">
-        <button class="svc-toggle-all-btn" id="svcToggleAll">Open All</button>
+        <button class="svc-toggle-all-btn" id="svcToggleAll">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:5px"><line x1="1" y1="1" x2="5" y2="5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="5" x2="1" y2="1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="5" y1="1" x2="1" y2="1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="13" y1="1" x2="9" y2="5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="13" y1="5" x2="13" y2="1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="9" y1="1" x2="13" y2="1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="13" x2="5" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="9" x2="1" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="5" y1="13" x2="1" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="13" y1="13" x2="9" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="13" y1="9" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="9" y1="13" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Collapse All
+        </button>
     </div>
 
     <!-- CARD GRID (populated by JS) -->
@@ -1350,37 +1352,37 @@
     // ── SERVICES: data ────────────────────────────────────────
     const svcServices = [
         {
-            num:"01", name:"Custom Strategic Analysis", price:"Starting at ~$7,500",
+            num:"01", name:"Custom Strategic Analysis", price:"Brands tackling specific strategic problems or needing complete YouTube channel plan",
             tabs:["all","competitive"],
             desc:"A deep-dive YouTube audit and custom growth strategy plan. Includes an analysis of channel health, content performance, audience behavior, and competitive gaps. Results delivered in a prioritized roadmap ready for immediate action.",
             tiers:[
-                { label:"Tier A", name:"Confined Topic",        timing:"2 Weeks",   startingAt:"~$7,500",   delivery:"Email Presentation",              resource:"both" },
-                { label:"Tier B", name:"Expansive Topic",       timing:"1 Month",   startingAt:"~$20,000",  delivery:"+Virtual Presentation",           resource:"both" },
-                { label:"Tier C", name:"Complete Strategy",     timing:"3 Months",  startingAt:"~$35,000",  delivery:"+Full Package",                   resource:"both" }
-            ]
+                { label:"Tier A", name:"Confined Topic",        timing:"2 Weeks",   startingAt:"~$7,500",   delivery:"PDF",                     resource:"both" },
+                { label:"Tier B", name:"Category Wide",         timing:"1 Month",   startingAt:"~$20,000",  delivery:"Online Presentation",     resource:"both" },
+                { label:"Tier C", name:"Channel Strategy",      timing:"3 Months",  startingAt:"~$35,000",  delivery:"+Full Package",           resource:"both" }
+            ].slice(0,2)
         },
         {
-            num:"02", name:"Brand Buzz Monitor Monthly Listening Update", price:"$1,000/year",
+            num:"02", name:"Brand Buzz Monitor", price:"Brands who don't want to miss vital reviews, competitive moves and consumer questions",
             tabs:["all","analytics"],
             desc:"Monthly reports surfacing how a brand is being talked about across YouTube: what creators are saying, how sentiment is shifting, and which videos are driving perception. Includes 12 monthly reports for one year delivered to up to three recipients.",
             details:[
-                { label:"Timeline",     value:"Monthly" },
-                { label:"Starting At",value:"$1,000 per year" },
-                { label:"Delivery",   value:"Email" },
-                { label:"Resource",   value:"Touchstorm DataLabs" }
+                { label:"Frequency",    value:"Monthly" },
+                { label:"Average Price",value:"$1,000/month" },
+                { label:"Delivery",     value:"Email" },
+                { label:"Resource",     value:"Touchstorm DataLabs" }
             ]
         },
         {
-            num:"03", name:"Category Trend Analysis", price:"Starting at ~$3,500",
+            num:"03", name:"Category Analysis & Trends", price:"Brands in fast-changing categories like Fashion, Beauty & Tech",
             tabs:["all","analytics"],
-            desc:"Know what's rising in a category before competitors do. Detect spikes in search volume, emerging topics, and rising content formats, all validated across YouTube, Instagram, and TikTok. Monitor overall trends or focus on a specific category or vertical.",
+            desc:"Find out the hottest trends in any given category, based on both YouTube viewing and keyword popularity. Understand the competitive landscape and how brands are responding to trends. Great for product R&D and brand strategy.",
             tiers:[
                 { label:"Tier A", name:"One Time Starter Analysis",                         timing:"1 Month",                       startingAt:"~$3,500",           delivery:"Emailed Presentation",                        resource:"both" },
                 { label:"Tier B", name:"Quarterly Analysis",                                timing:"Every Quarter / Full Year",     startingAt:"~$1,000/month",     delivery:"Virtual Meeting + Email",                     resource:"both" }
             ]
         },
         {
-            num:"04", name:"Topic Finder Content Study", price:"Starting at ~$30,000",
+            num:"04", name:"Topic Finder Content Study", price:"Brands that want topics that are hard-wired for organic success.",
             tabs:["all","analytics"],
             desc:"Stop guessing what content to make. Topic Finder identifies the highest-demand, lowest-competition content opportunities on YouTube ranked by search volume, audience fit, and monetization potential.",
             tiers:[
@@ -1389,92 +1391,103 @@
             ]
         },
         {
-            num:"05", name:"Global Brand Consistency", price:"$1,000/year",
+            num:"05", name:"Global Brand Consistency", price:"Global brand decision-makers needing to maintain branding standards across YouTube",
             tabs:["all","competitive"],
             desc:"Audit content, tone, templates, thumbnails, avatars, banners, &ldquo;About Us&rdquo; blurbs, strategy and more across multiple markets. Bring channels into alignment and ensure the brand shows up consistently—whether a viewer is in Tokyo, Toronto, or Tel Aviv—while still resonating locally.",
             tiers:[
-                { label:"Tier A", name:"As Needed",                 timing:"As Needed",     startingAt:"$1,000/year",   delivery:"On Demand / Self Serve",  resource:"tdl" },
-                { label:"Tier B", name:"Global Consistency Repair", timing:"Custom Quote",   startingAt:"Custom Quote",  delivery:"Custom Quote",            resource:"tdl" }
+                { label:"Tier A", name:"Always on self-serve platform", timing:"Always On",             startingAt:"$500/year",         delivery:"On Demand / Self Serve",  resource:"tdl" },
+                { label:"Tier B", name:"Global Consistency Repair",     timing:"6 Weeks – 6 Months",   startingAt:"$2,500 per channel", delivery:"Implemented on channel",  resource:"ts" }
             ]
         },
         {
-            num:"06", name:"Finding and Hiring Influencers", price:"Custom Quote",
+            num:"06", name:"Find and Hire Influencers", price:"Brands wanting to access all influencers in any category and analyze extensively",
             tabs:["all","competitive"],
             desc:"Find and hire the right YouTube creators with confidence based on 15+ strategic data points, including: audience demographics, engagement rates, brand safety signals, our Rising Star predictive analysis, and estimated rates. Know who to hire and what they'll cost before making contact. Make it turn-key and we'll contact and manage the entire creator relationship from briefing to content delivery and payment.",
-            details:[
-                { label:"Timeline",     value:"Custom Quote" },
-                { label:"Starting At",value:"Custom Quote" },
-                { label:"Delivery",   value:"Virtual Meetings to Review and Discuss Recommendations" },
-                { label:"Resource",   value:"Touchstorm + Touchstorm DataLabs" }
+            tiers:[
+                { label:"Tier A", name:"Single Campaign",           timing:"As Needed",     startingAt:"$3,000",        delivery:"Self Serve",                                  resource:"tdl" },
+                { label:"Tier B", name:"Single Campaign",  timing:"As Needed",     startingAt:"$5,000",        delivery:"Virtual + Full Management",           resource:"ts" },
+                { label:"Tier C", name:"Always On",                     timing:"Ongoing",       startingAt:"$500/month",    delivery:"On Demand / Self Serve",                      resource:"tdl" }
             ]
         },
         {
-            num:"07", name:"Competitive Monitoring and Benchmarking", price:"Custom Quote",
+            num:"07", name:"Competitive Monitoring and Benchmarking", price:"Brands who'd spend more on YouTube if they understood how behind they were",
             tabs:["all","competitive"],
             desc:"See exactly where your brand ranks against category / vertical / custom competitors on YouTube. Track upload cadence, subscriber growth, view velocity, and top-performing content for a custom competitive set and learn what it will take to move up in rankings.",
             tiers:[
-                { label:"Tier A", name:"As Needed",                 timing:"As Needed",                 startingAt:"TBD",   delivery:"On Demand / Self Serve",              resource:"both" },
-                { label:"Tier B", name:"Custom Strategic Guidance", timing:"Every Quarter / Full Year",  startingAt:"TBD",   delivery:"Virtual Meetings + Course of Action",  resource:"both" }
+                { label:"Tier A", name:"One-Time Report",       timing:"As Needed",  startingAt:"$1,000",        delivery:"On Demand / Self Serve",              resource:"both" },
+                { label:"Tier B", name:"Always On Software",    timing:"Ongoing",    startingAt:"$500/month",    delivery:"Virtual Meetings + Course of Action", resource:"both" }
             ]
         },
         {
-            num:"08", name:"YouTube Listening Tool", price:"TBD",
+            num:"08", name:"YouTube Social Listening", price:"Brands supplementing vital YouTube social listening data absent in their platforms",
+            priceLabel:"Price",
             tabs:["all","listening"],
             desc:"Organically understand how audiences truly feel about a brand on YouTube. Analyze comment sentiment, shifts in tone or reach, like/dislike signals, and conversation topics across thousands of videos to surface what's driving love, concern, or indifference toward a brand.",
             tiers:[
-                { label:"Tier A", name:"TBD", timing:"TBD", startingAt:"TBD", delivery:"TBD", resource:"tdl" },
-                { label:"Tier B", name:"TBD", timing:"TBD", startingAt:"TBD", delivery:"TBD", resource:"tdl" }
+                { label:"Tier A", name:"Always On Platform",  timing:"Daily Refresh",  startingAt:"$1,000/month",  delivery:"24/7 Platform Access",    resource:"tdl" },
+                { label:"Tier B", name:"One-Time Report",     timing:"~3 Weeks",       startingAt:"$4,000",        delivery:"Presentation + PDF",      resource:"tdl" }
             ]
         },
         {
-            num:"09", name:"Share of Voice", price:"~$500/year",
+            num:"09", name:"Category Share of Voice", price:"All Google reps",
             tabs:["all","analytics"],
-            desc:"What would it cost to become the #1 brand on YouTube in a category? Quantify it with the Share of Voice model and map current category ownership, model the content investment required to lead, and confidently move ahead with a clear, data-backed answer.",
+            desc:"YouTube Share of Voice with maximum controls and alternate views. Measure a brand's Paid &amp; Owned share against all other channels, all other brands, or set competitors. Analyze a brand in a country, brand region or all brand channels aggregated globally. Show brands how much advertising they should buy to raise their Share of Voice ranking.",
             details:[
                 { label:"Timeline",     value:"As Needed" },
-                { label:"Starting At",value:"~$500 per year" },
-                { label:"Delivery",   value:"On Demand / Self Serve" },
-                { label:"Resource",   value:"Touchstorm DataLabs" }
+                { label:"Average Price",value:"Free for Google reps / $29/month for others" },
+                { label:"Delivery",     value:"On Demand / Self Serve" },
+                { label:"Resource",     value:"Touchstorm DataLabs" }
             ]
         },
         {
-            num:"10", name:"Strategic Channel Business Plan", price:"~$15,000",
+            num:"10", name:"YouTube Channel Strategic Plan", price:"Brands transitioning a YouTube channel from an ad repository to a fan-building hub.",
             tabs:["all","strategy"],
-            desc:"Take action with a detailed 12-month channel roadmap, including: content pillars, publishing cadence, growth targets, monetization paths, and resource requirements. Built for brands serious about YouTube as a long-term owned media channel.",
+            desc:"Our YouTube marketing strategists spend three months analyzing the brand, its competitors, and what works in the space on YouTube to create a clear strategic plan for content, content marketing and distribution, search optimization, creative approach and channel management. Comes with well-researched strategic rational, performance KPIs and a specific action plan on a timeline. Answers all the standard brand questions and digs into trends and brand-specific challenges.",
             details:[
                 { label:"Timeline",     value:"3 Months" },
-                { label:"Starting At",value:"~$15,000" },
-                { label:"Delivery",   value:"Virtual Meeting + Emailed Presentation" },
-                { label:"Resource",   value:"Touchstorm + Touchstorm DataLabs" }
+                { label:"Average Price",value:"~$15,000" },
+                { label:"Delivery",     value:"Virtual Meeting + Emailed Presentation" },
+                { label:"Resource",     value:"Touchstorm + Touchstorm DataLabs" }
             ]
         },
         {
-            num:"11", name:"Community Management", price:"TBD",
+            num:"11", name:"Community Management", price:"Brands who understand that promptly answering YouTube questions and responding to user comments surprises &amp; delights consumers.",
             tabs:["all","listening"],
             desc:"YouTube comments are a goldmine of audience signal, and most brands ignore them instead of surfacing the highest-value questions and conversations while keeping the community healthy. Use the self-serve tools to monitor, moderate, and respond to comments, or make it turn-key and our trained-by-you team will manage responses on your behalf.",
             tiers:[
-                { label:"Tier A", name:"As Needed",         timing:"As Needed",     startingAt:"TBD",           delivery:"On Demand / Self Serve",  resource:"both" },
-                { label:"Tier B", name:"Management Services",timing:"Custom Quote",  startingAt:"Custom Quote",  delivery:"Custom Quote",            resource:"both" }
+                { label:"Tier A", name:"DIY Response",          timing:"Ongoing",   startingAt:"$200/month",    delivery:"Daily Email",                                     resource:"tdl" },
+                { label:"Tier B", name:"Management Services",   timing:"Ongoing",   startingAt:"$1,500/month",  delivery:"Live Record via Platform",                        resource:"both" }
             ]
         },
         {
-            num:"12", name:"Channel Management", price:"Custom Quote",
+            num:"12", name:"Channel Management", price:"Brands who aren't getting enough YouTube expertise out of their Social Media agency or in-house resources",
             tabs:["all","strategy"],
-            desc:"Full-service YouTube channel management, including: strategy, optimization, publishing, SEO, and ongoing reporting. Experience growth like the international auto brand that rocketed from being stuck at #3 to #1 in their category, and the global makeup brand that grew subscribers from 1,700 to 581,000.",
+            desc:"Our full-service YouTube Channel Management includes everything it takes to grow a brand's online fanbase. Channel Management starts with a complete strategic plan (described above) which then transitions to daily management by a team that includes Strategists, Account Mgmt, Channel Optimizers and Content Marketers. We love to include Paid &amp; Commerce in Channel Mgmt but it's not required.",
             details:[
-                { label:"Timeline",     value:"Start Immediately — requires full year commitment" },
-                { label:"Starting At",value:"Custom Quote" },
-                { label:"Delivery",   value:"Custom Quote" },
-                { label:"Resource",   value:"Touchstorm + Touchstorm DataLabs" }
+                { label:"Timeline",     value:"Requires 12-month commitment" },
+                { label:"Average Price",value:"Custom Quote" },
+                { label:"Delivery",     value:"Near daily client communication, coordination with fellow agencies, Monthly/Qtly Reporting" },
+                { label:"Resource",     value:"Touchstorm + Touchstorm DataLabs" }
             ]
         },
         {
-            num:"13", name:"Custom Project", price:"Custom Quote",
+            num:"13", name:"Contextual Media Buying", price:"Brands wanting precision ad placement on channels and videos proven to perform",
+            tabs:["all","strategy"],
+            desc:"Give your agencies a list of the perfect channels and videos on which to place their ads. Accounts for view volumes available so that GRP goals can be reached via the list. Can tolerate custom Brand Safety standards.",
+            details:[
+                { label:"Timeline",     value:"One Week" },
+                { label:"Average Price",value:"5% of media budget" },
+                { label:"Delivery",     value:"CSV" },
+                { label:"Resource",     value:"Touchstorm DataLabs" }
+            ]
+        },
+        {
+            num:"14", name:"Custom Projects", price:"Bespoke research project leveraging our unique data",
             tabs:["all","strategy"],
             desc:"Create the tools, products, and services you need to succeed but could never find elsewhere. YouTube is the World's Largest Focus Group if only the data is pulled out, analyzed, and presented properly. Recent projects include: political landscape analyses, attitudinal studies, specialty industry ratings, media monitoring for PR, and API access for data aggregation.",
             details:[
                 { label:"Timeline",     value:"Custom Quote" },
-                { label:"Starting At",value:"Custom Quote" },
+                { label:"Average Price",value:"Custom Quote" },
                 { label:"Delivery",   value:"Custom Quote" },
                 { label:"Resource",   value:"Touchstorm + Touchstorm DataLabs" }
             ]
@@ -1494,7 +1507,8 @@
         `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
         `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
         `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`,
-        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>`
+        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>`,
+        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>`
     ];
 
     const svcChevron = `<svg class="svc-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
@@ -1513,7 +1527,7 @@
         "10": { src: "images/11_StrategicChannelBusinessPlan_V2.jpg",              alt: "Strategic Channel Business Plan" },
         "11": { src: "images/12_CommunityManagement_V2.jpg",                        alt: "Community Management" },
         "12": { src: "images/13_ChannelManagement_V2.jpg",                        alt: "Channel Management" },
-        "13": { src: "images/14_CustomProject.jpg",                        alt: "Custom Project" }
+        "14": { src: "images/14_CustomProject.jpg",                        alt: "Custom Project" }
     };
 
     const svcCaseStudies = [
@@ -1636,10 +1650,13 @@
         resources: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`
     };
 
-    function svcBuildTierGrid(tiers) {
+    function svcBuildTierGrid(tiers, priceLabel) {
+        const priceLbl = priceLabel || 'Average Price';
         return `<div class="svc-tier-grid">${tiers.map(t => {
             const resourceMarkup = t.resource === 'both'
                 ? `<img src="images/TS-logo-short.png" alt="Touchstorm"><span class="svc-tier-resource-sep">+</span><img src="images/TDL-logo-short.png" alt="TDL">`
+                : t.resource === 'ts'
+                ? `<img src="images/TS-logo-short.png" alt="Touchstorm">`
                 : `<img src="images/TDL-logo-short.png" alt="TDL">`;
             return `<div class="svc-tier-col">
                 <span class="svc-tier-badge">${t.label}</span>
@@ -1649,7 +1666,7 @@
                     <div class="svc-tier-row-value">${t.timing}</div>
                 </div>
                 <div class="svc-tier-row">
-                    <div class="svc-tier-row-label">${svcTierIcons.startingAt} Starting At</div>
+                    <div class="svc-tier-row-label">${svcTierIcons.startingAt} ${priceLbl}</div>
                     <div class="svc-tier-row-value">${t.startingAt}</div>
                 </div>
                 <div class="svc-tier-row">
@@ -1687,15 +1704,31 @@
                     <div class="svc-expanded-watermark">${s.num}</div>
                     <div class="svc-expanded-name">${s.name}</div>
                     <p class="svc-expanded-desc">${s.desc}</p>
-                    <div class="svc-expanded-price-pill">${s.price}</div>
-                    ${s.tiers ? svcBuildTierGrid(s.tiers) : s.details ? `<ul class="svc-details-list">${s.details.map(d => `<li><strong>${d.label}:</strong> ${d.value}</li>`).join('')}</ul>` : ''}
+                    <div class="svc-expanded-price-pill"><span style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--pink);display:block;margin-bottom:2px;">Best For:</span>${s.price}</div>
+                    ${s.tiers ? svcBuildTierGrid(s.tiers, s.priceLabel) : s.details ? `<ul class="svc-details-list">${s.details.map(d => {
+                        if (d.label === 'Resource') {
+                            const val = d.value;
+                            let logoMarkup = '';
+                            const hasTDL = /touchstorm datalabs/i.test(val) || /\btdl\b/i.test(val);
+                            const hasTS = /^touchstorm\b(?!\s+datalabs)/i.test(val) || /\bts\b/i.test(val) || /touchstorm \+/i.test(val);
+                            if (hasTS && hasTDL) {
+                                logoMarkup = `<img src="images/TS-logo-short.png" alt="Touchstorm" style="height:12px;vertical-align:middle;margin-right:6px;"><span style="margin-right:6px;font-weight:700;color:#999">+</span><img src="images/TDL-logo-short.png" alt="TDL" style="height:12px;vertical-align:middle;">`;
+                            } else if (hasTDL) {
+                                logoMarkup = `<img src="images/TDL-logo-short.png" alt="TDL" style="height:12px;vertical-align:middle;">`;
+                            } else {
+                                logoMarkup = `<img src="images/TS-logo-short.png" alt="Touchstorm" style="height:12px;vertical-align:middle;">`;
+                            }
+                            return `<li><strong>${d.label}:</strong> <span style="display:inline-flex;align-items:center;gap:0;vertical-align:middle;">${logoMarkup}</span></li>`;
+                        }
+                        return `<li><strong>${d.label}:</strong> ${d.value}</li>`;
+                    }).join('')}</ul>` : ''}
                 </div>
                 <div class="svc-expanded-right">
                     <button class="svc-close-btn" aria-label="Close" onclick="event.stopPropagation(); svcCollapseCard(this.closest('.svc-card'));">${svcClose}</button>
                     ${serviceImageMarkup}
                 </div>
             </div>`;
-        card.addEventListener('click', () => svcToggleCard(card));
+        card.addEventListener('click', () => { if (!card.classList.contains('expanded')) svcToggleCard(card); });
         const revealBtn = card.querySelector('.svc-expanded-cta');
         if (revealBtn) {
             revealBtn.addEventListener('click', event => {
@@ -1786,19 +1819,27 @@
     if (svcSlideshowEl) svcInitSlideshow(svcSlideshowEl);
 
     // ── Open / Close All ─────────────────────────────────────
+    const COLLAPSE_SVG = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:5px"><line x1="1" y1="1" x2="5" y2="5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="5" x2="1" y2="1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="5" y1="1" x2="1" y2="1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="13" y1="1" x2="9" y2="5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="13" y1="5" x2="13" y2="1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="9" y1="1" x2="13" y2="1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="13" x2="5" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="9" x2="1" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="5" y1="13" x2="1" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="13" y1="13" x2="9" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="13" y1="9" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="9" y1="13" x2="13" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Collapse All`;
+    const EXPAND_SVG = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:5px"><line x1="1" y1="5" x2="5" y2="1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="1" x2="1" y2="5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="5" y1="5" x2="1" y2="5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="13" y1="5" x2="9" y2="1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="13" y1="1" x2="13" y2="5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="9" y1="5" x2="13" y2="5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="9" x2="5" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="13" x2="1" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="5" y1="9" x2="1" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="13" y1="9" x2="9" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="13" y1="13" x2="13" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="9" y1="9" x2="13" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Open All`;
+
     const svcToggleAllBtn = document.getElementById('svcToggleAll');
     if (svcToggleAllBtn) {
+        // Open all cards by default
+        const allCards = [...document.querySelectorAll('.svc-card')];
+        allCards.forEach(c => { c.classList.add('expanded'); c.classList.add('visible'); });
+        svcCurrentExpanded = null;
+
         svcToggleAllBtn.addEventListener('click', function() {
             const cards = [...document.querySelectorAll('.svc-card:not(.tab-hidden)')];
             const allExpanded = cards.every(c => c.classList.contains('expanded'));
             if (allExpanded) {
                 cards.forEach(c => svcCollapseCard(c));
-                this.textContent = 'Open All';
+                this.innerHTML = EXPAND_SVG;
             } else {
                 if (svcCurrentExpanded) svcCollapseCard(svcCurrentExpanded);
                 cards.forEach(c => { c.classList.add('expanded'); c.classList.add('visible'); });
                 svcCurrentExpanded = null;
-                this.textContent = 'Close All';
+                this.innerHTML = COLLAPSE_SVG;
             }
         });
     }
