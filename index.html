@@ -84,9 +84,15 @@
             align-items: center;
         }
         .site-logo-img img {
-            height: 20px;
             width: auto;
             display: block;
+        }
+        /* TDL primary / TS secondary — keep TDL visually larger */
+        .site-logo-img img.logo-img-tdl {
+            height: 24px;
+        }
+        .site-logo-img img.logo-img-ts {
+            height: 20px;
         }
         .nav-links {
             display: flex;
@@ -1151,10 +1157,10 @@
 <nav id="nav">
     <span class="site-logo-img">
         <a href="https://www.touchstormdatalabs.com/" class="custom-logo-link" rel="home">
-            <img height="30" src="images/logo_TDL.png" alt="Touchstorm DATAlabs" decoding="async">
+            <img class="logo-img-tdl" src="images/logo_TDL.png" alt="Touchstorm DATAlabs" decoding="async">
         </a>
         <a href="https://www.touchstorm.com/" class="custom-logo-link" rel="home">
-            <img height="22" src="images/TouchStorm_Logo_Rev.png" alt="Touchstorm" decoding="async">
+            <img class="logo-img-ts" src="images/TouchStorm_Logo_Rev.png" alt="Touchstorm" decoding="async">
         </a>
     </span>
     <div class="nav-links">
