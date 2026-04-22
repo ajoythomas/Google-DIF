@@ -15,7 +15,8 @@
       "Bash(ls /Users/ajoythomas/Documents/Sites/DIF-Claude/images/CM-CaseStudy-*)",
       "Skill(browse)",
       "Skill(browse:*)",
-      "Bash(python3 -m http.server 8765)"
+      "Bash(python3 -m http.server 8765)",
+      "Bash(git push *)"
     ]
   }
 }

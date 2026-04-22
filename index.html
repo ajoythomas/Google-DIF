@@ -1694,7 +1694,7 @@
                     <div class="svc-tier-row-value">${t.delivery}</div>
                 </div>
                 <div class="svc-tier-row">
-                    <div class="svc-tier-row-label">${svcTierIcons.resources} Resources</div>
+                    <div class="svc-tier-row-label">${svcTierIcons.resources} ${t.resource === 'both' ? 'Resources' : 'Resource'}</div>
                     <div class="svc-tier-resource">${resourceMarkup}</div>
                 </div>
             </div>`;
@@ -1738,7 +1738,8 @@
                             } else {
                                 logoMarkup = `<img src="images/TS-logo-short.png" alt="Touchstorm" style="height:12px;vertical-align:middle;">`;
                             }
-                            return `<li><strong>${d.label}:</strong> <span style="display:inline-flex;align-items:center;gap:0;vertical-align:middle;">${logoMarkup}</span></li>`;
+                            const resourceLabel = (hasTS && hasTDL) ? 'Resources' : 'Resource';
+                            return `<li><strong>${resourceLabel}:</strong> <span style="display:inline-flex;align-items:center;gap:0;vertical-align:middle;">${logoMarkup}</span></li>`;
                         }
                         return `<li><strong>${d.label}:</strong> ${d.value}</li>`;
                     }).join('')}</ul>` : ''}
