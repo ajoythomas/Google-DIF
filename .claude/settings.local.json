@@ -16,7 +16,8 @@
       "Skill(browse)",
       "Skill(browse:*)",
       "Bash(python3 -m http.server 8765)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(xargs du *)"
     ]
   }
 }
