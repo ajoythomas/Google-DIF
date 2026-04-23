@@ -320,7 +320,7 @@
 
         /* ── YOUTUBE SERVICES ── */
         .services-section {
-            background: url('images/DIF_ServicesBackground.jpg') center center / cover no-repeat;
+            background: url('images/DIF_ServicesBackground_v3.jpeg') repeat-y center/100% auto;
             padding-bottom: 80px;
         }
         .services-header {
@@ -1049,6 +1049,7 @@
             gap: 7px;
             margin-top: 4px;
             flex-wrap: nowrap;
+            align-items: stretch;
         }
         .svc-tier-col {
             flex: 1;
@@ -1057,6 +1058,8 @@
             border-radius: 10px;
             padding: 11px 10px 10px;
             background: #f5f6fb;
+            display: flex;
+            flex-direction: column;
         }
         .svc-tier-badge {
             display: inline-block;
@@ -1069,6 +1072,7 @@
             padding: 3px 11px;
             margin-bottom: 9px;
             white-space: nowrap;
+            align-self: flex-start;
         }
         .svc-tier-name {
             font-size: 13px;
@@ -1076,9 +1080,6 @@
             color: var(--text-dark);
             line-height: 1.2;
             margin-bottom: 0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
             padding-bottom: 8px;
             border-bottom: 1px solid rgba(16,21,47,0.08);
         }
@@ -1088,9 +1089,10 @@
             gap: 2px;
             padding: 7px 0;
             border-bottom: 1px solid rgba(16,21,47,0.08);
+            flex: 1;
         }
         .svc-tier-row:first-of-type { padding-top: 8px; }
-        .svc-tier-row:last-child { border-bottom: none; padding-bottom: 0; }
+        .svc-tier-row:last-child { border-bottom: none; padding-bottom: 0; flex: 0; }
         .svc-tier-row-label {
             display: flex;
             align-items: center;
@@ -1112,9 +1114,7 @@
             color: var(--text-dark);
             font-weight: 500;
             line-height: 1.3;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            white-space: normal;
         }
         .svc-tier-resource {
             display: flex;
@@ -1162,10 +1162,10 @@
 <!-- ══════════ NAV ══════════ -->
 <nav id="nav">
     <span class="site-logo-img">
-        <a href="https://www.touchstormdatalabs.com/" class="custom-logo-link" rel="home">
+        <a target="_blank" href="https://www.touchstormdatalabs.com/" class="custom-logo-link" rel="home">
             <img class="logo-img-tdl" src="images/logo_TDL.png" alt="Touchstorm DATAlabs" decoding="async">
         </a>
-        <a href="https://www.touchstorm.com/" class="custom-logo-link" rel="home">
+        <a target="_blank" href="https://www.touchstorm.com/" class="custom-logo-link" rel="home">
             <img class="logo-img-ts" src="images/TouchStorm_Logo_Rev.png" alt="Touchstorm" decoding="async">
         </a>
     </span>
@@ -1184,7 +1184,7 @@
     <div class="hero-inner reveal">
         <div class="hero-eyebrow">Touchstorm &amp; Touchstorm DataLabs &nbsp;&bull;&nbsp; A DIF Approved Vendor</div>
         <h1>YouTube Services &amp; Insights for Google's <em>Top Advertisers.</em></h1>
-        <p class="hero-sub"><a href="#services" style="color:inherit;text-decoration:underline;">Shop</a> from a menu of services for your brands below.</p>
+        <p class="hero-sub"><a href="#services" style="color:inherit;text-decoration:underline;">Shop</a> the DIF Approved Services.</p>
     </div>
 </section>
 
@@ -1366,129 +1366,129 @@
         {
             num:"01", name:"Category Share of Voice", price:"All Google reps",
             tabs:["all","analytics"],
-            desc:"YouTube Share of Voice with maximum controls and alternate views. Measure a brand's Paid &amp; Owned share against all other channels, all other brands, or set competitors. Analyze a brand in a country, brand region or all brand channels aggregated globally. Show brands how much advertising they should buy to raise their Share of Voice ranking.",
+            desc:"YouTube Share of Voice with maximum controls and alternate views. Measure a brand's Paid & Owned share against all other channels, all other brands, or your custom set of competitors. Analyze a brand in a country, brand region or all brand channels aggregated globally. Show brands how much advertising they should buy to raise their Share of Voice ranking.",
             details:[
                 { label:"Timeline",     value:"As Needed" },
-                { label:"Average Price",value:"Free for Google reps / $29/month for others" },
-                { label:"Delivery",     value:"On Demand / Self Serve" },
+                { label:"Average Price",value:"Free for Google reps; $29/month for Others" },
+                { label:"Delivery",     value:"24/7 On Demand (Self Serve Platform)" },
                 { label:"Resource",     value:"Touchstorm DataLabs" }
             ]
         },
         {
-            num:"02", name:"Community Management", price:"Brands who understand that promptly answering YouTube questions and responding to user comments surprises &amp; delights consumers.",
+            num:"02", name:"Community Management", price:"Brands that want to build customer loyalty through fast YouTube replies",
             tabs:["all","listening"],
             desc:"YouTube comments are a goldmine of audience signal, and most brands ignore them instead of surfacing the highest-value questions and conversations while keeping the community healthy. Use the self-serve tools to monitor, moderate, and respond to comments, or make it turn-key and our trained-by-you team will manage responses on your behalf.",
             tiers:[
-                { label:"Tier A", name:"DIY Response",          timing:"Ongoing",   startingAt:"$200/month",    delivery:"Daily Email",                 resource:"tdl" },
-                { label:"Tier B", name:"Management Services",   timing:"Ongoing",   startingAt:"$1,500/month",  delivery:"Live Record via Platform",     resource:"both" }
+                { label:"Tier A", name:"Always On",          timing:"Ongoing",   startingAt:"$200/month",    delivery:"Daily Email",                 resource:"tdl" },
+                { label:"Tier B", name:"Managed Services",   timing:"Ongoing",   startingAt:"$1,500/month",  delivery:"Full Activity Live on Platform and Channel(s)",     resource:"both" }
             ]
         },
         {
-            num:"03", name:"Brand Buzz Monitor", price:"Brands who don't want to miss vital reviews, competitive moves and consumer questions",
+            num:"03", name:"Brand Buzz Monitor", price:"Brands that refuse to miss vital feedback or competitor actions",
             tabs:["all","analytics"],
             desc:"Monthly reports surfacing how a brand is being talked about across YouTube: what creators are saying, how sentiment is shifting, and which videos are driving perception. Includes 12 monthly reports for one year delivered to up to three recipients.",
             details:[
                 { label:"Frequency",    value:"Monthly" },
                 { label:"Average Price",value:"$1,000/month" },
-                { label:"Delivery",     value:"Email" },
+                { label:"Delivery",     value:"Monthly Email" },
                 { label:"Resource",     value:"Touchstorm DataLabs" }
             ]
         },
         {
-            num:"04", name:"YouTube Social Listening", price:"Brands supplementing vital YouTube social listening data absent in their platforms",
-            priceLabel:"Price",
+            num:"04", name:"YouTube Social Listening", price:"Brands that need YouTube social listening data missing from their current tools",
+            priceLabel:"Average Price",
             tabs:["all","listening"],
             desc:"Organically understand how audiences truly feel about a brand on YouTube. Analyze comment sentiment, shifts in tone or reach, like/dislike signals, and conversation topics across thousands of videos to surface what's driving love, concern, or indifference toward a brand.",
             tiers:[
-                { label:"Tier A", name:"Always On Platform",  timing:"Daily Refresh",  startingAt:"$1,000/month",  delivery:"24/7 Platform Access",    resource:"tdl" },
-                { label:"Tier B", name:"One-Time Report",     timing:"~3 Weeks",       startingAt:"$4,000",        delivery:"Presentation + PDF",      resource:"tdl" }
+                { label:"Tier A", name:"Always On",  timing:"Refreshed Daily",  startingAt:"$1,000/month",  delivery:"24/7 On Demand (Self Serve Platform)",    resource:"tdl" },
+                { label:"Tier B", name:"One-Time Report",     timing:"~3 Weeks",       startingAt:"$4,000/report",        delivery:"Virtual Presentation + Emailed PDF Report",      resource:"tdl" }
             ]
         },
         {
-            num:"05", name:"Competitive Monitoring and Benchmarking", price:"Brands who'd spend more on YouTube if they understood how behind they were",
+            num:"05", name:"Competitive Monitoring and Benchmarking", price:"Brands that need to see their competitive gap on YouTube before increasing ad spend",
             tabs:["all","competitive"],
             desc:"See exactly where your brand ranks against category / vertical / custom competitors on YouTube. Track upload cadence, subscriber growth, view velocity, and top-performing content for a custom competitive set and learn what it will take to move up in rankings.",
             tiers:[
-                { label:"Tier A", name:"One-Time Report",       timing:"As Needed",  startingAt:"$1,000",        delivery:"On Demand / Self Serve",              resource:"both" },
-                { label:"Tier B", name:"Always On Software",    timing:"Ongoing",    startingAt:"$500/month",    delivery:"Virtual Meetings + Course of Action", resource:"both" }
+                { label:"Tier A", name:"Always On",       timing:"Ongoing",  startingAt:"$500/month",        delivery:"24/7 On Demand (Self Serve Platform)",              resource:"both" },
+                { label:"Tier B", name:"One-Time Report",    timing:"As Needed",    startingAt:"$1000/report",    delivery:"Virtual Presentation + Emailed PDF Report", resource:"both" }
             ]
         },
         {
-            num:"06", name:"Global Brand Consistency", price:"Global brand decision-makers needing to maintain branding standards across YouTube",
+            num:"06", name:"Global Brand Consistency", price:"Brands that need to maintain global branding standards across YouTube",
             tabs:["all","competitive"],
             desc:"Audit content, tone, templates, thumbnails, avatars, banners, &ldquo;About Us&rdquo; blurbs, strategy and more across multiple markets. Bring channels into alignment and ensure the brand shows up consistently—whether a viewer is in Tokyo, Toronto, or Tel Aviv—while still resonating locally.",
             tiers:[
-                { label:"Tier A", name:"Always on self-serve platform", timing:"Always On",             startingAt:"$500/year",         delivery:"On Demand / Self Serve",  resource:"tdl" },
-                { label:"Tier B", name:"Global Consistency Repair",     timing:"6 Weeks – 6 Months",   startingAt:"$2,500 per channel", delivery:"Implemented on channel",  resource:"ts" }
+                { label:"Tier A", name:"Always On",         timing:"As Needed",            startingAt:"$500/year",          delivery:"24/7 On Demand (Self Serve Platform)",  resource:"tdl" },
+                { label:"Tier B", name:"Managed Services", timing:"~6 Weeks to ~6 Months", startingAt:"$2,500/channel",     delivery:"Activity Live on Channel(s)",            resource:"ts" }
             ]
         },
         {
-            num:"07", name:"Find and Hire Influencers", price:"Brands wanting to access all influencers in any category and analyze extensively",
+            num:"07", name:"Find and Hire Influencers", price:"Brands that require unrestricted influencer discovery and deep analytics",
             tabs:["all","competitive"],
             desc:"Find and hire the right YouTube creators with confidence based on 15+ strategic data points, including: audience demographics, engagement rates, brand safety signals, our Rising Star predictive analysis, and estimated rates. Know who to hire and what they'll cost before making contact. Make it turn-key and we'll contact and manage the entire creator relationship from briefing to content delivery and payment.",
             tiers:[
-                { label:"Tier A", name:"Single Campaign",           timing:"As Needed",  startingAt:"$3,000",     delivery:"Self Serve",                        resource:"tdl" },
-                { label:"Tier B", name:"Single Campaign",           timing:"As Needed",  startingAt:"$5,000",     delivery:"Virtual + Full Management",         resource:"ts" },
-                { label:"Tier C", name:"Always On",                 timing:"Ongoing",    startingAt:"$500/month", delivery:"On Demand / Self Serve",             resource:"tdl" }
+                { label:"Tier A", name:"Always On",        timing:"Ongoing",    startingAt:"$500/month",      delivery:"24/7 On Demand (Self Serve Platform)",                              resource:"tdl" },
+                { label:"Tier B", name:"Single Campaign", timing:"As Needed",  startingAt:"$3,000/campaign", delivery:"24/7 On Demand (Self Serve Platform)",                              resource:"tdl" },
+                { label:"Tier C", name:"Single Campaign", timing:"As Needed",  startingAt:"$5,000/campaign", delivery:"As Needed Virtual Meetings + Full Activity Live on Platform", resource:"ts" }
             ]
         },
         {
-            num:"08", name:"Contextual Media Buying", price:"Brands wanting precision ad placement on channels and videos proven to perform",
+            num:"08", name:"Contextual Media Buying", price:"Brands that demand precision ad placement on high-performing content.",
             tabs:["all","strategy"],
             desc:"Give your agencies a list of the perfect channels and videos on which to place their ads. Accounts for view volumes available so that GRP goals can be reached via the list. Can tolerate custom Brand Safety standards.",
             details:[
-                { label:"Timeline",     value:"One Week" },
-                { label:"Average Price",value:"5% of media budget" },
-                { label:"Delivery",     value:"CSV" },
+                { label:"Timeline",     value:"~1 Week" },
+                { label:"Average Price",value:"5% of Media Budget" },
+                { label:"Delivery",     value:"Emailed CSV Plan" },
                 { label:"Resource",     value:"Touchstorm DataLabs" }
             ]
         },
         {
-            num:"09", name:"Category Analysis & Trends", price:"Brands in fast-changing categories like Fashion, Beauty & Tech",
+            num:"09", name:"Category Analysis & Trends", price:"Brands that navigate fast-paced categories like fashion, beauty, and tech.",
             tabs:["all","analytics"],
             desc:"Find out the hottest trends in any given category, based on both YouTube viewing and keyword popularity. Understand the competitive landscape and how brands are responding to trends. Great for product R&D and brand strategy.",
             tiers:[
-                { label:"Tier A", name:"One Time Starter Analysis", timing:"1 Month",                   startingAt:"~$3,500",       delivery:"Emailed Presentation",        resource:"both" },
-                { label:"Tier B", name:"Quarterly Analysis",        timing:"Every Quarter / Full Year",  startingAt:"~$1,000/month", delivery:"Virtual Meeting + Email",     resource:"both" }
+                { label:"Tier A", name:"Quarterly Analysis",        timing:"Quarterly", startingAt:"$1,000/month",   delivery:"Quarterly Virtual Presentation + Emailed PDF Report", resource:"both" },
+                { label:"Tier B", name:"One-Time Starter Analysis", timing:"~1 Month",  startingAt:"$3,500/category", delivery:"Emailed PDF Report",                          resource:"both" }
             ]
         },
         {
-            num:"10", name:"Custom Strategic Analysis", price:"Brands tackling specific strategic problems or needing complete YouTube channel plan",
+            num:"10", name:"Custom Strategic Analysis", price:"Brands that require tailored strategies for complex challenges or complete YouTube channel plans.",
             tabs:["all","competitive"],
             desc:"A deep-dive YouTube audit and custom growth strategy plan. Includes an analysis of channel health, content performance, audience behavior, and competitive gaps. Results delivered in a prioritized roadmap ready for immediate action.",
             tiers:[
-                { label:"Tier A", name:"Confined Topic",  timing:"2 Weeks",  startingAt:"~$7,500",  delivery:"PDF",                 resource:"both" },
-                { label:"Tier B", name:"Category Wide",   timing:"1 Month",  startingAt:"~$20,000", delivery:"Online Presentation", resource:"both" }
+                { label:"Tier A", name:"Confined Analysis",      timing:"~2 Weeks", startingAt:"$7,500/analysis",  delivery:"Emailed PDF Report",                          resource:"both" },
+                { label:"Tier B", name:"Category-Wide Analysis", timing:"~1 Month",  startingAt:"$20,000/analysis", delivery:"Virtual Presentation + Emailed PDF Report", resource:"both" }
             ]
         },
         {
-            num:"11", name:"YouTube Channel Strategic Plan", price:"Brands transitioning a YouTube channel from an ad repository to a fan-building hub.",
+            num:"11", name:"YouTube Channel Strategic Plan", price:"Brands that are transforming their YouTube channel from a static ad archive into an active fan community.",
             tabs:["all","strategy"],
             desc:"Our YouTube marketing strategists spend three months analyzing the brand, its competitors, and what works in the space on YouTube to create a clear strategic plan for content, content marketing and distribution, search optimization, creative approach and channel management. Comes with well-researched strategic rational, performance KPIs and a specific action plan on a timeline. Answers all the standard brand questions and digs into trends and brand-specific challenges.",
             details:[
-                { label:"Timeline",     value:"3 Months" },
-                { label:"Average Price",value:"~$15,000" },
-                { label:"Delivery",     value:"Virtual Meeting + Emailed Presentation" },
+                { label:"Timeline",     value:"~3 Months" },
+                { label:"Average Price",value:"$15,000/plan" },
+                { label:"Delivery",     value:"Virtual Presentation + Emailed PDF Report" },
                 { label:"Resource",     value:"Touchstorm + Touchstorm DataLabs" }
             ]
         },
         {
-            num:"12", name:"Topic Finder Content Study", price:"Brands that want topics that are hard-wired for organic success.",
+            num:"12", name:"Topic Finder Content Study", price:"Brands that require data-backed topics hard-wired for organic growth.",
             tabs:["all","analytics"],
             desc:"Stop guessing what content to make. Topic Finder identifies the highest-demand, lowest-competition content opportunities on YouTube ranked by search volume, audience fit, and monetization potential.",
             tiers:[
-                { label:"Tier A", name:"Single Category",     timing:"TBD", startingAt:"~$30,000",     delivery:"Virtual Meeting + Email", resource:"both" },
-                { label:"Tier B", name:"Multiple Categories", timing:"TBD", startingAt:"Custom Quote",  delivery:"Virtual Meeting + Email", resource:"both" }
+                { label:"Tier A", name:"Single Category",     timing:"Custom Quote", startingAt:"$30,000/study",  delivery:"Virtual Presentation + Emailed PDF Report", resource:"both" },
+                { label:"Tier B", name:"Multiple Categories", timing:"TBD",          startingAt:"Custom Quote",   delivery:"Virtual Presentation + Emailed PDF Report", resource:"both" }
             ]
         },
         {
-            num:"13", name:"Channel Management", price:"Brands who aren't getting enough YouTube expertise out of their Social Media agency or in-house resources",
+            num:"13", name:"Channel Management", price:"Brands that need dedicated YouTube experts to fill the gaps left by generalist agencies or internal staff",
             tabs:["all","strategy"],
-            desc:"Our full-service YouTube Channel Management includes everything it takes to grow a brand's online fanbase. Channel Management starts with a complete strategic plan (described above) which then transitions to daily management by a team that includes Strategists, Account Mgmt, Channel Optimizers and Content Marketers. We love to include Paid &amp; Commerce in Channel Mgmt but it's not required.",
+            desc:"Our full-service YouTube Channel Management includes everything it takes to grow a brand's online fanbase. Channel Management starts with a complete YouTube Channel Strategic Plan (described above) which then transitions to daily management by a team that includes Strategists, Account Managers, Channel Optimizers, and Content Marketers. We recommend including Paid & Commerce in Channel Management, too.",
             details:[
-                { label:"Timeline",     value:"Requires 12-month commitment" },
+                { label:"Timeline",     value:"Custom Quote" },
                 { label:"Average Price",value:"Custom Quote" },
-                { label:"Delivery",     value:"Near daily client communication, coordination with fellow agencies, Monthly/Qtly Reporting" },
+                { label:"Delivery",     value:"Custom Quote" },
                 { label:"Resource",     value:"Touchstorm + Touchstorm DataLabs" }
             ]
         },
@@ -1499,8 +1499,8 @@
             details:[
                 { label:"Timeline",     value:"Custom Quote" },
                 { label:"Average Price",value:"Custom Quote" },
-                { label:"Delivery",   value:"Custom Quote" },
-                { label:"Resource",   value:"Touchstorm + Touchstorm DataLabs" }
+                { label:"Delivery",     value:"Near Daily Client Communication and Coordination with Other Agencies + Monthly and Quarterly Emailed Reports" },
+                { label:"Resource",     value:"Touchstorm + Touchstorm DataLabs" }
             ]
         }
     ];
@@ -1731,24 +1731,26 @@
                     <div class="svc-expanded-name">${s.name}</div>
                     <p class="svc-expanded-desc">${s.desc}</p>
                     <div class="svc-expanded-price-pill"><span style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--pink);display:block;margin-bottom:2px;">Best For:</span>${s.price}</div>
-                    ${s.tiers ? svcBuildTierGrid(s.tiers, s.priceLabel) : s.details ? `<ul class="svc-details-list">${s.details.map(d => {
-                        if (d.label === 'Resource') {
+                    ${s.tiers ? svcBuildTierGrid(s.tiers, s.priceLabel) : s.details ? `<div class="svc-tier-grid"><div class="svc-tier-col">${s.details.map(d => {
+                        const iconMap = { 'Timeline': svcTierIcons.timing, 'Frequency': svcTierIcons.timing, 'Average Price': svcTierIcons.startingAt, 'Starting At': svcTierIcons.startingAt, 'Delivery': svcTierIcons.delivery, 'Resource': svcTierIcons.resources, 'Resources': svcTierIcons.resources };
+                        if (d.label === 'Resource' || d.label === 'Resources') {
                             const val = d.value;
                             let logoMarkup = '';
                             const hasTDL = /touchstorm datalabs/i.test(val) || /\btdl\b/i.test(val);
                             const hasTS = /^touchstorm\b(?!\s+datalabs)/i.test(val) || /\bts\b/i.test(val) || /touchstorm \+/i.test(val);
                             if (hasTS && hasTDL) {
-                                logoMarkup = `<img src="images/TS-logo-short.png" alt="Touchstorm" style="height:12px;vertical-align:middle;margin-right:6px;"><span style="margin-right:6px;font-weight:700;color:#999">+</span><img src="images/TDL-logo-short.png" alt="TDL" style="height:12px;vertical-align:middle;">`;
+                                logoMarkup = `<img src="images/TS-logo-short.png" alt="Touchstorm" style="height:12px;width:auto;display:block;flex-shrink:0;"><span class="svc-tier-resource-sep">+</span><img src="images/TDL-logo-short.png" alt="TDL" style="height:12px;width:auto;display:block;flex-shrink:0;">`;
                             } else if (hasTDL) {
-                                logoMarkup = `<img src="images/TDL-logo-short.png" alt="TDL" style="height:12px;vertical-align:middle;">`;
+                                logoMarkup = `<img src="images/TDL-logo-short.png" alt="TDL" style="height:12px;width:auto;display:block;flex-shrink:0;">`;
                             } else {
-                                logoMarkup = `<img src="images/TS-logo-short.png" alt="Touchstorm" style="height:12px;vertical-align:middle;">`;
+                                logoMarkup = `<img src="images/TS-logo-short.png" alt="Touchstorm" style="height:12px;width:auto;display:block;flex-shrink:0;">`;
                             }
                             const resourceLabel = (hasTS && hasTDL) ? 'Resources' : 'Resource';
-                            return `<li><strong>${resourceLabel}:</strong> <span style="display:inline-flex;align-items:center;gap:0;vertical-align:middle;">${logoMarkup}</span></li>`;
+                            return `<div class="svc-tier-row"><div class="svc-tier-row-label">${svcTierIcons.resources} ${resourceLabel}</div><div class="svc-tier-resource">${logoMarkup}</div></div>`;
                         }
-                        return `<li><strong>${d.label}:</strong> ${d.value}</li>`;
-                    }).join('')}</ul>` : ''}
+                        const icon = iconMap[d.label] || '';
+                        return `<div class="svc-tier-row"><div class="svc-tier-row-label">${icon} ${d.label}</div><div class="svc-tier-row-value">${d.value}</div></div>`;
+                    }).join('')}</div></div>` : ''}
                 </div>
                 <div class="svc-expanded-right">
                     <button class="svc-close-btn" aria-label="Close" onclick="event.stopPropagation(); svcCollapseCard(this.closest('.svc-card'));">${svcClose}</button>
